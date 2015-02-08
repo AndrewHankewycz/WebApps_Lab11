@@ -27,13 +27,13 @@ function posttool(req, res) {
 			req.session.user = new User(req.sessionID);
 		}
 
-		res.sendFile('/EvalTool/evaluation.html', {root: __dirname });
+		res.sendFile('/EvalTool/evaluation.html', {root: root });
 	} else if (req.path === "/EvalTool/testing") {
 		if(req.session.user) {
 			validateAnswer(req, res);
 		} else {
 			//Restart the quiz, the user is not logged in.
-			res.sendFile('/EvalTool/evaluation.html', {root: __dirname });
+			res.sendFile('/EvalTool/evaluation.html', {root: root });
 		}
 	} else if(req.path === "/EvalTool/questions") {
 		sendQuestions(req, res);

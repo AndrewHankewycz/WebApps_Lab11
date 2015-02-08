@@ -1,9 +1,10 @@
 var nodemailer = require('nodemailer');
-var User = require('./user');
-var util = require('./util/util');
+var User = require('../user');
+var util = require('../util/util');
 var questions = require('./questions.js').questions;
 var smtpTransport = nodemailer.createTransport();
-var root = __dirname;
+//Get base path of project
+var root = process.env.PWD;
 var curNum = 1;
 
 function gettool(req, res) {

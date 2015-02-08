@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html lang = "en">
+  <body>
+    <h1>Evaluation Feedback</h1>
+    <form action="/EvalTool/sendmail" method="POST">
+            <label>Your Name:</label>
+            <input type="text" id="fname" name="fname" placeholder="Enter your full name" />
+      <br>
+            <label for="email">From Email:</label>
+            <input type="email" id="femail" name = "femail" placeholder="Enter your email address" />
+      <br><hr>
+            <label for="name">To Name:</label>
+            <input type="text" id="tname" name="tname" placeholder="Enter recipients full name" />
+      <br>
+            <label for="email">To Email:</label>
+            <input type="email" id="temail" name = "temail" placeholder="Enter recipients email address" />
+      <br>
+            <label for="subject">Subject:</label>
+            <input type="text" id="subject" name = "subject" placeholder="Enter subject" />
+      <br><hr>
+            <label id="finalScore">Your final score: 8/10</label><br>
+            <input type="hidden" name="message" value="Your final score: 8/10"/>
+      <br>
+            <input type="submit" value="Send Emails" />
+
+    </form>    
+  </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html lang = "en">
+  <head>
+    <title>Javascript Evaluation Tool</title>
+    <meta charset = "UTF-8" />
+    <link href="/ThreeRegion/threeregion.css" rel="stylesheet" type="text/css">
+    <link href="/ThreeRegion/webhome.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <div id="navigationbar">
+        <a href="/">
+            <img src="/ThreeRegion/logo.png" alt="webapplication logo" />
+        </a>
+        <span class="topnavigationlink">
+            <a href="homec.html" target="cframe">Get Syllabus</a>
+        </span>
+        <span class="topnavigationlink">
+            <a href="schedule.html">Get Schedule</a>
+        </span>
+        <span class="topnavigationlink">
+            <a href="/EvalTool/startpage.html" target="cframe">Evaluation Tool</a>
+        </span>
+        <span class="topnavigationlink">
+            <a href="resources.htm">Resources</a>
+        </span>
+    </div>
+    <div id="sidenavigation">
+        <div class="sidenavigationlink">
+            <a href="Instructor.htm">Instructor</a>
+        </div>
+        <div class="sidenavigationlink">
+            <a href="lecture.htm">Lecture Notes</a>
+        </div>
+        <div class="sidenavigationlink">
+            <a href="project.htm">Course Project</a>
+        </div>
+        <div class="sidenavigationlink">
+            <a href="more.htm">More Info</a>
+        </div>
+    </div>
+    <div id="content" style="margin-top:1%">
+      <form action="http://127.0.0.1:8080/EvalTool/start" method="post">
+       <fieldset>
+        <legend> Navigation </legend>
+       <input type="submit" value="Start" />&nbsp;&nbsp;
+       <button name = cancel>Cancel</button>
+       </fieldset>
+      </form> 
+    </div>   
+  </body>
+</html>

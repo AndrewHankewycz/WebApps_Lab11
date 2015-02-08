@@ -1,0 +1,213 @@
+<!DOCTYPE HTML>
+<html lang = "en">
+  <head>
+    <title>Javascript Evaluation Tool</title>
+    <meta charset = "UTF-8" />
+    <link href="/ThreeRegion/threeregion.css" rel="stylesheet" type="text/css">
+    <link href="/ThreeRegion/webhome.css" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript">
+      var currentQuestionId = 0;
+      var questions = null;
+      var answersSelected = [];
+
+      function nextLetter(s){
+        return s.replace(/([a-zA-Z])[^a-zA-Z]*$/, function(a){
+            var c= a.charCodeAt(0);
+            switch(c){
+                case 90: return 'A';
+                case 122: return 'a';
+                default: return String.fromCharCode(++c);
+            }
+        });
+      }
+
+      function loadQuestion() {
+        var currentLetter = 'a';
+
+        $("#radioAnswers").empty();
+        $("#questionId").text("Question " + (currentQuestionId + 1) + "/" + questions.length);
+        $("#question").text(questions[currentQuestionId].question);
+
+        for(var i = 0; i < questions[currentQuestionId].answers.length; i++) {
+          $("#radioAnswers").append("<p><label><input id='answer"+i+"' type='radio' name='radio' value='"+i+"'> (" + currentLetter+ ") " + questions[currentQuestionId].answers[i] + "</label></p>");
+          currentLetter = nextLetter(currentLetter);
+        }
+
+        for(var i = 0; i < answersSelected.length; i++) {
+          if(answersSelected[i].questionId == currentQuestionId) {
+            $("#answer" + i).attr('checked', true);
+            break;
+          }
+        }
+      }
+
+      /**
+      * Updates a specific answer by answerId
+      * @return True if the question had been previously answered and is now updated, otherwise false
+      */
+      function updateAnsweredById(answerId) {
+          for(var i = 0; i < answersSelected.length; i++) {
+            if(answersSelected[i].questionId == currentQuestionId) {
+              answersSelected[i].answerId = answerId;
+              return true;
+              break;
+            }
+          }
+          return false;
+      }
+
+      $(document).ready(function() {
+        $.ajax({
+          type: "POST",
+          url: "/EvalTool/questions",
+          success: function(result) {
+            questions = result.questions;
+            loadQuestion();
+          },
+          error: function() {
+            //TODO: Handle this error
+          }
+        });
+
+        function submitButtonClick(next, successCallback) {
+          return function() {
+            if((currentQuestionId - 1 < 0 && !next)) {
+              $("#prevButton").prop('disabled', true);
+              return;
+            }
+
+            if(currentQuestionId+1 > 0) {
+              $("#prevButton").prop('disabled', false);
+            }
+
+            if(currentQuestionId + 1 === questions.length-1 && next) {
+              $("#nextButton").prop('value', 'Submission');
+            }
+
+            if(currentQuestionId - 1 === questions.length-2 && !next) {
+              $("#nextButton").prop('value', 'Next Page');
+            }
+
+            if(currentQuestionId + 1 > questions.length-1 && next) {
+              $("#content").empty();
+
+              $.ajax({ 
+                url: "/EvalTool/page11.html", 
+                dataType: "html"
+              }).done(function( responseHtml ) {
+                $.ajax({
+                  type: "POST",
+                  url: "/EvalTool/submit",
+                  success: function(result) {
+                    $("#content").html(responseHtml);
+                    var finalScoreText = "Your final score: " + result.correctAnswers + "/" + questions.length;
+
+                    $("#finalScore").text(finalScoreText);
+                    $('input[name=message]').val(finalScoreText);
+                  },
+                  error: function() {
+                    //TODO: Handle this error
+                  }
+                });
+              });
+              return;
+            }
+
+            var answer = questions[currentQuestionId].answers[$('input[name=radio]:checked', '#answers').val()];
+
+            $.ajax({
+              type: "POST",
+              url: "/EvalTool/testing",
+              data: { 
+                questionId: currentQuestionId,
+                answer: answer
+              },
+              success: function(result) {
+                successCallback(result);
+              },
+              error: function() {
+                //TODO: Handle this error
+              }
+            });
+          }
+        }
+
+        $("#nextButton").click(submitButtonClick(true, function(result) {
+            var answerId = parseInt($('input[name=radio]:checked', '#answers').val());
+
+            if(!updateAnsweredById(answerId)) {
+              answersSelected.push({
+                questionId: currentQuestionId,
+                answerId: answerId
+              });
+            }
+
+            currentQuestionId++;
+            loadQuestion();
+        }));
+
+        $("#prevButton").click(submitButtonClick(false, function(result) {
+            var answerId = parseInt($('input[name=radio]:checked', '#answers').val());
+
+            if(!updateAnsweredById(answerId)) {
+              answersSelected.push({
+                questionId: currentQuestionId,
+                answerId: answerId
+              });
+            }
+
+            currentQuestionId--;
+            loadQuestion();
+        }));
+      });
+    </script>
+  </head>
+  <body>
+    <div id="navigationbar">
+        <a href="/">
+            <img src="/ThreeRegion/logo.png" alt="webapplication logo" />
+        </a>
+        <span class="topnavigationlink">
+            <a href="homec.html" target="cframe">Get Syllabus</a>
+        </span>
+        <span class="topnavigationlink">
+            <a href="schedule.html">Get Schedule</a>
+        </span>
+        <span class="topnavigationlink">
+            <a href="/EvalTool/startpage.html" target="cframe">Evaluation Tool</a>
+        </span>
+        <span class="topnavigationlink">
+            <a href="resources.htm">Resources</a>
+        </span>
+    </div>
+    <div id="sidenavigation">
+        <div class="sidenavigationlink">
+            <a href="Instructor.htm">Instructor</a>
+        </div>
+        <div class="sidenavigationlink">
+            <a href="lecture.htm">Lecture Notes</a>
+        </div>
+        <div class="sidenavigationlink">
+            <a href="project.htm">Course Project</a>
+        </div>
+        <div class="sidenavigationlink">
+            <a href="more.htm">More Info</a>
+        </div>
+    </div>
+    <div id="content" style="margin-top:1%">
+     <fieldset>
+      <legend> Navigation </legend>
+      <input type="submit" id="prevButton" name="prev" value="Previous Page" disabled="true" /> 
+      <input type="submit" id="nextButton" name="next" value="Next Page" /> 
+     </fieldset>
+    <form id="answers">
+     <fieldset>
+      <legend id="questionId"></legend>
+      <p id="question"></p>
+      <div id="radioAnswers"></div>
+     </fieldset>
+    </form>
+    </div> 
+  </body>
+</html>

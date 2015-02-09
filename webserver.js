@@ -31,10 +31,10 @@ app.get('/', function (req, res) {
 app.get('/homec.html', function (req, res) {
 	fs.readFile('homec.html', 'utf8', function (err,data) {
 		if (err) {
-			return console.log(err);	
+			return console.log(err);
 		}
 		res.send(data);
-	});	
+	});
 });
 
 app.get('/ThreeRegion/*', threeregion);

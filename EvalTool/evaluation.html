@@ -3,6 +3,7 @@
   <head>
     <title>Javascript Evaluation Tool</title>
     <meta charset = "UTF-8" />
+    <link href="eval.css" rel="stylesheet" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript">
       var currentQuestionId = 0;
@@ -90,8 +91,8 @@
             if(currentQuestionId + 1 > questions.length-1 && next) {
               $("#content").empty();
 
-              $.ajax({ 
-                url: "/EvalTool/page11.html", 
+              $.ajax({
+                url: "/EvalTool/page11.html",
                 dataType: "html"
               }).done(function( responseHtml ) {
                 $.ajax({
@@ -117,7 +118,7 @@
             $.ajax({
               type: "POST",
               url: "/EvalTool/testing",
-              data: { 
+              data: {
                 questionId: currentQuestionId,
                 answer: answer
               },
@@ -165,16 +166,16 @@
     <div id="content" style="margin-top:1%">
      <fieldset>
       <legend> Navigation </legend>
-      <input type="submit" id="prevButton" name="prev" value="Previous Page" disabled="true" /> 
-      <input type="submit" id="nextButton" name="next" value="Next Page" /> 
+      <input type="submit" id="prevButton" name="prev" value="Previous Page" disabled="true" />
+      <input type="submit" id="nextButton" name="next" value="Next Page" />
      </fieldset>
-    <form id="answers">
+    <form class="quiz" id="answers">
      <fieldset>
       <legend id="questionId"></legend>
       <p id="question"></p>
       <div id="radioAnswers"></div>
      </fieldset>
     </form>
-    </div> 
+    </div>
   </body>
 </html>

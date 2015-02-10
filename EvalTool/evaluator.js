@@ -67,7 +67,7 @@ function validateAnswer(req, res) {
 			if(serverQuestion.answers[i] == userAnswer) {
 
 				//Check if the question has already been answered
-				var index = req.session.user.answers.map(function(e) { 
+				var index = req.session.user.answers.map(function(e) {
 					return e.questionId;
 				}).indexOf(questionId);
 

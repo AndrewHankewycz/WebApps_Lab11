@@ -12,6 +12,8 @@ app.use(bodyParser.urlencoded({
 	extended: true
 }));
 
+app.set("jsonp callback", true);
+
 app.use(session({
 	secret: util.generateRandomString(20),
 	cookie: {

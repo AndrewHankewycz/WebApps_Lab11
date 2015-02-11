@@ -1,8 +1,25 @@
 <!DOCTYPE HTML>
 <html lang = "en">
   <head>
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
     <title>Javascript Evaluation Tool</title>
     <meta charset = "UTF-8" />
+    <script>
+    $(document).ready(function(){
+        $("#sidenavigation", window.parent.document).html('<fieldset>'+
+        '<legend> Navigation </legend>'+
+        '<input type="submit" id="startButton" class="sidenavinput" name="start" value="Start" />'+
+        '</br>'+
+        '<input type="submit" id="cancelButton" class="sidenavinput" name="cancel" value="Cancel"/>'+
+        '</br>'+
+        '<input type="submit" id="prevButton" class="sidenavinput" name="prev" value="Previous Page" disabled="true" />'+
+        '</br>'+
+        '<input type="submit" id="nextButton" class="sidenavinput" name="next" value="Next Page" />'+
+        '</br>'+
+        '<input type="submit" id="emailButton" class="sidenavinput" name="email" value="Send Email" />'+
+        '</fieldset>');
+    });
+    </script>
   </head>
   <body>
     <div id="content" style="margin-top:1%">
@@ -13,6 +30,6 @@
        <button name = cancel>Cancel</button>
        </fieldset>
       </form>
-    </div>   
+    </div>
   </body>
 </html>

@@ -6,42 +6,6 @@
     <title>
         Web Applications At PSU Behrend
     </title>
-    <script>
-    $(document).ready(function(){
-      // setup event handler for quiz link, modifies the side panel content
-      $("#evalToolLink").click(function() {
-          $("#sidenavigation").html('<fieldset>'+
-          '<legend> Navigation </legend>'+
-          '<input type="submit" id="startButton" class="sidenavinput" name="start" value="Start" />'+
-          '</br>'+
-          '<input type="submit" id="cancelButton" class="sidenavinput" name="cancel" value="Cancel"/>'+
-          '</br>'+
-          '<input type="submit" id="prevButton" class="sidenavinput" name="prev" value="Previous Page" disabled="true" />'+
-          '</br>'+
-          '<input type="submit" id="nextButton" class="sidenavinput" name="next" value="Next Page" />'+
-          '</br>'+
-          '<input type="submit" id="emailButton" class="sidenavinput" name="email" value="Send Email" />'+
-          '</fieldset>');
-        });
-
-        // setup event handler for syllabus link, modifies the side panel content
-        $("#syllabusLink").click(function() {
-          $("#sidenavigation").html('<div class="sidenavigationlink">'+
-          '<a href="Instructor.htm">Instructor</a>'+
-          '</div>'+
-          '<div class="sidenavigationlink">'+
-          '<a href="lecture.htm">Lecture Notes</a>'+
-          '</div>'+
-          '<div class="sidenavigationlink">'+
-          '<a href="project.htm">Course Project</a>'+
-          '</div>'+
-          '<div class="sidenavigationlink">'+
-          '<a href="more.htm">More Info</a>'+
-          '</div>');
-        });
-      }
-    );
-    </script>
 </head>
 <body>
     <div id="navigationbar">
@@ -62,18 +26,6 @@
         </span>
     </div>
     <div id="sidenavigation">
-      <div class="sidenavigationlink">
-        <a href="Instructor.htm">Instructor</a>
-      </div>
-      <div class="sidenavigationlink">
-        <a href="lecture.htm">Lecture Notes</a>
-      </div>
-      <div class="sidenavigationlink">
-        <a href="project.htm">Course Project</a>
-      </div>
-      <div class="sidenavigationlink">
-        <a href="more.htm">More Info</a>
-      </div>
     </div>
     <div id="content">
         <iframe src="http://127.0.0.1:8080/homec.html" name = "cframe" id="cframe" frameborder="0" ></iframe>

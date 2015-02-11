@@ -8,6 +8,7 @@ var root = process.env.PWD;
 var curNum = 1;
 
 function gettool(req, res) {
+	console.log(global.TestFive);
 	var fileName = root + req.path;
 	res.sendFile(fileName, function (err) {
 	    if (err) {
@@ -19,14 +20,23 @@ function gettool(req, res) {
 	});
 }
 
+function generateNewUserId() {
+	var uId = util.generateRandomString(20);
+
+	for(var i = 0; i < global.users.length; i++) {
+		if(global.users[i].id == uId) {
+			return generateNewUserId();
+		}
+	}
+
+	return uId;
+}
+
 function posttool(req, res) {
 	if (req.path==="/EvalTool/sendmail") {
 		sendmail(req, res);
 	} else if (req.path === "/EvalTool/start") {
-		if(!req.session.user) {
-			req.session.user = new User(req.sessionID);
-		}
-
+		global.users.push(new User(generateNewUserId()));
 		res.sendFile('/EvalTool/evaluation.html', {root: root });
 	} else if (req.path === "/EvalTool/testing") {
 		if(req.session.user) {

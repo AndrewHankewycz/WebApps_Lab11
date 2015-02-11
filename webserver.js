@@ -14,12 +14,7 @@ app.use(bodyParser.urlencoded({
 
 app.set("jsonp callback", true);
 
-app.use(session({
-	secret: util.generateRandomString(20),
-	cookie: {
-		maxAge: 60000
-	}
-}));
+global.users = [];
 
 app.get('/', function (req, res) {
 	fs.readFile('home.html', 'utf8', function (err,data) {

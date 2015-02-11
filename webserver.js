@@ -4,6 +4,7 @@ var session = require('express-session');
 var fs = require('fs');
 var bodyParser  = require('body-parser');
 var util = require('./util/util');
+var config = require('./config').config;
 var root = __dirname;
 
 var app = express();
@@ -51,6 +52,6 @@ function threeregion(req, res) {
 app.get('/EvalTool/*', require("./EvalTool/evaluator").gettool);
 app.post('/EvalTool/*', require("./EvalTool/evaluator").posttool);
 
-app.listen(8080, function() {
-	console.log('Server running at http://127.0.0.1:8080/');
+app.listen(config.port, function() {
+	console.log('Server running at http://127.0.0.1:' + config.port + '/');
 });

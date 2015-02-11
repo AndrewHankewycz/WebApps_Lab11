@@ -2,6 +2,7 @@ var nodemailer = require('nodemailer');
 var User = require('../user');
 var util = require('../util/util');
 var questions = require('./questions.js').questions;
+var config = require('../config').config;
 var smtpTransport = nodemailer.createTransport();
 //Get base path of project
 var root = process.env.PWD;
@@ -21,7 +22,7 @@ function gettool(req, res) {
 }
 
 function generateNewUserId() {
-	var uId = util.generateRandomString(20);
+	var uId = util.generateRandomString(config.sessionIdSize);
 
 	for(var i = 0; i < global.users.length; i++) {
 		if(global.users[i].id == uId) {

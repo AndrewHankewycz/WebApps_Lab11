@@ -33,15 +33,31 @@ function generateNewUserId() {
 	return uId;
 }
 
+function getUserSessPositionFromUserId(userId) {
+	for(var i = 0; i < global.users.length; i++) {
+		if(global.users[i].id == userId) return i;
+	}
+	return null;
+}
+
 function posttool(req, res) {
 	if (req.path==="/EvalTool/sendmail") {
 		sendmail(req, res);
+	} else if(req.path == "/EvalTool/login") {
+		var uId = generateNewUserId();
+		global.users.push(new User(uId));
+
+		res.json({
+			userId: uId
+		});
 	} else if (req.path === "/EvalTool/start") {
-		global.users.push(new User(generateNewUserId()));
 		res.sendFile('/EvalTool/evaluation.html', {root: root });
 	} else if (req.path === "/EvalTool/testing") {
-		if(req.session.user) {
-			validateAnswer(req, res);
+		var userId = req.body.userId;
+		var userSessPosition = getUserSessPositionFromUserId(userId);
+
+		if(typeof(userId) !== 'undefined' && userSessPosition != null) {
+			validateAnswer(userSessPosition, req, res);
 		} else {
 			//Restart the quiz, the user is not logged in.
 			res.sendFile('/EvalTool/evaluation.html', {root: root });
@@ -67,7 +83,7 @@ function posttool(req, res) {
 	}
 }
 
-function validateAnswer(req, res) {
+function validateAnswer(userSessPosition, req, res) {
 	var questionId = req.body.questionId;
 	var userAnswer = req.body.answer;
 
@@ -78,19 +94,21 @@ function validateAnswer(req, res) {
 			if(serverQuestion.answers[i] == userAnswer) {
 
 				//Check if the question has already been answered
-				var index = req.session.user.answers.map(function(e) {
+				var index = global.users[userSessPosition].answers.map(function(e) {
 					return e.questionId;
 				}).indexOf(questionId);
 
 				//If the question has not been answered, add it
 				if(index == -1) {
-					req.session.user.answers.push({
+					console.log(global.users[userSessPosition].id);
+					global.users[userSessPosition].answers.push({
 						questionId: parseInt(questionId),
 						answerId: i
 					});
 				} else {
+					console.log(global.users[userSessPosition].id);
 					//If the question has already been answered, update the answer
-					req.session.user.answers[index].answerId = i;
+					global.users[userSessPosition].answers[index].answerId = i;
 				}
 
 				break;

@@ -9,6 +9,7 @@
       var currentQuestionId = 0;
       var questions = null;
       var answersSelected = [];
+      var userId = -1;
 
       function nextLetter(s){
         return s.replace(/([a-zA-Z])[^a-zA-Z]*$/, function(a){
@@ -57,12 +58,24 @@
       }
 
       $(document).ready(function() {
+        //Get the userId
         $.ajax({
           type: "POST",
-          url: "/EvalTool/questions",
+          url: "/EvalTool/login",
           success: function(result) {
-            questions = result.questions;
-            loadQuestion();
+            userId = result.userId;
+            //Get the questions
+            $.ajax({
+              type: "POST",
+              url: "/EvalTool/questions",
+              success: function(result) {
+                questions = result.questions;
+                loadQuestion();
+              },
+              error: function() {
+                //TODO: Handle this error
+              }
+            });
           },
           error: function() {
             //TODO: Handle this error
@@ -119,6 +132,7 @@
               type: "POST",
               url: "/EvalTool/testing",
               data: {
+                userId: userId,
                 questionId: currentQuestionId,
                 answer: answer
               },

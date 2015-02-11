@@ -1,6 +1,5 @@
 
 var express = require('express');
-var session = require('express-session');
 var fs = require('fs');
 var bodyParser  = require('body-parser');
 var util = require('./util/util');

@@ -5,6 +5,7 @@ fieldset legend {
 }
 
 fieldset{
+  width: 50%;
   border-radius: 10px;
   background: linear-gradient(to right, #477187, #6F90A2);
 }

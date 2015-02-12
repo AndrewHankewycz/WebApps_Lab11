@@ -5,7 +5,7 @@ var questions = require('./questions.js').questions;
 var config = require('../config').config;
 var smtpTransport = nodemailer.createTransport();
 //Get base path of project
-var root = process.env.PWD;
+var root = process.cwd();
 var curNum = 1;
 
 function gettool(req, res) {

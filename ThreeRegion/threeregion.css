@@ -1,11 +1,11 @@
 a:link{color: white}
 a:visited{color: red}
-a:hover{font-weight: bold}
+a:hover{color: red;}
 a:active{font-style: italic}
 
 #navigationbar {
 	color: white;
-	background-color: rgb(0,0,150)
+	background-color: #DEE263
 }
 #sidenavigation {
 	float: left;
@@ -13,7 +13,7 @@ a:active{font-style: italic}
 	min-width: 100px;
 	padding: 5px;
 	color: white;
-	background-color: rgb(0,0,150)
+	background-color: #3399FF
 }
 
 .sidenavinput{
@@ -31,10 +31,34 @@ a:active{font-style: italic}
 	height:100%;
 }
 
-.topnavigationlink {
-	clear: left;
-	margin-left: 1em;
-	font-size: 1.1em
+.topregion{
+
+	background-color: blue;
+	padding-bottom: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+li {
+
+	display: block;
+	display: inline;
+	background: #DEE263
+}
+
+ul{
+
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
+	background: #DEE263;
+}
+
+.topnavigationbox{
+
+	color: blue;
+	background-color: #DEE263;
+	margin-left: 0.5em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
 }
 
 .sidenavigationlink {font-size: 1em}

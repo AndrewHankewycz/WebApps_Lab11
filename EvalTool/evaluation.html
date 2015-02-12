@@ -6,7 +6,7 @@
     <link href="eval.css" rel="stylesheet" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript">
-      var quesitonsLen = 10;
+      var questionsLen = 10;
       var answersSelected = [];
       var userId = -1;
       var question = null;
@@ -26,7 +26,7 @@
         var currentLetter = 'a';
 
         $("#radioAnswers").empty();
-        $("#questionId").text("Question " + (question.questionId + 1) + "/" + quesitonsLen);
+        $("#questionId").text("Question " + (question.questionId + 1) + "/" + questionsLen);
         $("#question").text(question.question);
 
         for(var i = 0; i < question.answers.length; i++) {
@@ -84,15 +84,15 @@
               $("#prevButton").prop('disabled', false);
             }
 
-            if(question.questionId + 1 === quesitonsLen-1 && next) {
+            if(question.questionId + 1 === questionsLen-1 && next) {
               $("#nextButton").prop('value', 'Submission');
             }
 
-            if(question.questionId - 1 === quesitonsLen-2 && !next) {
+            if(question.questionId - 1 === questionsLen-2 && !next) {
               $("#nextButton").prop('value', 'Next Page');
             }
 
-            if(question.questionId + 1 > quesitonsLen-1 && next) {
+            if(question.questionId + 1 > questionsLen-1 && next) {
               $("#content").empty();
 
               $.ajax({
@@ -104,7 +104,7 @@
                   url: "/EvalTool/submit",
                   success: function(result) {
                     $("#content").html(responseHtml);
-                    var finalScoreText = "Your final score: " + result.correctAnswers + "/" + quesitonsLen;
+                    var finalScoreText = "Your final score: " + result.correctAnswers + "/" + questionsLen;
 
                     $("#finalScore").text(finalScoreText);
                     $('input[name=message]').val(finalScoreText);

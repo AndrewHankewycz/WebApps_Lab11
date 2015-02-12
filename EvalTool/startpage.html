@@ -8,10 +8,11 @@
     $(document).ready(function(){
         $("#sidenavigation", window.parent.document).html('<fieldset>'+
         '<legend> Navigation </legend>'+
+        '<form action="http://127.0.0.1:8080/EvalTool/start" method="post" target="cframe">'+
         '<input type="submit" id="startButton" class="sidenavinput" name="start" value="Start" />'+
         '</br>'+
-        '<input type="submit" id="cancelButton" class="sidenavinput" name="cancel" value="Cancel"/>'+
-        '</br>'+
+        '<button id="cancelButton" class="sidenavinput" name="cancel" name="cancel">Cancel</button>'+
+        '</form>'+
         '<input type="submit" id="prevButton" class="sidenavinput" name="prev" value="Previous Page" disabled="true" />'+
         '</br>'+
         '<input type="submit" id="nextButton" class="sidenavinput" name="next" value="Next Page" />'+
@@ -23,13 +24,7 @@
   </head>
   <body>
     <div id="content" style="margin-top:1%">
-      <form action="http://127.0.0.1:8080/EvalTool/start" method="post">
-       <fieldset>
-        <legend> Navigation </legend>
-       <input type="submit" value="Start" />&nbsp;&nbsp;
-       <button name = cancel>Cancel</button>
-       </fieldset>
-      </form>
+      <p>Press start to begin the quiz!</p>
     </div>
   </body>
 </html>

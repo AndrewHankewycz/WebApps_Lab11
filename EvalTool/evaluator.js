@@ -5,7 +5,7 @@ var questions = require('./questions.js').questions;
 var config = require('../config').config;
 var smtpTransport = nodemailer.createTransport();
 //Get base path of project
-var root = process.env.PWD;
+var root = process.cwd();
 var curNum = 1;
 
 function gettool(req, res) {
@@ -47,8 +47,16 @@ function posttool(req, res) {
 		var uId = generateNewUserId();
 		global.users.push(new User(uId));
 
+		var userSessPosition = getUserSessPositionFromUserId(uId);
+		global.users[userSessPosition].currentQuestionId++;
+
 		res.json({
-			userId: uId
+			userId: uId,
+			question: {
+				questionId: 0,
+				question: questions[0].question,
+				answers: questions[0].answers
+			}
 		});
 	} else if (req.path === "/EvalTool/start") {
 		res.sendFile('/EvalTool/evaluation.html', {root: root });
@@ -56,14 +64,17 @@ function posttool(req, res) {
 		var userId = req.body.userId;
 		var userSessPosition = getUserSessPositionFromUserId(userId);
 
+		//Next = 1, previous = -1
+		var direction = parseInt(req.body.direction);
+
 		if(typeof(userId) !== 'undefined' && userSessPosition != null) {
 			validateAnswer(userSessPosition, req, res);
+			global.users[userSessPosition].currentQuestionId += direction;
+			sendQuestion(global.users[userSessPosition].currentQuestionId, req, res);
 		} else {
 			//Restart the quiz, the user is not logged in.
 			res.sendFile('/EvalTool/evaluation.html', {root: root });
 		}
-	} else if(req.path === "/EvalTool/questions") {
-		sendQuestions(req, res);
 	} else if(req.path === "/EvalTool/submit") {
 		var correctAnswers = 0;
 
@@ -100,13 +111,11 @@ function validateAnswer(userSessPosition, req, res) {
 
 				//If the question has not been answered, add it
 				if(index == -1) {
-					console.log(global.users[userSessPosition].id);
 					global.users[userSessPosition].answers.push({
 						questionId: parseInt(questionId),
 						answerId: i
 					});
 				} else {
-					console.log(global.users[userSessPosition].id);
 					//If the question has already been answered, update the answer
 					global.users[userSessPosition].answers[index].answerId = i;
 				}
@@ -115,9 +124,14 @@ function validateAnswer(userSessPosition, req, res) {
 			}
 		}
 	}
+}
 
+function sendQuestion(questionId, req, res) {
 	res.json({
-		done: true
+		question: {
+			question: questions[questionId].question,
+			answers: questions[questionId].answers
+		}
 	});
 }
 

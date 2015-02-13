@@ -165,7 +165,7 @@
             error: function(){
               console.log("error resetting quiz");
             }
-          })
+          });
         });
 
         $("#nextButton", window.parent.document).click(submitButtonClick(true, function(result) {
@@ -175,6 +175,28 @@
         $("#prevButton", window.parent.document).click(submitButtonClick(false, function(result) {
             loadQuestion();
         }));
+
+        $("#emailButton", window.parent.document).click(function() {
+          $.ajax({
+            url:"/EvalTool/sendmail",
+            type: "POST",
+            data: {
+              fname: $("#fname").val(),
+              femail: $("#femail").val(),
+              tname: $("#tname").val(),
+              temail: $("#temail").val(),
+              subject: $("#subject").val(),
+              message: $("#message").val()
+            },
+            success: function(response){
+              $("#content").html(response);
+              $("#emailButton", window.parent.document).prop('disabled', true);
+            },
+            error: function(){
+              console.log("error resetting quiz");
+            }
+          });
+        });
       });
     </script>
   </head>

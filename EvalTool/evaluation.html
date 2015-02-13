@@ -90,6 +90,9 @@
                 $.ajax({
                   type: "POST",
                   url: "/EvalTool/submit",
+                  data: {
+                    userId: userId
+                  },
                   success: function(result) {
                     $("#content").html(responseHtml);
                     var finalScoreText = "Your final score: " + result.correctAnswers + "/" + questionsLen;

@@ -43,7 +43,7 @@ exports.questions = [
 		question: "Which is not a type of pop up box available in JavaScript?",
 		answers: [
 			"Alert",
-			"Comfirm and",
+			"Comfirm",
 			"Display",
 			"Promt"
 		],

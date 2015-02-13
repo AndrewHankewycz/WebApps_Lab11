@@ -78,13 +78,17 @@ function posttool(req, res) {
 			res.sendFile('/EvalTool/evaluation.html', {root: root });
 		}
 	} else if(req.path === "/EvalTool/submit") {
+		var userId = req.body.userId;
+		var userSessPosition = getUserSessPositionFromUserId(userId);
+		var userAnswers = global.users[userSessPosition].answers;
 		var correctAnswers = 0;
 
 		for(var i = 0; i < questions.length; i++) {
-			for(var j = 0; j < req.session.user.answers.length; j++) {
-				if(parseInt(req.session.user.answers[j].questionId) == i) {
-					if(req.session.user.answers[j].answerId == questions[i].correctAnswer) {
+			for(var j = 0; j < userAnswers.length; j++) {
+				if(i == userAnswers[j].questionId) {
+					if(questions[i].correctAnswer == userAnswers[j].answerId) {
 						correctAnswers++;
+						break;
 					}
 				}
 			}

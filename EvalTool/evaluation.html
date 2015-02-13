@@ -41,24 +41,33 @@
         }
       }
 
-      function loadQuestion() {
+      function doLoad() {
+        $("#answers").hide();
         var currentLetter = 'a';
 
-        $("#answers").fadeOut(500).promise().done(function() {
-            $("#radioAnswers").empty();
-            $("#questionId").text("Question " + (question.questionId + 1) + "/" + questionsLen);
-            $("#question").text(question.question);
+        $("#radioAnswers").empty();
+        $("#questionId").text("Question " + (question.questionId + 1) + "/" + questionsLen);
+        $("#question").text(question.question);
 
-            for(var i = 0; i < question.answers.length; i++) {
-              $("#radioAnswers").append("<p><label><input id='answer"+i+"' type='radio' name='radio' value='"+i+"'> (" + currentLetter+ ") " + question.answers[i] + "</label></p>");
-              currentLetter = nextLetter(currentLetter);
-            }
+        for(var i = 0; i < question.answers.length; i++) {
+          $("#radioAnswers").append("<p><label><input id='answer"+i+"' type='radio' name='radio' value='"+i+"'> (" + currentLetter+ ") " + question.answers[i] + "</label></p>");
+          currentLetter = nextLetter(currentLetter);
+        }
 
-            if(parseInt(question.userAnswerId) != -1)
-              $("#answer" + question.userAnswerId).attr('checked', true);
+        if(parseInt(question.userAnswerId) != -1)
+          $("#answer" + question.userAnswerId).attr('checked', true);
 
-            $("#answers").fadeIn(500);
-        });
+        $("#answers").fadeIn(500);
+      }
+
+      function loadQuestion() {
+        if( $('#radioAnswers').is(':empty') ) {
+          doLoad();
+        } else {
+          $("#answers").fadeOut(500).promise().done(function() {
+            doLoad();
+          });
+        }
       }
 
       $(document).ready(function() {

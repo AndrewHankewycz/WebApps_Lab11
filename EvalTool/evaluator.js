@@ -9,7 +9,6 @@ var root = process.cwd();
 var curNum = 1;
 
 function gettool(req, res) {
-	console.log(global.TestFive);
 	var fileName = root + req.path;
 	res.sendFile(fileName, function (err) {
 	    if (err) {
@@ -66,10 +65,8 @@ function posttool(req, res) {
 
 		//Next = 1, previous = -1
 		var direction = parseInt(req.body.direction);
-		console.log("HERE1");
 
 		if(typeof(userId) !== 'undefined' && userSessPosition != null) {
-			console.log("HERE2");
 			validateAnswer(userSessPosition, req, res);
 			global.users[userSessPosition].currentQuestionId += direction;
 

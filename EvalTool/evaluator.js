@@ -131,6 +131,7 @@ function sendQuestion(questionId, req, res) {
 
 	res.json({
 		question: {
+			questionId: questionId,
 			question: questions[questionId].question,
 			answers: questions[questionId].answers
 		}

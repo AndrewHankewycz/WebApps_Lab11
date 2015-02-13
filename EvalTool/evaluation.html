@@ -6,10 +6,10 @@
     <link href="eval.css" rel="stylesheet" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript">
-      var currentQuestionId = 0;
-      var questions = null;
+      var questionsLen = 10;
       var answersSelected = [];
       var userId = -1;
+      var question = null;
 
       function nextLetter(s){
         return s.replace(/([a-zA-Z])[^a-zA-Z]*$/, function(a){
@@ -26,16 +26,16 @@
         var currentLetter = 'a';
 
         $("#radioAnswers").empty();
-        $("#questionId").text("Question " + (currentQuestionId + 1) + "/" + questions.length);
-        $("#question").text(questions[currentQuestionId].question);
+        $("#questionId").text("Question " + (question.questionId + 1) + "/" + questionsLen);
+        $("#question").text(question.question);
 
-        for(var i = 0; i < questions[currentQuestionId].answers.length; i++) {
-          $("#radioAnswers").append("<p><label><input id='answer"+i+"' type='radio' name='radio' value='"+i+"'> (" + currentLetter+ ") " + questions[currentQuestionId].answers[i] + "</label></p>");
+        for(var i = 0; i < question.answers.length; i++) {
+          $("#radioAnswers").append("<p><label><input id='answer"+i+"' type='radio' name='radio' value='"+i+"'> (" + currentLetter+ ") " + question.answers[i] + "</label></p>");
           currentLetter = nextLetter(currentLetter);
         }
 
         for(var i = 0; i < answersSelected.length; i++) {
-          if(answersSelected[i].questionId == currentQuestionId) {
+          if(answersSelected[i].questionId == question.questionId) {
             $("#answer" + i).attr('checked', true);
             break;
           }
@@ -48,7 +48,7 @@
       */
       function updateAnsweredById(answerId) {
           for(var i = 0; i < answersSelected.length; i++) {
-            if(answersSelected[i].questionId == currentQuestionId) {
+            if(answersSelected[i].questionId == question.questionId) {
               answersSelected[i].answerId = answerId;
               return true;
               break;
@@ -64,19 +64,9 @@
           url: "/EvalTool/login",
           success: function(result) {
             userId = result.userId;
-            //Get the questions
-            $.ajax({
-              type: "POST",
-              url: "/EvalTool/questions",
-              success: function(result) {
-                questions = result.questions;
-                loadQuestion();
-              },
-              error: function() {
-                //TODO: Handle this error
+            question = result.question;
 
-              }
-            });
+            loadQuestion();
           },
           error: function() {
 
@@ -87,24 +77,24 @@
         function submitButtonClick(next, successCallback) {
           //console.log(next + " " + currentQuestionId);
           return function() {
-            if((currentQuestionId - 1 <= -1 && !next)) {
+            if((question.questionId - 1 < 0 && !next)) {
               $("#prevButton", window.parent.document).prop('disabled', true);
               return;
             }
 
-            if(currentQuestionId+1 > 0) {
+            if(question.questionId+1 > 0) {
               $("#prevButton", window.parent.document).prop('disabled', false);
             }
 
-            if(currentQuestionId + 1 === questions.length-1 && next) {
+            if(question.questionId + 1 === questionsLen-1 && next) {
               $("#nextButton", window.parent.document).prop('value', 'Submission');
             }
 
-            if(currentQuestionId - 1 === questions.length-2 && !next) {
+            if(question.questionId - 1 === questionsLen-2 && !next) {
               $("#nextButton", window.parent.document).prop('value', 'Next Page');
             }
 
-            if(currentQuestionId + 1 > questions.length-1 && next) {
+            if(question.questionId + 1 > questionsLen-1 && next) {
               $("#content").empty();
 
               $.ajax({
@@ -116,7 +106,7 @@
                   url: "/EvalTool/submit",
                   success: function(result) {
                     $("#content").html(responseHtml);
-                    var finalScoreText = "Your final score: " + result.correctAnswers + "/" + questions.length;
+                    var finalScoreText = "Your final score: " + result.correctAnswers + "/" + questionsLen;
 
                     $("#finalScore").text(finalScoreText);
                     $('input[name=message]').val(finalScoreText);
@@ -129,17 +119,20 @@
               return;
             }
 
-            var answer = questions[currentQuestionId].answers[$('input[name=radio]:checked', '#answers').val()];
+            var answer = question.answers[$('input[name=radio]:checked', '#answers').val()];
 
             $.ajax({
               type: "POST",
               url: "/EvalTool/testing",
               data: {
                 userId: userId,
-                questionId: currentQuestionId,
-                answer: answer
+                questionId: question.questionId,
+                answer: answer,
+                //Next button = 1, prev button = -1
+                direction: next ? 1 : -1
               },
               success: function(result) {
+                question = result.question;
                 successCallback(result);
               },
               error: function() {
@@ -154,12 +147,11 @@
 
             if(!updateAnsweredById(answerId)) {
               answersSelected.push({
-                questionId: currentQuestionId,
+                questionId: question.questionId,
                 answerId: answerId
               });
             }
 
-            currentQuestionId++;
             loadQuestion();
         }));
 
@@ -168,12 +160,11 @@
 
             if(!updateAnsweredById(answerId)) {
               answersSelected.push({
-                questionId: currentQuestionId,
+                questionId: question.questionId,
                 answerId: answerId
               });
             }
 
-            currentQuestionId--;
             loadQuestion();
         }));
       });

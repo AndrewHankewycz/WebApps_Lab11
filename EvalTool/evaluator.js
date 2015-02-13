@@ -142,27 +142,6 @@ function sendQuestion(user, req, res) {
 	});
 }
 
-function sendQuestions(req, res) {
-	res.contentType('application/json');
-	res.setHeader("Access-Control-Allow-Origin", "*");
-
-	//Remove the correct answer property when sending
-	//to the client. Additionally, shuffle the answers
-	//so they're never in a consistent order.
-	var questionsWithoutAnswers = [];
-	for(var i = 0; i < questions.length; i++) {
-		questionsWithoutAnswers.push({
-			question: questions[i].question,
-			answers: questions[i].answers
-			//util.shuffleArray(questions[i].answers)
-		});
-	}
-
-	res.json({
-		questions: questionsWithoutAnswers
-	});
-}
-
 function sendmail(req, res) {
 	var mymail = {};
 	mymail['from']=req.body.fname+"<"+req.body.femail+">"; // sender address

@@ -44,9 +44,8 @@
       function loadQuestion() {
         var currentLetter = 'a';
 
-        $("#radioAnswers").empty();
-
         $("#answers").fadeOut(500).promise().done(function() {
+            $("#radioAnswers").empty();
             $("#questionId").text("Question " + (question.questionId + 1) + "/" + questionsLen);
             $("#question").text(question.question);
 

@@ -45,6 +45,8 @@ function gettool(req, res) {
 		var userAnswers = global.users[userSessPosition].answers;
 		var correctAnswers = 0;
 
+		validateAnswer(userSessPosition, req, res);
+
 		for(var i = 0; i < questions.length; i++) {
 			for(var j = 0; j < userAnswers.length; j++) {
 				if(i == userAnswers[j].questionId) {

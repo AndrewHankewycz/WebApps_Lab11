@@ -83,13 +83,12 @@
         $("#startButton", window.parent.document).prop('disabled', true);
         $("#cancelButton", window.parent.document).prop('disabled', false);
 
-        function submitButtonClick(next, successCallback) {
+        function submitButtonClick(next, successCallback, answer) {
           return function() {
 
             if(question.questionId + 1 > questionsLen-1 && next) {
+              var answer = parseInt($('input[name=radio]:checked', '#answers').val());
               $("#content").empty();
-
-              // $("#prevButton", window.parent.document).props('disabled', true);
 
               $.ajax({
                 url: "/EvalTool/page11.html",
@@ -99,7 +98,9 @@
                   url: "/EvalTool/submit",
                   dataType: "jsonp",
                   data: {
-                    userId: userId
+                    userId: userId,
+                    questionId: question.questionId,
+                    answer: answer
                   },
                   success: function(result) {
                     $("#content").html(responseHtml);
@@ -116,7 +117,6 @@
               return;
             }
 
-            //var answer = question.answers[$('input[name=radio]:checked', '#answers').val()];
             var answer = parseInt($('input[name=radio]:checked', '#answers').val());
 
             $.ajax({

@@ -26,20 +26,26 @@
         var currentLetter = 'a';
 
         $("#radioAnswers").empty();
-        $("#questionId").text("Question " + (question.questionId + 1) + "/" + questionsLen);
-        $("#question").text(question.question);
 
-        for(var i = 0; i < question.answers.length; i++) {
-          $("#radioAnswers").append("<p><label><input id='answer"+i+"' type='radio' name='radio' value='"+i+"'> (" + currentLetter+ ") " + question.answers[i] + "</label></p>");
-          currentLetter = nextLetter(currentLetter);
-        }
+        $("#answers").fadeOut(500).promise().done(function() {
+            $("#questionId").text("Question " + (question.questionId + 1) + "/" + questionsLen);
+            $("#question").text(question.question);
 
-        for(var i = 0; i < answersSelected.length; i++) {
-          if(answersSelected[i].questionId == question.questionId) {
-            $("#answer" + i).attr('checked', true);
-            break;
-          }
-        }
+            for(var i = 0; i < question.answers.length; i++) {
+              $("#radioAnswers").append("<p><label><input id='answer"+i+"' type='radio' name='radio' value='"+i+"'> (" + currentLetter+ ") " + question.answers[i] + "</label></p>");
+              currentLetter = nextLetter(currentLetter);
+            }
+
+            for(var i = 0; i < answersSelected.length; i++) {
+              if(answersSelected[i].questionId == question.questionId) {
+                //alert('test');
+                //$("#answer" + i).attr('checked', true);
+                break;
+              }
+            }
+
+            $("#answers").fadeIn(500);
+        });
       }
 
       /**
@@ -119,7 +125,8 @@
               return;
             }
 
-            var answer = question.answers[$('input[name=radio]:checked', '#answers').val()];
+            //var answer = question.answers[$('input[name=radio]:checked', '#answers').val()];
+            var answer = parseInt($('input[name=radio]:checked', '#answers').val());
 
             $.ajax({
               type: "POST",
@@ -133,6 +140,7 @@
               },
               success: function(result) {
                 question = result.question;
+                alert(question.userAnswerId);
                 successCallback(result);
               },
               error: function() {

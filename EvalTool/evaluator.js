@@ -66,11 +66,16 @@ function posttool(req, res) {
 
 		//Next = 1, previous = -1
 		var direction = parseInt(req.body.direction);
+		console.log("HERE1");
 
 		if(typeof(userId) !== 'undefined' && userSessPosition != null) {
+			console.log("HERE2");
 			validateAnswer(userSessPosition, req, res);
 			global.users[userSessPosition].currentQuestionId += direction;
-			sendQuestion(global.users[userSessPosition].currentQuestionId, req, res);
+
+			var user = global.users[userSessPosition];
+
+			sendQuestion(user, req, res);
 		} else {
 			//Restart the quiz, the user is not logged in.
 			res.sendFile('/EvalTool/evaluation.html', {root: root });
@@ -96,44 +101,43 @@ function posttool(req, res) {
 
 function validateAnswer(userSessPosition, req, res) {
 	var questionId = req.body.questionId;
-	var userAnswer = req.body.answer;
+	var userAnswerId = req.body.answer;
 
-	if(typeof(questionId) !== 'undefined' && typeof(userAnswer) !== 'undefined') {
-		var serverQuestion = questions[questionId];
-
-		for(var i = 0; i < serverQuestion.answers.length; i++) {
-			if(serverQuestion.answers[i] == userAnswer) {
-
-				//Check if the question has already been answered
-				var index = global.users[userSessPosition].answers.map(function(e) {
-					return e.questionId;
-				}).indexOf(questionId);
-
-				//If the question has not been answered, add it
-				if(index == -1) {
-					global.users[userSessPosition].answers.push({
-						questionId: parseInt(questionId),
-						answerId: i
-					});
-				} else {
-					//If the question has already been answered, update the answer
-					global.users[userSessPosition].answers[index].answerId = i;
-				}
-
-				break;
+	if(typeof(questionId) !== 'undefined' && typeof(userAnswerId) !== 'undefined' && userAnswerId !== 'NaN') {
+		for(var i = 0; i < global.users[userSessPosition].answers.length; i++) {
+			if(global.users[userSessPosition].answers[i].questionId == questionId) {
+				global.users[userSessPosition].answers[i].answerId = userAnswerId;
+				return;
 			}
 		}
+
+		global.users[userSessPosition].answers.push({
+			questionId: parseInt(questionId),
+			answerId: parseInt(userAnswerId)
+		});
 	}
 }
 
-function sendQuestion(questionId, req, res) {
+function sendQuestion(user, req, res) {
+	var questionId = user.currentQuestionId;
+
 	if(questionId > questions.length - 1 || questionId < 0) return;
+
+	var userQuestionAnswer = -1;
+
+	for(var i = 0; i < user.answers.length; i++) {
+		if(user.answers[i].questionId == questionId) {
+			userQuestionAnswer = user.answers[i].answerId;
+			break;
+		}
+	}
 
 	res.json({
 		question: {
 			questionId: questionId,
 			question: questions[questionId].question,
-			answers: questions[questionId].answers
+			answers: questions[questionId].answers,
+			userAnswerId: userQuestionAnswer
 		}
 	});
 }

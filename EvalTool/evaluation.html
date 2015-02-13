@@ -22,6 +22,25 @@
         });
       }
 
+      function updateButtonStates(){
+        if((question.questionId < 1)) {
+          $("#prevButton", window.parent.document).prop('disabled', true);
+          return;
+        }
+
+        if(question.questionId > 0) {
+          $("#prevButton", window.parent.document).prop('disabled', false);
+        }
+
+        if(question.questionId === questionsLen-1) {
+          $("#nextButton", window.parent.document).prop('value', 'Submission');
+        }
+
+        if(question.questionId === questionsLen-2) {
+          $("#nextButton", window.parent.document).prop('value', 'Next');
+        }
+      }
+
       function loadQuestion() {
         var currentLetter = 'a';
 
@@ -60,28 +79,17 @@
           }
         });
 
+        $("#nextButton", window.parent.document).prop('disabled', false);
+        $("#startButton", window.parent.document).prop('disabled', true);
+        $("#cancelButton", window.parent.document).prop('disabled', false);
+
         function submitButtonClick(next, successCallback) {
-          //console.log(next + " " + currentQuestionId);
           return function() {
-            if((question.questionId - 1 < 0 && !next)) {
-              $("#prevButton", window.parent.document).prop('disabled', true);
-              return;
-            }
-
-            if(question.questionId+1 > 0) {
-              $("#prevButton", window.parent.document).prop('disabled', false);
-            }
-
-            if(question.questionId + 1 === questionsLen-1 && next) {
-              $("#nextButton", window.parent.document).prop('value', 'Submission');
-            }
-
-            if(question.questionId - 1 === questionsLen-2 && !next) {
-              $("#nextButton", window.parent.document).prop('value', 'Next Page');
-            }
 
             if(question.questionId + 1 > questionsLen-1 && next) {
               $("#content").empty();
+
+              // $("#prevButton", window.parent.document).props('disabled', true);
 
               $.ajax({
                 url: "/EvalTool/page11.html",
@@ -124,6 +132,7 @@
               success: function(result) {
                 question = result.question;
                 successCallback(result);
+                updateButtonStates();
               },
               error: function() {
                 //TODO: Handle this error
@@ -131,6 +140,19 @@
             });
           }
         }
+
+        $("#cancelButton", window.parent.document).click(function(result) {
+          $.ajax({
+            url:"/EvalTool/startpage.html",
+            type: "GET",
+            success: function(response){
+              $("#content").html(response);
+            },
+            error: function(){
+              console.log("error resetting quiz");
+            }
+          })
+        });
 
         $("#nextButton", window.parent.document).click(submitButtonClick(true, function(result) {
             loadQuestion();

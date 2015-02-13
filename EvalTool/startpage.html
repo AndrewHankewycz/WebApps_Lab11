@@ -8,14 +8,14 @@
     $(document).ready(function(){
         $("#sidenavigation", window.parent.document).html('<fieldset>'+
         '<legend> Navigation </legend>'+
-        '<form action="http://127.0.0.1:8080/EvalTool/start" method="post" target="cframe">'+
+        '<form action="/EvalTool/start" method="post" target="cframe">'+
         '<input type="submit" id="startButton" class="sidenavinput" name="start" value="Start" />'+
-        '</br>'+
-        '<button id="cancelButton" class="sidenavinput" name="cancel" name="cancel">Cancel</button>'+
         '</form>'+
-        '<input type="submit" id="prevButton" class="sidenavinput" name="prev" value="Previous Page" disabled="true" />'+
+        '<button id="cancelButton" class="sidenavinput" name="cancel" name="cancel" disabled="true" >Cancel</button>'+
         '</br>'+
-        '<input type="submit" id="nextButton" class="sidenavinput" name="next" value="Next Page" />'+
+        '<input type="submit" id="prevButton" class="sidenavinput" name="prev" value="Previous" disabled="true" />'+
+        '</br>'+
+        '<input type="submit" id="nextButton" class="sidenavinput" name="next" value="Next" disabled="true" />'+
         '</br>'+
         '<input type="submit" id="emailButton" class="sidenavinput" name="email" value="Send Email" />'+
         '</fieldset>');

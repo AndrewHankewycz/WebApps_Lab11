@@ -46,8 +46,8 @@
       $(document).ready(function() {
         //Get the userId
         $.ajax({
-          type: "POST",
           url: "/EvalTool/login",
+          dataType: "jsonp",
           success: function(result) {
             userId = result.userId;
             question = result.question;

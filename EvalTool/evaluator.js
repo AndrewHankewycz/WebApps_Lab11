@@ -24,6 +24,21 @@ function gettool(req, res) {
 
 			sendQuestion(user, req, res);
 		}
+	} else if(req.path == "/EvalTool/login") {
+		var uId = generateNewUserId();
+		global.users.push(new User(uId));
+
+		var userSessPosition = getUserSessPositionFromUserId(uId);
+		global.users[userSessPosition].currentQuestionId++;
+
+		res.jsonp({
+			userId: uId,
+			question: {
+				questionId: 0,
+				question: questions[0].question,
+				answers: questions[0].answers
+			}
+		});
 	} else {
 		var fileName = root + req.path;
 		res.sendFile(fileName, function (err) {
@@ -59,26 +74,8 @@ function getUserSessPositionFromUserId(userId) {
 function posttool(req, res) {
 	if (req.path==="/EvalTool/sendmail") {
 		sendmail(req, res);
-	} else if(req.path == "/EvalTool/login") {
-		var uId = generateNewUserId();
-		global.users.push(new User(uId));
-
-		var userSessPosition = getUserSessPositionFromUserId(uId);
-		global.users[userSessPosition].currentQuestionId++;
-
-		res.json({
-			userId: uId,
-			question: {
-				questionId: 0,
-				question: questions[0].question,
-				answers: questions[0].answers
-			}
-		});
 	} else if (req.path === "/EvalTool/start") {
 		res.sendFile('/EvalTool/evaluation.html', {root: root });
-	} else if (req.path === "/EvalTool/testing") {
-		//Moved
-		console.log("HERE1");
 	} else if(req.path === "/EvalTool/submit") {
 		var userId = req.body.userId;
 		var userSessPosition = getUserSessPositionFromUserId(userId);

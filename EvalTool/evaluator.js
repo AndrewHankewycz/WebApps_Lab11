@@ -39,6 +39,26 @@ function gettool(req, res) {
 				answers: questions[0].answers
 			}
 		});
+	} else if(req.path === "/EvalTool/submit") {
+		var userId = req.query.userId;
+		var userSessPosition = getUserSessPositionFromUserId(userId);
+		var userAnswers = global.users[userSessPosition].answers;
+		var correctAnswers = 0;
+
+		for(var i = 0; i < questions.length; i++) {
+			for(var j = 0; j < userAnswers.length; j++) {
+				if(i == userAnswers[j].questionId) {
+					if(questions[i].correctAnswer == userAnswers[j].answerId) {
+						correctAnswers++;
+						break;
+					}
+				}
+			}
+		}
+
+		res.jsonp({
+			correctAnswers: correctAnswers
+		});
 	} else {
 		var fileName = root + req.path;
 		res.sendFile(fileName, function (err) {
@@ -76,26 +96,6 @@ function posttool(req, res) {
 		sendmail(req, res);
 	} else if (req.path === "/EvalTool/start") {
 		res.sendFile('/EvalTool/evaluation.html', {root: root });
-	} else if(req.path === "/EvalTool/submit") {
-		var userId = req.body.userId;
-		var userSessPosition = getUserSessPositionFromUserId(userId);
-		var userAnswers = global.users[userSessPosition].answers;
-		var correctAnswers = 0;
-
-		for(var i = 0; i < questions.length; i++) {
-			for(var j = 0; j < userAnswers.length; j++) {
-				if(i == userAnswers[j].questionId) {
-					if(questions[i].correctAnswer == userAnswers[j].answerId) {
-						correctAnswers++;
-						break;
-					}
-				}
-			}
-		}
-
-		res.json({
-			correctAnswers: correctAnswers
-		});
 	}
 }
 

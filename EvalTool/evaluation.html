@@ -88,8 +88,8 @@
                 dataType: "html"
               }).done(function( responseHtml ) {
                 $.ajax({
-                  type: "POST",
                   url: "/EvalTool/submit",
+                  dataType: "jsonp",
                   data: {
                     userId: userId
                   },

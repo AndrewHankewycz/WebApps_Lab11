@@ -127,6 +127,8 @@ function validateAnswer(userSessPosition, req, res) {
 }
 
 function sendQuestion(questionId, req, res) {
+	if(questionId > questions.length - 1 || questionId < 0) return;
+
 	res.json({
 		question: {
 			question: questions[questionId].question,

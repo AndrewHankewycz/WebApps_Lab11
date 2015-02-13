@@ -116,6 +116,12 @@
 
                     $("#finalScore").text(finalScoreText);
                     $('input[name=message]').val(finalScoreText);
+
+                    $("#nextButton", window.parent.document).prop('disabled', true);
+                    $("#startButton", window.parent.document).prop('disabled', true);
+                    $("#cancelButton", window.parent.document).prop('disabled', true);
+                    $("#prevButton", window.parent.document).prop('disabled', true);
+                    $("#emailButton", window.parent.document).prop('disabled', false);
                   },
                   error: function() {
                     //TODO: Handle this error

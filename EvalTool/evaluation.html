@@ -112,8 +112,8 @@
             var answer = parseInt($('input[name=radio]:checked', '#answers').val());
 
             $.ajax({
-              type: "POST",
               url: "/EvalTool/testing",
+              dataType: "jsonp",
               data: {
                 userId: userId,
                 questionId: question.questionId,

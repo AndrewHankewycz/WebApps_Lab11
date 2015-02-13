@@ -9,15 +9,32 @@ var root = process.cwd();
 var curNum = 1;
 
 function gettool(req, res) {
-	var fileName = root + req.path;
-	res.sendFile(fileName, function (err) {
-	    if (err) {
-	      console.log(err);
-	      res.status(err.status).end();
-	    } else {
-	      console.log('Sent:', req.path);
-	    }
-	});
+	if (req.path === "/EvalTool/testing") {
+		var userId = req.query.userId;
+		var userSessPosition = getUserSessPositionFromUserId(userId);
+
+		//Next = 1, previous = -1
+		var direction = parseInt(req.query.direction);
+
+		if(typeof(userId) !== 'undefined' && userSessPosition != null) {
+			validateAnswer(userSessPosition, req, res);
+			global.users[userSessPosition].currentQuestionId += direction;
+
+			var user = global.users[userSessPosition];
+
+			sendQuestion(user, req, res);
+		}
+	} else {
+		var fileName = root + req.path;
+		res.sendFile(fileName, function (err) {
+		    if (err) {
+		      console.log(err);
+		      res.status(err.status).end();
+		    } else {
+		      console.log('Sent:', req.path);
+		    }
+		});
+	}
 }
 
 function generateNewUserId() {
@@ -60,23 +77,8 @@ function posttool(req, res) {
 	} else if (req.path === "/EvalTool/start") {
 		res.sendFile('/EvalTool/evaluation.html', {root: root });
 	} else if (req.path === "/EvalTool/testing") {
-		var userId = req.body.userId;
-		var userSessPosition = getUserSessPositionFromUserId(userId);
-
-		//Next = 1, previous = -1
-		var direction = parseInt(req.body.direction);
-
-		if(typeof(userId) !== 'undefined' && userSessPosition != null) {
-			validateAnswer(userSessPosition, req, res);
-			global.users[userSessPosition].currentQuestionId += direction;
-
-			var user = global.users[userSessPosition];
-
-			sendQuestion(user, req, res);
-		} else {
-			//Restart the quiz, the user is not logged in.
-			res.sendFile('/EvalTool/evaluation.html', {root: root });
-		}
+		//Moved
+		console.log("HERE1");
 	} else if(req.path === "/EvalTool/submit") {
 		var userId = req.body.userId;
 		var userSessPosition = getUserSessPositionFromUserId(userId);
@@ -101,8 +103,8 @@ function posttool(req, res) {
 }
 
 function validateAnswer(userSessPosition, req, res) {
-	var questionId = req.body.questionId;
-	var userAnswerId = req.body.answer;
+	var questionId = req.query.questionId;
+	var userAnswerId = req.query.answer;
 
 	if(typeof(questionId) !== 'undefined' && typeof(userAnswerId) !== 'undefined' && userAnswerId !== 'NaN') {
 		for(var i = 0; i < global.users[userSessPosition].answers.length; i++) {
@@ -133,7 +135,7 @@ function sendQuestion(user, req, res) {
 		}
 	}
 
-	res.json({
+	res.jsonp({
 		question: {
 			questionId: questionId,
 			question: questions[questionId].question,

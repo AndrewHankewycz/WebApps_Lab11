@@ -9,7 +9,6 @@
       var questionsLen = 10;
       var userId = -1;
       var question = null;
-      var pageLoads = 0;
 
       function nextLetter(s){
         return s.replace(/([a-zA-Z])[^a-zA-Z]*$/, function(a){
@@ -70,8 +69,7 @@
         }
       }
 
-      $(document).ready(function() {
-        //Get the userId
+      function login() {
         $.ajax({
           url: "/EvalTool/login",
           dataType: "jsonp",
@@ -82,10 +80,14 @@
             loadQuestion();
           },
           error: function() {
-
             //TODO: Handle this error
           }
         });
+      }
+
+      $(document).ready(function() {
+        //Get the userId
+        login();
 
         $("#nextButton", window.parent.document).prop('disabled', false);
         $("#startButton", window.parent.document).prop('disabled', true);

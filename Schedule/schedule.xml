@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Row xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="schedule.xsd">
+	<ClassNum>1</ClassNum>
+	<Date>
+            <Day>M</Day>
+            <Month>1</Month>
+            <Year>2012</Year>
+        </Date>
+        <Tag>JSON</Tag>
+        <Project>Project One</Project>
+        <Topic>Coding in Javascript</Topic>
+        <Notes>These are some notes</Notes>
+</Row>

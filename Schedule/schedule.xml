@@ -3,12 +3,12 @@
   xsi:noNamespaceSchemaLocation="schedule.xsd">
 	<ClassNum>1</ClassNum>
 	<Date>
-            <Day>M</Day>
-            <Month>1</Month>
-            <Year>2012</Year>
+            <WeekDay>M</WeekDay>
+            <Day>1</Day>
+            <Month>12</Month>
         </Date>
-        <Tag>JSON</Tag>
-        <Project>Project One</Project>
-        <Topic>Coding in Javascript</Topic>
-        <Notes>These are some notes</Notes>
+        <Tag>MVC</Tag>
+        <Topic>Introduction to Web Applications</Topic>
+        <Project>Topic: Course Web Application</Project>
+        <Notes></Notes>
 </Row>

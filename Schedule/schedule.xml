@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Row xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<Schedule
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:noNamespaceSchemaLocation="schedule.xsd">
-	<ClassNum>1</ClassNum>
-	<Date>
-            <WeekDay>M</WeekDay>
-            <Day>1</Day>
-            <Month>12</Month>
-        </Date>
-        <Tag>MVC</Tag>
-        <Topic>Introduction to Web Applications</Topic>
-        <Project>Topic: Course Web Application</Project>
-        <Notes></Notes>
-</Row>
+
+  <Row>
+  	<ClassNum>1</ClassNum>
+  	<Date>
+        <WeekDay>M</WeekDay>
+        <Month>1</Month>
+        <Day>12</Day>
+    </Date>
+    <Tag>MVC</Tag>
+    <Topic>Introduction to Web Applications</Topic>
+    <Project>Topic: Course Web Application</Project>
+    <Notes> </Notes>
+  </Row>
+
+  <Row>
+    <ClassNum>2</ClassNum>
+    <Date>
+      <WeekDay>W</WeekDay>
+      <Month>1</Month>
+      <Day>14</Day>
+    </Date>
+    <Tag> </Tag>
+    <Topic>Fundamental Javascript: the control</Topic>
+    <Project>Simple page design</Project>
+    <Notes>David 1-11</Notes>
+  </Row>
+</Schedule>

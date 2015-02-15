@@ -1,57 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://127.0.0.1:8080"
+	xmlns="http://127.0.0.1:8080"
+	elementFormDefault="qualified">
 
-<xsd:simpleType name="stringType">
-	<xsd:restriction base="xsd:string"/>
-</xsd:simpleType>
+<xs:simpleType name="stringType">
+	<xs:restriction base="xs:string"/>
+</xs:simpleType>
 
-<xsd:simpleType name="intType">
-	<xsd:restriction base="xsd:positiveInteger"/>
-</xsd:simpleType>
+<xs:simpleType name="intType">
+	<xs:restriction base="xs:positiveInteger"/>
+</xs:simpleType>
 
-<xsd:simpleType name="weekDayType">
-    <xsd:restriction base="xsd:string">
-        <xsd:enumeration value="M"/>
-        <xsd:enumeration value="T"/>
-        <xsd:enumeration value="W"/>
-        <xsd:enumeration value="TH"/>
-        <xsd:enumeration value="F"/>
-    </xsd:restriction>
-</xsd:simpleType>
+<xs:simpleType name="weekDayType">
+    <xs:restriction base="xs:string">
+        <xs:enumeration value="M"/>
+        <xs:enumeration value="T"/>
+        <xs:enumeration value="W"/>
+        <xs:enumeration value="TH"/>
+        <xs:enumeration value="F"/>
+    </xs:restriction>
+</xs:simpleType>
 
-<xsd:simpleType name="dayIntType">
-    <xsd:restriction base="xsd:positiveInteger">
-        <xsd:minInclusive value="1"/>
-        <xsd:maxInclusive value="31"/>
-    </xsd:restriction>
-</xsd:simpleType>
+<xs:simpleType name="dayIntType">
+    <xs:restriction base="xs:positiveInteger">
+        <xs:minInclusive value="1"/>
+        <xs:maxInclusive value="31"/>
+    </xs:restriction>
+</xs:simpleType>
 
-<xsd:simpleType name="monthType">
-    <xsd:restriction base="xsd:positiveInteger">
-        <xsd:minInclusive value="1"/>
-        <xsd:maxInclusive value="12"/>
-    </xsd:restriction>
-</xsd:simpleType>
+<xs:simpleType name="monthType">
+    <xs:restriction base="xs:positiveInteger">
+        <xs:minInclusive value="1"/>
+        <xs:maxInclusive value="12"/>
+    </xs:restriction>
+</xs:simpleType>
 
-<xsd:complexType name="dateType">
-	<xsd:sequence>
-		<xsd:element name="WeekDay" type="weekDayType"/>
-		<xsd:element name="Day" type="dayIntType"/>
-		<xsd:element name="Month" type="monthType"/>
-	</xsd:sequence>
-</xsd:complexType>
+<xs:complexType name="dateType">
+	<xs:sequence>
+		<xs:element name="WeekDay" type="weekDayType"/>
+		<xs:element name="Month" type="monthType"/>
+		<xs:element name="Day" type="dayIntType"/>
+	</xs:sequence>
+</xs:complexType>
 
-<xsd:complexType name="rowType">
-    <xsd:sequence>
-	<xsd:element name="ClassNum" type="intType"/>
-	<xsd:element name="Date" type="dateType"/>
-	<xsd:element name="Tag" type="stringType"/>
-	<xsd:element name="Topic" type="stringType"/>
-	<xsd:element name="Project" type="stringType"/>
-	<xsd:element name="Notes" type="stringType>"/>
-    </xsd:sequence>
-</xsd:complexType>
+<xs:complexType name="rowType">
+    <xs:sequence>
+	<xs:element name="ClassNum" type="intType"/>
+	<xs:element name="Date" type="dateType"/>
+	<xs:element name="Tag" type="stringType"/>
+	<xs:element name="Topic" type="stringType"/>
+	<xs:element name="Project" type="stringType"/>
+	<xs:element name="Notes" type="stringType>"/>
+    </xs:sequence>
+</xs:complexType>
 
-<xsd:element name="Row" type="rowType"/>
+<xs:element name="Row" type="rowType"/>
 
-</xsd:schema>
+</xs:schema>

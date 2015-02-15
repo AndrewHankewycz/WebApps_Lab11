@@ -1,6 +1,5 @@
 
 var express = require('express');
-var fs = require('fs');
 var bodyParser  = require('body-parser');
 var util = require('./util/util');
 var config = require('./config').config;
@@ -17,20 +16,39 @@ app.set("jsonp callback", true);
 global.users = [];
 
 app.get('/', function (req, res) {
-	fs.readFile('home.html', 'utf8', function (err,data) {
+	res.sendFile(root + "/home.html", function (err) {
 		if (err) {
-			return console.log(err);
+			console.log(err);
+			res.status(err.status).end();
 		}
-		res.send(data);
+		else {
+			console.log('Sent:', req.path);
+		}
+	});
+});
+
+app.get('/Schedule/*', function (req, res) {
+	var fileName = root + req.path;
+	res.sendFile(fileName, function (err) {
+		if (err) {
+			console.log(err);
+			res.status(err.status).end();
+		}
+		else {
+			console.log('Sent:', req.path);
+		}
 	});
 });
 
 app.get('/homec.html', function (req, res) {
-	fs.readFile('homec.html', 'utf8', function (err,data) {
+	res.sendFile(root + "/homec.html", function (err) {
 		if (err) {
-			return console.log(err);
+			console.log(err);
+			res.status(err.status).end();
 		}
-		res.send(data);
+		else {
+			console.log('Sent:', req.path);
+		}
 	});
 });
 

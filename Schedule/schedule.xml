@@ -30,17 +30,4 @@
     <Project>Simple page design</Project>
     <Notes>David 1-11</Notes>
   </Row>
-
-  <Row>
-    <ClassNum>2</ClassNum>
-    <Date>
-      <WeekDay>W</WeekDay>
-      <Month>1</Month>
-      <Day>14</Day>
-    </Date>
-    <Tag> </Tag>
-    <Lab>Fundamental Javascript: the control</Lab>
-    <Project>Simple page design</Project>
-    <Notes>David 1-11</Notes>
-  </Row>
 </Schedule>

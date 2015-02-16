@@ -7,45 +7,25 @@
     <title>
         Web Applications At PSU Behrend
     </title>
-
     <script>
-      if (window.XMLHttpRequest)
-      {// code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp=new XMLHttpRequest();
+      function parseXML(xml) {
+        document.getElementById("schedule").innerHTML = xml;
       }
-      else
-      {// code for IE6, IE5
-        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-      }
-      xmlhttp.open("GET","/Schedule/schedule.xml",false);
-      xmlhttp.send();
-      xmlDoc=xmlhttp.responseXML;
 
-      document.write("<table><tr><th>Class #</th><th>Date</th><th>Tag</th><th>Topic</th><th>Project</th><th>Notes</th></tr>");
-      var x=xmlDoc.getElementsByTagName("Row");
-      for (i=0;i<x.length;i++)
-      {
-        document.write("<tr><td>");
-        document.write(x[i].getElementsByTagName("ClassNum")[0].childNodes[0].nodeValue);
-        document.write("</td><td>");
-        var dateElement = x[i].getElementsByTagName("Date");
-        var weekDay = dateElement[0].getElementsByTagName("WeekDay")[0].childNodes[0].nodeValue;
-        var day = dateElement[0].getElementsByTagName("Day")[0].childNodes[0].nodeValue;
-        var month = dateElement[0].getElementsByTagName("Month")[0].childNodes[0].nodeValue;
-        document.write(weekDay + ':' + month + '/' + day);
-        document.write("</td><td>");
-        document.write(x[i].getElementsByTagName("Tag")[0].childNodes[0].nodeValue);
-        document.write("</td><td>");
-        document.write(x[i].getElementsByTagName("Topic")[0].childNodes[0].nodeValue);
-        document.write("</td><td>");
-        document.write(x[i].getElementsByTagName("Project")[0].childNodes[0].nodeValue);
-        document.write("</td><td>");
-        document.write(x[i].getElementsByTagName("Notes")[0].childNodes[0].nodeValue);
-        document.write("</td></tr>");
-      }
-      document.write("</table>");
+      $(document).ready(function() {
+        $.ajax({
+          type: "GET",
+          url: "/Schedule/schedule.xml",
+          dataType: "text",
+          success: parseXML
+        });
+      });
     </script>
 </head>
 <body>
+  <center>
+    <b>Schedule for spring 2015 (subject to change)</b>
+  </center>
+  <div id="schedule" style="margin-top:2%;"></div>
 </body>
 </html>

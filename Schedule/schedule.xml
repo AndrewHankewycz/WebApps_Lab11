@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="schedule.css"?>
 <Schedule
   xmlns="http://www.w3.org/2001/XMLSchema"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -26,6 +27,19 @@
     </Date>
     <Tag> </Tag>
     <Topic>Fundamental Javascript: the control</Topic>
+    <Project>Simple page design</Project>
+    <Notes>David 1-11</Notes>
+  </Row>
+
+  <Row>
+    <ClassNum>2</ClassNum>
+    <Date>
+      <WeekDay>W</WeekDay>
+      <Month>1</Month>
+      <Day>14</Day>
+    </Date>
+    <Tag> </Tag>
+    <Lab>Fundamental Javascript: the control</Lab>
     <Project>Simple page design</Project>
     <Notes>David 1-11</Notes>
   </Row>

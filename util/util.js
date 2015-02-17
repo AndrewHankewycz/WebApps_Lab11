@@ -23,4 +23,20 @@ exports.shuffleArray = function(array) {
         array[j] = temp;
     }
     return array;
-}
+};
+
+/**
+* Sends a file to the client 
+* and outputs information regarding the result
+*/
+exports.sendFile = function(file, req, res) {
+    res.sendFile(file, function (err) {
+        if (err) {
+            console.log(err);
+            res.status(err.status).end();
+        }
+        else {
+            console.log('Sent:', req.path);
+        }
+    });
+};

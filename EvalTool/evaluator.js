@@ -62,15 +62,7 @@ function gettool(req, res) {
 			correctAnswers: correctAnswers
 		});
 	} else {
-		var fileName = root + req.path;
-		res.sendFile(fileName, function (err) {
-		    if (err) {
-		      console.log(err);
-		      res.status(err.status).end();
-		    } else {
-		      console.log('Sent:', req.path);
-		    }
-		});
+		util.sendFile(root + req.path, req, res);
 	}
 }
 

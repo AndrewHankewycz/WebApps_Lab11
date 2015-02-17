@@ -16,55 +16,20 @@ app.set("jsonp callback", true);
 global.users = [];
 
 app.get('/', function (req, res) {
-	res.sendFile(root + "/home.html", function (err) {
-		if (err) {
-			console.log(err);
-			res.status(err.status).end();
-		}
-		else {
-			console.log('Sent:', req.path);
-		}
-	});
+	util.sendFile(root + "/home.html", req, res);
 });
 
 app.get('/Schedule/*', function (req, res) {
-	var fileName = root + req.path;
-	res.sendFile(fileName, function (err) {
-		if (err) {
-			console.log(err);
-			res.status(err.status).end();
-		}
-		else {
-			console.log('Sent:', req.path);
-		}
-	});
+	util.sendFile(root + req.path, req, res);
 });
 
 app.get('/homec.html', function (req, res) {
-	res.sendFile(root + "/homec.html", function (err) {
-		if (err) {
-			console.log(err);
-			res.status(err.status).end();
-		}
-		else {
-			console.log('Sent:', req.path);
-		}
-	});
+	util.sendFile(root + "/homec.html", req, res);
 });
 
-app.get('/ThreeRegion/*', threeregion);
-function threeregion(req, res) {
-	var fileName = root +req.path;
-	  res.sendFile(fileName, function (err) {
-	    if (err) {
-	      console.log(err);
-	      res.status(err.status).end();
-	    }
-	    else {
-	      console.log('Sent:', req.path);
-	    }
-	});
-}
+app.get('/ThreeRegion/*', function (req, res) {
+	util.sendFile(root + req.path, req, res);
+});
 
 app.get('/EvalTool/*', require("./EvalTool/evaluator").gettool);
 app.post('/EvalTool/*', require("./EvalTool/evaluator").posttool);

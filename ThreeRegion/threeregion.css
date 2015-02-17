@@ -1,83 +1,113 @@
-a:link{color: white;}
-a:visited{color: white}
-a:active{color: red}
-a:hover{color: #6E8B66;}
-
-#navigationbar {
-	color: black;
-	background-color: #DEE263;
-
+a:visited{
+	color: white
 }
+
+a:active{
+	color: red
+}
+
+a:hover{
+	color: #C2C2C2;
+}
+
+a.sidetext:hover{
+
+	color: #585858;
+}
+
 #sidenavigation {
 	float: left;
 	height: 600px;
-	min-width: 150px;
-	padding: 5px;
+	min-width: 120px;
+	padding: 10px;
 	color: black;
 	background-color: #BABA7A;
-}
-
-.sidenavinput{
-	margin-top: 10px;
-	margin-bottom: 10px;
+	border-right-style: solid;
+	border-right-width: 0.2em;
+	border-right-color: black;
 }
 
 #content {
 	margin-left: 10em;
+	margin-right: 0.5em;
 	height:600px;
 }
+
 #cframe {
 	display: block;
 	width:100%;
 	height:100%;
 }
 
-.topregion{
-
-	background: -webkit-linear-gradient(#0099FF, #002E4C); /* For Safari 5.1 to 6.0 */
-  	background: -o-linear-gradient(#0099FF, #002E4C); /* For Opera 11.1 to 12.0 */
-  	background: -moz-linear-gradient(#0099FF, #002E4C); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#0099FF, #002E4C); /* Standard syntax */
+#logo {
 	padding-top: 0.5em;
-}
-
-li {
-
-
-	display: block;
-	display: inline;
-	margin-top: 0.5em;
-	background: #272714;
-}
-
-ul{
-
-	color: white;
-	padding-left: 0.2em;
-	padding-top: 0.2em;
-	padding-bottom: 0.2em;
-	background: #272714
-}
-
-.topnavigationbox{
-
-	margin-left: 0.5em;
 	padding-left: 0.5em;
-	padding-right: 0.5em;
 }
 
-.sidenavigationlink {
-
-	font-size: 1em;
-	color: black;
+#pagefooter {
+	clear: left
 }
 
-#pagefooter {clear: left}
-#footer
-{
+#footer {
 	font-weight: bold;
 	font-style: italic;
 	color: white;
 	background-color: black;
 	text-align: center
 }
+
+.topregion {
+	background: -webkit-linear-gradient(#0099FF, #002E4C); /* For Safari 5.1 to 6.0 */
+  	background: -o-linear-gradient(#0099FF, #002E4C); /* For Opera 11.1 to 12.0 */
+  	background: -moz-linear-gradient(#0099FF, #002E4C); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#0099FF, #002E4C); /* Standard syntax */
+}
+
+.topnavigationbox{
+	margin-top: 0.0em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+}
+
+.sidenavigationlink {
+	font-size: 1em;
+	color: black;
+}
+
+a {
+	text-decoration: none;
+	color: white;
+}
+
+a.sidetext{
+
+	font-size: 0.8em;
+	color: black;
+}
+
+li {
+	margin-left: 0.0em;
+	padding-left: 0.0em;
+	display: block;
+	display: inline;
+	background: #272714;
+}
+
+ul {
+	color: white;
+	margin-bottom: 0.0em;
+	padding-left: 0.2em;
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
+	padding-right: 0.2em;
+	background: #272714;
+}
+
+body {
+	margin-top: 0.0em;
+	margin-left: 0.0em;
+	margin-right: 0.0em;
+}
+
+
+

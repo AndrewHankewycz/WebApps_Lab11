@@ -8,16 +8,14 @@
         Web Applications At PSU Behrend
     </title>
     <script>
-      function parseXML(xml) {
-        document.getElementById("schedule").innerHTML = xml;
-      }
-
       $(document).ready(function() {
         $.ajax({
           type: "GET",
           url: "/Schedule/schedule.xml",
           dataType: "text",
-          success: parseXML
+          success: function(result) {
+            $("#schedule").html(result);
+          }
         });
       });
     </script>

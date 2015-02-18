@@ -28,6 +28,10 @@ Topic, Project {
     width: 17.0em;
 }
 
+Day {
+    margin-left: -4px;
+}
+
 Notes {
     font-style: normal;
 }

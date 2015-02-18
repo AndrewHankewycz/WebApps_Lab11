@@ -9,8 +9,8 @@
   	<TopicTag>
       <ClassNum>1</ClassNum>
       <Date>
-        <WeekDay>M</WeekDay>
-        <Month>1</Month>
+        <WeekDay>M:</WeekDay>
+        <Month>1/</Month>
         <Day>12</Day>
       </Date>
       <Tag>MVC</Tag>
@@ -26,8 +26,8 @@
     <TopicTag>
       <ClassNum>2</ClassNum>
       <Date>
-        <WeekDay>W</WeekDay>
-        <Month>1</Month>
+        <WeekDay>W:</WeekDay>
+        <Month>1/</Month>
         <Day>14</Day>
       </Date>
       <Tag></Tag>
@@ -43,8 +43,8 @@
     <TopicTag>
       <ClassNum>3</ClassNum>
       <Date>
-        <WeekDay>F</WeekDay>
-        <Month>1</Month>
+        <WeekDay>F:</WeekDay>
+        <Month>1/</Month>
         <Day>16</Day>
       </Date>
       <Tag></Tag>
@@ -60,8 +60,8 @@
     <AltTopicTag>
       <ClassNum>4</ClassNum>
       <Date>
-        <WeekDay>W</WeekDay>
-        <Month>1</Month>
+        <WeekDay>W:</WeekDay>
+        <Month>1/</Month>
         <Day>21</Day>
       </Date>
       <Tag>HTML</Tag>
@@ -77,8 +77,8 @@
     <AltTopicTag>
       <ClassNum></ClassNum>
       <Date>
-        <WeekDay>F</WeekDay>
-        <Month>1</Month>
+        <WeekDay>F:</WeekDay>
+        <Month>1/</Month>
         <Day>23</Day>
       </Date>
       <Tag></Tag>
@@ -94,8 +94,8 @@
     <TopicTag>
       <ClassNum>5</ClassNum>
       <Date>
-        <WeekDay>M</WeekDay>
-        <Month>1</Month>
+        <WeekDay>M:</WeekDay>
+        <Month>1/</Month>
         <Day>26</Day>
       </Date>
       <Tag>CSS</Tag>
@@ -111,8 +111,8 @@
     <TopicTag>
       <ClassNum>6</ClassNum>
       <Date>
-        <WeekDay>W</WeekDay>
-        <Month>1</Month>
+        <WeekDay>W:</WeekDay>
+        <Month>1/</Month>
         <Day>28</Day>
       </Date>
       <Tag></Tag>
@@ -128,8 +128,8 @@
     <TopicTag>
       <ClassNum></ClassNum>
       <Date>
-        <WeekDay>F</WeekDay>
-        <Month>1</Month>
+        <WeekDay>F:</WeekDay>
+        <Month>1/</Month>
         <Day>30</Day>
       </Date>
       <Tag></Tag>
@@ -145,8 +145,8 @@
     <AltTopicTag>
       <ClassNum>7</ClassNum>
       <Date>
-        <WeekDay>M</WeekDay>
-        <Month>2</Month>
+        <WeekDay>M:</WeekDay>
+        <Month>2/</Month>
         <Day>2</Day>
       </Date>
       <Tag>Ajax</Tag>
@@ -162,8 +162,8 @@
     <AltTopicTag>
       <ClassNum>8</ClassNum>
       <Date>
-        <WeekDay>W</WeekDay>
-        <Month>2</Month>
+        <WeekDay>W:</WeekDay>
+        <Month>2/</Month>
         <Day>4</Day>
       </Date>
       <Tag></Tag>
@@ -179,8 +179,8 @@
     <AltTopicTag>
       <ClassNum></ClassNum>
       <Date>
-        <WeekDay>F</WeekDay>
-        <Month>2</Month>
+        <WeekDay>F:</WeekDay>
+        <Month>2/</Month>
         <Day>6</Day>
       </Date>
       <Tag></Tag>
@@ -196,8 +196,8 @@
     <TopicTag>
       <ClassNum>9</ClassNum>
       <Date>
-        <WeekDay>M</WeekDay>
-        <Month>2</Month>
+        <WeekDay>M:</WeekDay>
+        <Month>2/</Month>
         <Day>9</Day>
       </Date>
       <Tag>XML</Tag>
@@ -213,8 +213,8 @@
     <TopicTag>
       <ClassNum>10</ClassNum>
       <Date>
-        <WeekDay>W</WeekDay>
-        <Month>2</Month>
+        <WeekDay>W:</WeekDay>
+        <Month>2/</Month>
         <Day>11</Day>
       </Date>
       <Tag></Tag>
@@ -230,8 +230,8 @@
     <TopicTag>
       <ClassNum></ClassNum>
       <Date>
-        <WeekDay>F</WeekDay>
-        <Month>2</Month>
+        <WeekDay>F:</WeekDay>
+        <Month>2/</Month>
         <Day>13</Day>
       </Date>
       <Tag></Tag>
@@ -247,8 +247,8 @@
     <AltTopicTag>
       <ClassNum>11</ClassNum>
       <Date>
-        <WeekDay>M</WeekDay>
-        <Month>2</Month>
+        <WeekDay>M:</WeekDay>
+        <Month>2/</Month>
         <Day>16</Day>
       </Date>
       <Tag>JSP</Tag>
@@ -264,8 +264,8 @@
     <AltTopicTag>
       <ClassNum>12</ClassNum>
       <Date>
-        <WeekDay>W</WeekDay>
-        <Month>2</Month>
+        <WeekDay>W:</WeekDay>
+        <Month>2/</Month>
         <Day>18</Day>
       </Date>
       <Tag></Tag>
@@ -281,8 +281,8 @@
     <AltTopicTag>
       <ClassNum></ClassNum>
       <Date>
-        <WeekDay>F</WeekDay>
-        <Month>2</Month>
+        <WeekDay>F:</WeekDay>
+        <Month>2/</Month>
         <Day>20</Day>
       </Date>
       <Tag></Tag>
@@ -298,8 +298,8 @@
     <TopicTag>
       <ClassNum>13</ClassNum>
       <Date>
-        <WeekDay>M</WeekDay>
-        <Month>2</Month>
+        <WeekDay>M:</WeekDay>
+        <Month>2/</Month>
         <Day>23</Day>
       </Date>
       <Tag>REST</Tag>
@@ -315,8 +315,8 @@
     <TopicTag>
       <ClassNum>14</ClassNum>
       <Date>
-        <WeekDay>W</WeekDay>
-        <Month>2</Month>
+        <WeekDay>W:</WeekDay>
+        <Month>2/</Month>
         <Day>25</Day>
       </Date>
       <Tag></Tag>
@@ -332,8 +332,8 @@
     <TopicTag>
       <ClassNum></ClassNum>
       <Date>
-        <WeekDay>F</WeekDay>
-        <Month>2</Month>
+        <WeekDay>F:</WeekDay>
+        <Month>2/</Month>
         <Day>27</Day>
       </Date>
       <Tag></Tag>
@@ -349,8 +349,8 @@
     <AltTopicTag>
       <ClassNum>15</ClassNum>
       <Date>
-        <WeekDay>M</WeekDay>
-        <Month>3</Month>
+        <WeekDay>M:</WeekDay>
+        <Month>3/</Month>
         <Day>2</Day>
       </Date>
       <Tag>REST</Tag>
@@ -366,8 +366,8 @@
     <AltTopicTag>
       <ClassNum>16</ClassNum>
       <Date>
-        <WeekDay>W</WeekDay>
-        <Month>3</Month>
+        <WeekDay>W:</WeekDay>
+        <Month>3/</Month>
         <Day>4</Day>
       </Date>
       <Tag></Tag>
@@ -383,8 +383,8 @@
     <AltTopicTag>
       <ClassNum></ClassNum>
       <Date>
-        <WeekDay>F</WeekDay>
-        <Month>3</Month>
+        <WeekDay>F:</WeekDay>
+        <Month>3/</Month>
         <Day>6</Day>
       </Date>
       <Tag></Tag>
@@ -400,8 +400,8 @@
     <TopicTag>
       <ClassNum>17</ClassNum>
       <Date>
-        <WeekDay>M</WeekDay>
-        <Month>3</Month>
+        <WeekDay>M:</WeekDay>
+        <Month>3/</Month>
         <Day>16</Day>
       </Date>
       <Tag>REST</Tag>
@@ -417,8 +417,8 @@
     <TopicTag>
       <ClassNum>18</ClassNum>
       <Date>
-        <WeekDay>W</WeekDay>
-        <Month>3</Month>
+        <WeekDay>W:</WeekDay>
+        <Month>3/</Month>
         <Day>18</Day>
       </Date>
       <Tag></Tag>
@@ -434,8 +434,8 @@
     <TopicTag>
       <ClassNum></ClassNum>
       <Date>
-        <WeekDay>F</WeekDay>
-        <Month>3</Month>
+        <WeekDay>F:</WeekDay>
+        <Month>3/</Month>
         <Day>20</Day>
       </Date>
       <Tag></Tag>
@@ -451,8 +451,8 @@
     <AltTopicTag>
       <ClassNum>19</ClassNum>
       <Date>
-        <WeekDay>M</WeekDay>
-        <Month>3</Month>
+        <WeekDay>M:</WeekDay>
+        <Month>3/</Month>
         <Day>23</Day>
       </Date>
       <Tag>SOAP</Tag>
@@ -468,8 +468,8 @@
     <AltTopicTag>
       <ClassNum>20</ClassNum>
       <Date>
-        <WeekDay>W</WeekDay>
-        <Month>3</Month>
+        <WeekDay>W:</WeekDay>
+        <Month>3/</Month>
         <Day>20</Day>
       </Date>
       <Tag></Tag>
@@ -485,8 +485,8 @@
     <AltTopicTag>
       <ClassNum></ClassNum>
       <Date>
-        <WeekDay>F</WeekDay>
-        <Month>3</Month>
+        <WeekDay>F:</WeekDay>
+        <Month>3/</Month>
         <Day>27</Day>
       </Date>
       <Tag></Tag>
@@ -502,8 +502,8 @@
     <TopicTag>
       <ClassNum>21</ClassNum>
       <Date>
-        <WeekDay>M</WeekDay>
-        <Month>3</Month>
+        <WeekDay>M:</WeekDay>
+        <Month>3/</Month>
         <Day>30</Day>
       </Date>
       <Tag>SOAP</Tag>
@@ -519,8 +519,8 @@
     <TopicTag>
       <ClassNum>22</ClassNum>
       <Date>
-        <WeekDay>W</WeekDay>
-        <Month>4</Month>
+        <WeekDay>W:</WeekDay>
+        <Month>4/</Month>
         <Day>1</Day>
       </Date>
       <Tag></Tag>
@@ -536,8 +536,8 @@
     <TopicTag>
       <ClassNum></ClassNum>
       <Date>
-        <WeekDay>M</WeekDay>
-        <Month>1</Month>
+        <WeekDay>M:</WeekDay>
+        <Month>1/</Month>
         <Day>12</Day>
       </Date>
       <Tag></Tag>
@@ -553,8 +553,8 @@
     <AltTopicTag>
       <ClassNum>23</ClassNum>
       <Date>
-        <WeekDay>M</WeekDay>
-        <Month>4</Month>
+        <WeekDay>M:</WeekDay>
+        <Month>4/</Month>
         <Day>6</Day>
       </Date>
       <Tag>SOAP</Tag>
@@ -570,8 +570,8 @@
     <AltTopicTag>
       <ClassNum>24</ClassNum>
       <Date>
-        <WeekDay>W</WeekDay>
-        <Month>4</Month>
+        <WeekDay>W:</WeekDay>
+        <Month>4/</Month>
         <Day>8</Day>
       </Date>
       <Tag></Tag>
@@ -587,8 +587,8 @@
     <AltTopicTag>
       <ClassNum></ClassNum>
       <Date>
-        <WeekDay>F</WeekDay>
-        <Month>4</Month>
+        <WeekDay>F:</WeekDay>
+        <Month>4/</Month>
         <Day>10</Day>
       </Date>
       <Tag></Tag>
@@ -604,8 +604,8 @@
     <TopicTag>
       <ClassNum>25</ClassNum>
       <Date>
-        <WeekDay>M</WeekDay>
-        <Month>4</Month>
+        <WeekDay>M:</WeekDay>
+        <Month>4/</Month>
         <Day>13</Day>
       </Date>
       <Tag>Security</Tag>
@@ -621,8 +621,8 @@
     <TopicTag>
       <ClassNum>26</ClassNum>
       <Date>
-        <WeekDay>W</WeekDay>
-        <Month>4</Month>
+        <WeekDay>W:</WeekDay>
+        <Month>4/</Month>
         <Day>15</Day>
       </Date>
       <Tag></Tag>
@@ -638,8 +638,8 @@
     <TopicTag>
       <ClassNum></ClassNum>
       <Date>
-        <WeekDay>F</WeekDay>
-        <Month>4</Month>
+        <WeekDay>F:</WeekDay>
+        <Month>4/</Month>
         <Day>17</Day>
       </Date>
       <Tag></Tag>
@@ -655,8 +655,8 @@
     <AltTopicTag>
       <ClassNum>27</ClassNum>
       <Date>
-        <WeekDay>M</WeekDay>
-        <Month>4</Month>
+        <WeekDay>M:</WeekDay>
+        <Month>4/</Month>
         <Day>20</Day>
       </Date>
       <Tag>EJB</Tag>
@@ -672,8 +672,8 @@
     <AltTopicTag>
       <ClassNum>28</ClassNum>
       <Date>
-        <WeekDay>W</WeekDay>
-        <Month>4</Month>
+        <WeekDay>W:</WeekDay>
+        <Month>4/</Month>
         <Day>22</Day>
       </Date>
       <Tag></Tag>
@@ -689,8 +689,8 @@
     <AltTopicTag>
       <ClassNum></ClassNum>
       <Date>
-        <WeekDay>F</WeekDay>
-        <Month>4</Month>
+        <WeekDay>F:</WeekDay>
+        <Month>4/</Month>
         <Day>24</Day>
       </Date>
       <Tag></Tag>
@@ -706,8 +706,8 @@
     <TopicTag>
       <ClassNum></ClassNum>
       <Date>
-        <WeekDay>M</WeekDay>
-        <Month>4</Month>
+        <WeekDay>M:</WeekDay>
+        <Month>4/</Month>
         <Day>27</Day>
       </Date>
       <Tag>Project</Tag>
@@ -723,8 +723,8 @@
     <TopicTag>
       <ClassNum></ClassNum>
       <Date>
-        <WeekDay>W</WeekDay>
-        <Month>4</Month>
+        <WeekDay>W:</WeekDay>
+        <Month>4/</Month>
         <Day>29</Day>
       </Date>
       <Tag></Tag>
@@ -740,8 +740,8 @@
     <TopicTag>
       <ClassNum></ClassNum>
       <Date>
-        <WeekDay>F</WeekDay>
-        <Month>5</Month>
+        <WeekDay>F:</WeekDay>
+        <Month>5/</Month>
         <Day>1</Day>
       </Date>
       <Tag></Tag>

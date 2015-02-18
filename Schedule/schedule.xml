@@ -187,7 +187,7 @@
     </AltTopicTag>
     <Lab>
       <Topic>Lab3: Node.js</Topic>
-      <Project>A simple website up & running</Project>
+      <Project>A simple website up &#038; running</Project>
       <Notes></Notes>
     </Lab>
   </Row>
@@ -203,7 +203,7 @@
       <Tag>XML</Tag>
     </TopicTag>
     <NonLab>
-      <Topic>Fundamental XML & XML parsers</Topic>
+      <Topic>Fundamental XML &#038; XML parsers</Topic>
       <Project></Project>
       <Notes></Notes>
     </NonLab>
@@ -458,7 +458,7 @@
       <Tag>SOAP</Tag>
     </AltTopicTag>
     <NonLab>
-      <Topic>WSDL & SOAP: service description</Topic>
+      <Topic>WSDL &#038; SOAP: service description</Topic>
       <Project></Project>
       <Notes></Notes>
     </NonLab>
@@ -577,7 +577,7 @@
       <Tag></Tag>
     </AltTopicTag>
     <NonLab>
-      <Topic>SOAP: Message Context & Attachment</Topic>
+      <Topic>SOAP: Message Context &#038; Attachment</Topic>
       <Project>Use SOAP handlers</Project>
       <Notes>Martin ch5</Notes>
     </NonLab>
@@ -679,7 +679,7 @@
       <Tag></Tag>
     </AltTopicTag>
     <NonLab>
-      <Topic>Service Integration & SOA</Topic>
+      <Topic>Service Integration &#038; SOA</Topic>
       <Project>Put it all together</Project>
       <Notes>Martin ch7</Notes>
     </NonLab>

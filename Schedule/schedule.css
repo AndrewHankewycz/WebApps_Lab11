@@ -1,27 +1,78 @@
 document {
     display: table;
     border-collapse: collapse;
-    border: 3px solid black;
     table-layout: auto;
     margin: 2em;
+
 }
 
 Row {
 	display: table-row;
-  	border-bottom: 1px solid black;
+
+    text-align: left;
 }
 
-ClassNum, Date, Tag, Topic, Lab, Project, Notes {
-	border: 1px solid black;
+ClassNum, Date, Tag, Topic, Project, Notes {
+
+    border-style: solid;
+    border-width: 0.1em;
+    padding-left: 0.4em;
+    padding-right: 0.4em;
     display: table-cell;
-    padding: 1em;
 }
 
-Topic {
-	background: #DEEFF6;
+ClassNum, Date, Tag {
+
+    width: 4.0em;
+}
+
+Topic, Project {
+
+    width: 16.0em;
+}
+
+Notes {
+
+    font-style: normal;
+}
+
+ClassNum {
+
+    text-align: center;
+}
+
+Notes {
+
+    width: 6.0em;
+}
+
+TopicTag {
+
+    display: table-cell;
+    background-color: white;
+}
+
+AltTopicTag {
+
+    display: table-cell;
+    background-color: #CFCFCF;
 }
 
 Lab {
-	background: #FFEBE0;
-	font-style: italic;
+
+    display: table-cell;
+    font-style: italic;
+    background: #FFCC99;
 }
+
+NonLab {
+    display: table-cell;
+    background: #DEEFF6;
+}
+
+Presentation {
+    display: table-cell;
+    background-color: #CFCFCF;
+}
+
+

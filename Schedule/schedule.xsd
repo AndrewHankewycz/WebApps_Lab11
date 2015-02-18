@@ -44,14 +44,54 @@
 	</xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="rowType">
+<xs:complexType name="labType">
     <xs:sequence>
-	<xs:element name="ClassNum" type="intType"/>
-	<xs:element name="Date" type="dateType"/>
-	<xs:element name="Tag" type="stringType"/>
 	<xs:element name="Topic" type="stringType"/>
 	<xs:element name="Project" type="stringType"/>
 	<xs:element name="Notes" type="stringType>"/>
+    </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tagType">
+    <xs:sequence>
+    <xs:element name="ClassNum" type="intType"/>
+    <xs:element name="Date" type="dateType"/>
+    <xs:element name="Tag" type="stringType"/>
+    </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="rowType">
+    <xs:sequence>
+    <xs:element name="TopicTag" type="tagType"/>
+    <xs:element name="Lab" type="labType"/>
+    </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="rowType">
+    <xs:sequence>
+    <xs:element name="TopicTag" type="tagType"/>
+    <xs:element name="NonLab" type="labType"/>
+    </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="rowType">
+    <xs:sequence>
+    <xs:element name="AltTopicTag" type="tagType"/>
+    <xs:element name="NonLab" type="labType"/>
+    </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="rowType">
+    <xs:sequence>
+    <xs:element name="AltTopicTag" type="tagType"/>
+    <xs:element name="Lab" type="labType"/>    
+    </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="rowType">
+    <xs:sequence>
+    <xs:element name="TopicTag" type="tagType"/>
+    <xs:element name="Presentation" type="stringType"/>    
     </xs:sequence>
 </xs:complexType>
 

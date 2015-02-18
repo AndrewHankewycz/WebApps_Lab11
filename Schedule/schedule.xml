@@ -6,28 +6,751 @@
   xsi:noNamespaceSchemaLocation="schedule.xsd">
 
   <Row>
-  	<ClassNum>1</ClassNum>
-  	<Date>
+  	<TopicTag>
+      <ClassNum>1</ClassNum>
+      <Date>
         <WeekDay>M</WeekDay>
         <Month>1</Month>
         <Day>12</Day>
-    </Date>
-    <Tag>MVC</Tag>
-    <Topic>Introduction to Web Applications</Topic>
-    <Project>Topic: Course Web Application</Project>
-    <Notes> </Notes>
+      </Date>
+      <Tag>MVC</Tag>
+    </TopicTag>
+    <NonLab>
+      <Topic>Introduction to Web Applications</Topic>
+      <Project>Topic: Course Web Application</Project>
+      <Notes></Notes>
+    </NonLab>
   </Row>
 
   <Row>
-    <ClassNum>2</ClassNum>
-    <Date>
-      <WeekDay>W</WeekDay>
-      <Month>1</Month>
-      <Day>14</Day>
-    </Date>
-    <Tag> </Tag>
-    <Topic>Fundamental Javascript: the control</Topic>
-    <Project>Simple page design</Project>
-    <Notes>David 1-11</Notes>
+    <TopicTag>
+      <ClassNum>2</ClassNum>
+      <Date>
+        <WeekDay>W</WeekDay>
+        <Month>1</Month>
+        <Day>14</Day>
+      </Date>
+      <Tag></Tag>
+    </TopicTag>
+    <NonLab>
+      <Topic>Fundamental Javascript: the control</Topic>
+      <Project>Simple page design</Project>
+      <Notes>David 1-11</Notes>
+    </NonLab>
   </Row>
+
+  <Row>
+    <TopicTag>
+      <ClassNum>3</ClassNum>
+      <Date>
+        <WeekDay>F</WeekDay>
+        <Month>1</Month>
+        <Day>16</Day>
+      </Date>
+      <Tag></Tag>
+    </TopicTag>
+    <NonLab>
+      <Topic>Javascript: the Window object</Topic>
+      <Project></Project>
+      <Notes>David 12-14</Notes>
+    </NonLab>
+  </Row>
+
+  <Row>
+    <AltTopicTag>
+      <ClassNum>4</ClassNum>
+      <Date>
+        <WeekDay>W</WeekDay>
+        <Month>1</Month>
+        <Day>21</Day>
+      </Date>
+      <Tag>HTML</Tag>
+    </AltTopicTag>
+    <NonLab>
+      <Topic>Scripting Document: the model</Topic>
+      <Project>Scripting client</Project>
+      <Notes>David 15</Notes>
+    </NonLab>
+  </Row>
+
+  <Row>
+    <AltTopicTag>
+      <ClassNum></ClassNum>
+      <Date>
+        <WeekDay>F</WeekDay>
+        <Month>1</Month>
+        <Day>23</Day>
+      </Date>
+      <Tag></Tag>
+    </AltTopicTag>
+    <Lab>
+      <Topic>Lab1: Node.js</Topic>
+      <Project></Project>
+      <Notes></Notes>
+    </Lab>
+  </Row>
+
+  <Row>
+    <TopicTag>
+      <ClassNum>5</ClassNum>
+      <Date>
+        <WeekDay>M</WeekDay>
+        <Month>1</Month>
+        <Day>26</Day>
+      </Date>
+      <Tag>CSS</Tag>
+    </TopicTag>
+    <NonLab>
+      <Topic>Scripting CSS: the view</Topic>
+      <Project>CSS design</Project>
+      <Notes>David 16</Notes>
+    </NonLab>
+  </Row>
+
+  <Row>
+    <TopicTag>
+      <ClassNum>6</ClassNum>
+      <Date>
+        <WeekDay>W</WeekDay>
+        <Month>1</Month>
+        <Day>28</Day>
+      </Date>
+      <Tag></Tag>
+    </TopicTag>
+    <NonLab>
+      <Topic>Advanced Javascript: event handling</Topic>
+      <Project>Scripting client</Project>
+      <Notes>David 17</Notes>
+    </NonLab>
+  </Row>
+
+  <Row>
+    <TopicTag>
+      <ClassNum></ClassNum>
+      <Date>
+        <WeekDay>F</WeekDay>
+        <Month>1</Month>
+        <Day>30</Day>
+      </Date>
+      <Tag></Tag>
+    </TopicTag>
+    <Lab>
+      <Topic>Lab2: Node.js</Topic>
+      <Project></Project>
+      <Notes></Notes>
+    </Lab>
+  </Row>
+
+  <Row>
+    <AltTopicTag>
+      <ClassNum>7</ClassNum>
+      <Date>
+        <WeekDay>M</WeekDay>
+        <Month>2</Month>
+        <Day>2</Day>
+      </Date>
+      <Tag>Ajax</Tag>
+    </AltTopicTag>
+    <NonLab>
+      <Topic>Advanced Javascript: Ajax</Topic>
+      <Project>Ajax component</Project>
+      <Notes>David 18</Notes>
+    </NonLab>
+  </Row>
+
+  <Row>
+    <AltTopicTag>
+      <ClassNum>8</ClassNum>
+      <Date>
+        <WeekDay>W</WeekDay>
+        <Month>2</Month>
+        <Day>4</Day>
+      </Date>
+      <Tag></Tag>
+    </AltTopicTag>
+    <NonLab>
+      <Topic>Advanced Javascript: jQuery</Topic>
+      <Project>Use jQuery</Project>
+      <Notes>David 19</Notes>
+    </NonLab>
+  </Row>
+
+  <Row>
+    <AltTopicTag>
+      <ClassNum></ClassNum>
+      <Date>
+        <WeekDay>F</WeekDay>
+        <Month>2</Month>
+        <Day>6</Day>
+      </Date>
+      <Tag></Tag>
+    </AltTopicTag>
+    <Lab>
+      <Topic>Lab3: Node.js</Topic>
+      <Project>A simple website up & running</Project>
+      <Notes></Notes>
+    </Lab>
+  </Row>
+
+  <Row>
+    <TopicTag>
+      <ClassNum>9</ClassNum>
+      <Date>
+        <WeekDay>M</WeekDay>
+        <Month>2</Month>
+        <Day>9</Day>
+      </Date>
+      <Tag>XML</Tag>
+    </TopicTag>
+    <NonLab>
+      <Topic>Fundamental XML & XML parsers</Topic>
+      <Project></Project>
+      <Notes></Notes>
+    </NonLab>
+  </Row>
+
+  <Row>
+    <TopicTag>
+      <ClassNum>10</ClassNum>
+      <Date>
+        <WeekDay>W</WeekDay>
+        <Month>2</Month>
+        <Day>11</Day>
+      </Date>
+      <Tag></Tag>
+    </TopicTag>
+    <NonLab>
+      <Topic>Advanced XML: the schema</Topic>
+      <Project>A schema desribing columns 2-4</Project>
+      <Notes></Notes>
+    </NonLab>
+  </Row>
+
+  <Row>
+    <TopicTag>
+      <ClassNum></ClassNum>
+      <Date>
+        <WeekDay>F</WeekDay>
+        <Month>2</Month>
+        <Day>13</Day>
+      </Date>
+      <Tag></Tag>
+    </TopicTag>
+    <Lab>
+      <Topic>Lab4: XML</Topic>
+      <Project></Project>
+      <Notes></Notes>
+    </Lab>
+  </Row>
+
+  <Row>
+    <AltTopicTag>
+      <ClassNum>11</ClassNum>
+      <Date>
+        <WeekDay>M</WeekDay>
+        <Month>2</Month>
+        <Day>16</Day>
+      </Date>
+      <Tag>JSP</Tag>
+    </AltTopicTag>
+    <NonLab>
+      <Topic>Fundamental JSP</Topic>
+      <Project></Project>
+      <Notes></Notes>
+    </NonLab>
+  </Row>
+
+  <Row>
+    <AltTopicTag>
+      <ClassNum>12</ClassNum>
+      <Date>
+        <WeekDay>W</WeekDay>
+        <Month>2</Month>
+        <Day>18</Day>
+      </Date>
+      <Tag></Tag>
+    </AltTopicTag>
+    <NonLab>
+      <Topic>Advanced JSP</Topic>
+      <Project>Transform website to JSP</Project>
+      <Notes>Tomcat</Notes>
+    </NonLab>
+  </Row>
+
+  <Row>
+    <AltTopicTag>
+      <ClassNum></ClassNum>
+      <Date>
+        <WeekDay>F</WeekDay>
+        <Month>2</Month>
+        <Day>20</Day>
+      </Date>
+      <Tag></Tag>
+    </AltTopicTag>
+    <Lab>
+      <Topic>Lab5: JSP</Topic>
+      <Project></Project>
+      <Notes></Notes>
+    </Lab>
+  </Row>
+
+  <Row>
+    <TopicTag>
+      <ClassNum>13</ClassNum>
+      <Date>
+        <WeekDay>M</WeekDay>
+        <Month>2</Month>
+        <Day>23</Day>
+      </Date>
+      <Tag>REST</Tag>
+    </TopicTag>
+    <NonLab>
+      <Topic>RESTful Web Services: intro, http, ant</Topic>
+      <Project>Design a REST component</Project>
+      <Notes>Martin ch1</Notes>
+    </NonLab>
+  </Row>
+
+  <Row>
+    <TopicTag>
+      <ClassNum>14</ClassNum>
+      <Date>
+        <WeekDay>W</WeekDay>
+        <Month>2</Month>
+        <Day>25</Day>
+      </Date>
+      <Tag></Tag>
+    </TopicTag>
+    <NonLab>
+      <Topic>RESTful Web Services: HttpServlet</Topic>
+      <Project></Project>
+      <Notes>Martin ch2</Notes>
+    </NonLab>
+  </Row>
+
+  <Row>
+    <TopicTag>
+      <ClassNum></ClassNum>
+      <Date>
+        <WeekDay>F</WeekDay>
+        <Month>2</Month>
+        <Day>27</Day>
+      </Date>
+      <Tag></Tag>
+    </TopicTag>
+    <Lab>
+      <Topic>Lab6: RESTful Web Services</Topic>
+      <Project></Project>
+      <Notes>Martin ch2</Notes>
+    </Lab>
+  </Row>
+
+  <Row>
+    <AltTopicTag>
+      <ClassNum>15</ClassNum>
+      <Date>
+        <WeekDay>M</WeekDay>
+        <Month>3</Month>
+        <Day>2</Day>
+      </Date>
+      <Tag>REST</Tag>
+    </AltTopicTag>
+    <NonLab>
+      <Topic>RESTful Web Services: JAX-RS</Topic>
+      <Project>Implement the REST component</Project>
+      <Notes>Martin ch2</Notes>
+    </NonLab>
+  </Row>
+
+  <Row>
+    <AltTopicTag>
+      <ClassNum>16</ClassNum>
+      <Date>
+        <WeekDay>W</WeekDay>
+        <Month>3</Month>
+        <Day>4</Day>
+      </Date>
+      <Tag></Tag>
+    </AltTopicTag>
+    <NonLab>
+      <Topic>RESTful Web Services: Restlet</Topic>
+      <Project></Project>
+      <Notes>Martin ch2</Notes>
+    </NonLab>
+  </Row>
+
+  <Row>
+    <AltTopicTag>
+      <ClassNum></ClassNum>
+      <Date>
+        <WeekDay>F</WeekDay>
+        <Month>3</Month>
+        <Day>6</Day>
+      </Date>
+      <Tag></Tag>
+    </AltTopicTag>
+    <Lab>
+      <Topic>Lab7: RESTful Web Services</Topic>
+      <Project></Project>
+      <Notes>Martin ch2</Notes>
+    </Lab>
+  </Row>
+
+  <Row>
+    <TopicTag>
+      <ClassNum>17</ClassNum>
+      <Date>
+        <WeekDay>M</WeekDay>
+        <Month>3</Month>
+        <Day>16</Day>
+      </Date>
+      <Tag>REST</Tag>
+    </TopicTag>
+    <NonLab>
+      <Topic>RESTful Web Services: JAX-WS</Topic>
+      <Project></Project>
+      <Notes>Martin ch2</Notes>
+    </NonLab>
+  </Row>
+
+  <Row>
+    <TopicTag>
+      <ClassNum>18</ClassNum>
+      <Date>
+        <WeekDay>W</WeekDay>
+        <Month>3</Month>
+        <Day>18</Day>
+      </Date>
+      <Tag></Tag>
+    </TopicTag>
+    <NonLab>
+      <Topic>Consuming RESTful Services on the Web</Topic>
+      <Project>Javascript client to your REST</Project>
+      <Notes>Martin ch3</Notes>
+    </NonLab>
+  </Row>
+
+  <Row>
+    <TopicTag>
+      <ClassNum></ClassNum>
+      <Date>
+        <WeekDay>F</WeekDay>
+        <Month>3</Month>
+        <Day>20</Day>
+      </Date>
+      <Tag></Tag>
+    </TopicTag>
+    <Lab>
+      <Topic>Lab8: Real world RESTful Web Services</Topic>
+      <Project></Project>
+      <Notes>Martin ch3</Notes>
+    </Lab>
+  </Row>
+
+  <Row>
+    <AltTopicTag>
+      <ClassNum>19</ClassNum>
+      <Date>
+        <WeekDay>M</WeekDay>
+        <Month>3</Month>
+        <Day>23</Day>
+      </Date>
+      <Tag>SOAP</Tag>
+    </AltTopicTag>
+    <NonLab>
+      <Topic>WSDL & SOAP: service description</Topic>
+      <Project></Project>
+      <Notes></Notes>
+    </NonLab>
+  </Row>
+
+  <Row>
+    <AltTopicTag>
+      <ClassNum>20</ClassNum>
+      <Date>
+        <WeekDay>W</WeekDay>
+        <Month>3</Month>
+        <Day>20</Day>
+      </Date>
+      <Tag></Tag>
+    </AltTopicTag>
+    <NonLab>
+      <Topic>SOAP-based Web Services</Topic>
+      <Project>Design a SOAP component</Project>
+      <Notes>Martin ch4</Notes>
+    </NonLab>
+  </Row>
+
+  <Row>
+    <AltTopicTag>
+      <ClassNum></ClassNum>
+      <Date>
+        <WeekDay>F</WeekDay>
+        <Month>3</Month>
+        <Day>27</Day>
+      </Date>
+      <Tag></Tag>
+    </AltTopicTag>
+    <Lab>
+      <Topic>Lab9: SOAP Web Services</Topic>
+      <Project></Project>
+      <Notes>Martin ch4</Notes>
+    </Lab>
+  </Row>
+
+  <Row>
+    <TopicTag>
+      <ClassNum>21</ClassNum>
+      <Date>
+        <WeekDay>M</WeekDay>
+        <Month>3</Month>
+        <Day>30</Day>
+      </Date>
+      <Tag>SOAP</Tag>
+    </TopicTag>
+    <NonLab>
+      <Topic>SOAP-based Service Client</Topic>
+      <Project></Project>
+      <Notes>Martin ch4</Notes>
+    </NonLab>
+  </Row>
+
+  <Row>
+    <TopicTag>
+      <ClassNum>22</ClassNum>
+      <Date>
+        <WeekDay>W</WeekDay>
+        <Month>4</Month>
+        <Day>1</Day>
+      </Date>
+      <Tag></Tag>
+    </TopicTag>
+    <NonLab>
+      <Topic>SOAP handlers</Topic>
+      <Project>Implement the SOAP component</Project>
+      <Notes>Martin ch5</Notes>
+    </NonLab>
+  </Row>
+
+  <Row>
+    <TopicTag>
+      <ClassNum></ClassNum>
+      <Date>
+        <WeekDay>M</WeekDay>
+        <Month>1</Month>
+        <Day>12</Day>
+      </Date>
+      <Tag></Tag>
+    </TopicTag>
+    <Lab>
+      <Topic>Lab10: SOAP message handlers</Topic>
+      <Project></Project>
+      <Notes>Martin ch5</Notes>
+    </Lab>
+  </Row>
+
+  <Row>
+    <AltTopicTag>
+      <ClassNum>23</ClassNum>
+      <Date>
+        <WeekDay>M</WeekDay>
+        <Month>4</Month>
+        <Day>6</Day>
+      </Date>
+      <Tag>SOAP</Tag>
+    </AltTopicTag>
+    <NonLab>
+      <Topic>SOAP handler chain</Topic>
+      <Project></Project>
+      <Notes>Martin ch5</Notes>
+    </NonLab>
+  </Row>
+
+  <Row>
+    <AltTopicTag>
+      <ClassNum>24</ClassNum>
+      <Date>
+        <WeekDay>W</WeekDay>
+        <Month>4</Month>
+        <Day>8</Day>
+      </Date>
+      <Tag></Tag>
+    </AltTopicTag>
+    <NonLab>
+      <Topic>SOAP: Message Context & Attachment</Topic>
+      <Project>Use SOAP handlers</Project>
+      <Notes>Martin ch5</Notes>
+    </NonLab>
+  </Row>
+
+  <Row>
+    <AltTopicTag>
+      <ClassNum></ClassNum>
+      <Date>
+        <WeekDay>F</WeekDay>
+        <Month>4</Month>
+        <Day>10</Day>
+      </Date>
+      <Tag></Tag>
+    </AltTopicTag>
+    <Lab>
+      <Topic>Lab11: SOAP message handlers</Topic>
+      <Project></Project>
+      <Notes>Martin ch5</Notes>
+    </Lab>
+  </Row>
+
+  <Row>
+    <TopicTag>
+      <ClassNum>25</ClassNum>
+      <Date>
+        <WeekDay>M</WeekDay>
+        <Month>4</Month>
+        <Day>13</Day>
+      </Date>
+      <Tag>Security</Tag>
+    </TopicTag>
+    <NonLab>
+      <Topic>Web Services Security: Https</Topic>
+      <Project></Project>
+      <Notes>Martin ch6</Notes>
+    </NonLab>
+  </Row>
+
+  <Row>
+    <TopicTag>
+      <ClassNum>26</ClassNum>
+      <Date>
+        <WeekDay>W</WeekDay>
+        <Month>4</Month>
+        <Day>15</Day>
+      </Date>
+      <Tag></Tag>
+    </TopicTag>
+    <NonLab>
+      <Topic>Web Services Scurity: Containers</Topic>
+      <Project>Add security to your WebApp</Project>
+      <Notes>Martin ch6</Notes>
+    </NonLab>
+  </Row>
+
+  <Row>
+    <TopicTag>
+      <ClassNum></ClassNum>
+      <Date>
+        <WeekDay>F</WeekDay>
+        <Month>4</Month>
+        <Day>17</Day>
+      </Date>
+      <Tag></Tag>
+    </TopicTag>
+    <Lab>
+      <Topic>Lab12: Web Services Security</Topic>
+      <Project></Project>
+      <Notes>Martin ch6</Notes>
+    </Lab>
+  </Row>
+
+  <Row>
+    <AltTopicTag>
+      <ClassNum>27</ClassNum>
+      <Date>
+        <WeekDay>M</WeekDay>
+        <Month>4</Month>
+        <Day>20</Day>
+      </Date>
+      <Tag>EJB</Tag>
+    </AltTopicTag>
+    <NonLab>
+      <Topic>JAX-WS: JSP, EJB</Topic>
+      <Project></Project>
+      <Notes>Martin ch7</Notes>
+    </NonLab>
+  </Row>
+
+  <Row>
+    <AltTopicTag>
+      <ClassNum>28</ClassNum>
+      <Date>
+        <WeekDay>W</WeekDay>
+        <Month>4</Month>
+        <Day>22</Day>
+      </Date>
+      <Tag></Tag>
+    </AltTopicTag>
+    <NonLab>
+      <Topic>Service Integration & SOA</Topic>
+      <Project>Put it all together</Project>
+      <Notes>Martin ch7</Notes>
+    </NonLab>
+  </Row>
+
+  <Row>
+    <AltTopicTag>
+      <ClassNum></ClassNum>
+      <Date>
+        <WeekDay>F</WeekDay>
+        <Month>4</Month>
+        <Day>24</Day>
+      </Date>
+      <Tag></Tag>
+    </AltTopicTag>
+    <Lab>
+      <Topic>Lab13: JAX-WS</Topic>
+      <Project></Project>
+      <Notes>Martin ch7</Notes>
+    </Lab>
+  </Row>
+
+  <Row>
+    <TopicTag>
+      <ClassNum></ClassNum>
+      <Date>
+        <WeekDay>M</WeekDay>
+        <Month>4</Month>
+        <Day>27</Day>
+      </Date>
+      <Tag>Project</Tag>
+    </TopicTag>
+    <Presentation>
+      <Topic>Final project Presentation</Topic>
+      <Project></Project>
+      <Notes></Notes>
+    </Presentation>
+  </Row>
+
+  <Row>
+    <TopicTag>
+      <ClassNum></ClassNum>
+      <Date>
+        <WeekDay>W</WeekDay>
+        <Month>4</Month>
+        <Day>29</Day>
+      </Date>
+      <Tag></Tag>
+    </TopicTag>
+    <Presentation>
+      <Topic>Final project Presentation</Topic>
+      <Project></Project>
+      <Notes></Notes>
+    </Presentation>
+  </Row>
+
+  <Row>
+    <TopicTag>
+      <ClassNum></ClassNum>
+      <Date>
+        <WeekDay>F</WeekDay>
+        <Month>5</Month>
+        <Day>1</Day>
+      </Date>
+      <Tag></Tag>
+    </TopicTag>
+    <Presentation>
+      <Topic>Final project Presentation</Topic>
+      <Project></Project>
+      <Notes></Notes>
+    </Presentation>
+  </Row>
+
 </Schedule>

@@ -32,15 +32,12 @@ Day {
     margin-left: -4px;
 }
 
-Notes {
-    font-style: normal;
-}
-
 ClassNum {
     text-align: center;
 }
 
 Notes {
+    font-style: normal;
     width: 6.0em;
 }
 
@@ -58,6 +55,10 @@ Lab {
     display: table-cell;
     font-style: italic;
     background: #FFCC99;
+}
+
+Project {
+    font-style: normal;
 }
 
 NonLab {

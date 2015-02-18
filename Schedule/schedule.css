@@ -8,58 +8,49 @@ document {
 
 Row {
 	display: table-row;
-
     text-align: left;
 }
 
 ClassNum, Date, Tag, Topic, Project, Notes {
-
     border-style: solid;
     border-width: 0.1em;
     padding-left: 0.4em;
     padding-right: 0.4em;
     display: table-cell;
+    white-space: nowrap;
 }
 
 ClassNum, Date, Tag {
-
     width: 4.0em;
 }
 
 Topic, Project {
-
-    width: 16.0em;
+    width: 17.0em;
 }
 
 Notes {
-
     font-style: normal;
 }
 
 ClassNum {
-
     text-align: center;
 }
 
 Notes {
-
     width: 6.0em;
 }
 
 TopicTag {
-
     display: table-cell;
     background-color: white;
 }
 
 AltTopicTag {
-
     display: table-cell;
     background-color: #CFCFCF;
 }
 
 Lab {
-
     display: table-cell;
     font-style: italic;
     background: #FFCC99;
@@ -74,5 +65,3 @@ Presentation {
     display: table-cell;
     background-color: #CFCFCF;
 }
-
-

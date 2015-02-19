@@ -48,7 +48,7 @@
     <xs:sequence>
 	<xs:element name="Topic" type="stringType"/>
 	<xs:element name="Project" type="stringType"/>
-	<xs:element name="Notes" type="stringType>"/>
+	<xs:element name="Notes" type="stringType"/>
     </xs:sequence>
 </xs:complexType>
 
@@ -67,28 +67,28 @@
     </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="rowType">
+<xs:complexType name="rowType1">
     <xs:sequence>
     <xs:element name="TopicTag" type="tagType"/>
     <xs:element name="NonLab" type="labType"/>
     </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="rowType">
+<xs:complexType name="rowType2">
     <xs:sequence>
     <xs:element name="AltTopicTag" type="tagType"/>
     <xs:element name="NonLab" type="labType"/>
     </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="rowType">
+<xs:complexType name="rowType3">
     <xs:sequence>
     <xs:element name="AltTopicTag" type="tagType"/>
     <xs:element name="Lab" type="labType"/>    
     </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="rowType">
+<xs:complexType name="rowType4">
     <xs:sequence>
     <xs:element name="TopicTag" type="tagType"/>
     <xs:element name="Presentation" type="stringType"/>    
@@ -106,7 +106,7 @@
     </xs:sequence>
 </xs:complexType>
 
-<xs:element name="Row" type="rowType"/>
+<xs:element name="Row" type="rowType1"/>
 <xs:element name="HeaderH" type="headerType"/>
 
 </xs:schema>

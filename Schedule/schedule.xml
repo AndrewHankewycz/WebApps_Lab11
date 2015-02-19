@@ -5,18 +5,14 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:noNamespaceSchemaLocation="schedule.xsd">
 
-  <Row>
-    <HeaderTag>
-      <ClassNum>Class #</ClassNum>
-      <Date>Date</Date>
-      <Tag>Topic</Tag>
-    </HeaderTag>
-    <HeaderTag>
-      <Topic>Topic</Topic>
-      <Project>Project</Project>
-      <Notes>Notes</Notes>
-    </HeaderTag>
-  </Row>
+  <HeaderH>
+    <ClassH>Class #</ClassH>
+    <DateH>Date</DateH>
+    <TagH>Tag</TagH>
+    <TopicH>Topic</TopicH>
+    <ProjectH>Project</ProjectH>
+    <NotesH>Notes</NotesH>
+  </HeaderH>
 
   <Row>
   	<TopicTag>

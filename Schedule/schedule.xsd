@@ -38,9 +38,9 @@
 
 <xs:complexType name="dateType">
 	<xs:sequence>
-		<xs:element name="WeekDay" type="weekDayType"/>
-		<xs:element name="Month" type="monthType"/>
-		<xs:element name="Day" type="dayIntType"/>
+		<xs:element name="WeekDay" type="stringType"/>
+		<xs:element name="Month" type="stringType"/>
+		<xs:element name="Day" type="stringType"/>
 	</xs:sequence>
 </xs:complexType>
 
@@ -95,6 +95,18 @@
     </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="headerType">
+    <xs:sequence>
+    <xs:element name="ClassH" type="stringType"/>
+    <xs:element name="DateH" type="stringType"/>
+    <xs:element name="TagH" type="stringType"/>  
+    <xs:element name="TopicH" type="stringType"/>
+    <xs:element name="ProjectH" type="stringType"/> 
+    <xs:element name="NotesH" type="stringType"/>
+    </xs:sequence>
+</xs:complexType>
+
 <xs:element name="Row" type="rowType"/>
+<xs:element name="HeaderH" type="headerType"/>
 
 </xs:schema>

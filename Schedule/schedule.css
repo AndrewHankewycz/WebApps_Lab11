@@ -3,7 +3,6 @@ document {
     border-collapse: collapse;
     table-layout: auto;
     margin: 2em;
-
 }
 
 Row {
@@ -11,11 +10,23 @@ Row {
     text-align: left;
 }
 
-HeaderTag {
+HeaderH {
+    display: table;
+    text-align: center;
+}
+
+ClassH, DateH, TagH, TopicH, ProjectH, NotesH {
     display: table-cell;
     font-style: italic;
     text-align: center;
     background-color: #0070C0;
+    border-style: solid;
+    border-color: black;
+    border-width: 0.1em;
+    padding-left: 0.4em;
+    padding-right: 0.4em;
+    font-weight: bold;
+    color: white;
 }
 
 ClassNum, Date, Tag, Topic, Project, Notes {
@@ -27,11 +38,13 @@ ClassNum, Date, Tag, Topic, Project, Notes {
     white-space: nowrap;
 }
 
-ClassNum, Date, Tag {
+ClassNum, Date, Tag,
+ClassH, DateH, TagH {
     width: 4.0em;
 }
 
-Topic, Project {
+Topic, Project,
+TopicH, ProjectH {
     width: 17.0em;
 }
 
@@ -45,6 +58,11 @@ ClassNum {
 
 Notes {
     font-style: normal;
+    width: 6.0em;
+}
+
+NotesH {
+    font-style: italic;
     width: 6.0em;
 }
 

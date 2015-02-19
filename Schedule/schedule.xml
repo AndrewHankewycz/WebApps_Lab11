@@ -6,6 +6,19 @@
   xsi:noNamespaceSchemaLocation="schedule.xsd">
 
   <Row>
+    <HeaderTag>
+      <ClassNum>Class #</ClassNum>
+      <Date>Date</Date>
+      <Tag>Topic</Tag>
+    </HeaderTag>
+    <HeaderTag>
+      <Topic>Topic</Topic>
+      <Project>Project</Project>
+      <Notes>Notes</Notes>
+    </HeaderTag>
+  </Row>
+
+  <Row>
   	<TopicTag>
       <ClassNum>1</ClassNum>
       <Date>

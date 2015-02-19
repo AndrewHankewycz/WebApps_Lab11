@@ -11,6 +11,13 @@ Row {
     text-align: left;
 }
 
+HeaderTag {
+    display: table-cell;
+    font-style: italic;
+    text-align: center;
+    background-color: #0070C0;
+}
+
 ClassNum, Date, Tag, Topic, Project, Notes {
     border-style: solid;
     border-width: 0.1em;

@@ -34,6 +34,9 @@ app.get('/ThreeRegion/*', function (req, res) {
 app.get('/EvalTool/*', require("./EvalTool/evaluator").gettool);
 app.post('/EvalTool/*', require("./EvalTool/evaluator").posttool);
 
+app.get('/WebServices/*', require("./WebServices/service").gettool);
+app.post('/WebServices/*', require("./WebServices/service").posttool);
+
 app.listen(config.port, function() {
 	console.log('Server running at http://127.0.0.1:' + config.port + '/');
 });

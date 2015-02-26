@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="/ThreeRegion/webhome.css" rel="stylesheet" type="text/css">
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+</head>
+<script>
+$(document).ready(function(){
+    $("#sidenavigation", window.parent.document).html('<fieldset>'+
+    '<legend> Navigation </legend>'+
+    '<form action="/EvalTool/start" method="post" target="cframe">'+
+    '<input type="submit" id="jspButton" class="sidenavinput" name="RosterJSP" value="RosterJSP" />'+
+    '</form>'+
+    '<button id="mvcButton" class="sidenavinput" name="Click" onClick="goHome()" >Click</button>'+
+    '</br>'+
+    '<button id="myButton" class="float-left onClick="goHome()">Home</button>'+
+    '</br>'+
+    '<input type="submit" id="roster1Button" class="sidenavinput" name="roster1Button" value="Roster" />'+
+    '</fieldset>');
+});
+</script>
+<body>
+        <h1 class="heading">Instructions</h1>
+        <p>The goal of this tool is to practive various types of Web Services</p>
+        <p>We learn to develop RESTful Web Services</p>
+        <p>We learn to develop SOAP-based Web Services</p>
+        <p>Click any button on the side region to continue...</p>
+</body>
+</html>

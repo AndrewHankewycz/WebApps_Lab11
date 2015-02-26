@@ -31,6 +31,11 @@ app.get('/ThreeRegion/*', function (req, res) {
 	util.sendFile(root + req.path, req, res);
 });
 
+app.get('/NavigationBar/*', function (req, res) {
+	util.sendFile(root + req.path, req, res);
+});
+
+
 app.get('/EvalTool/*', require("./EvalTool/evaluator").gettool);
 app.post('/EvalTool/*', require("./EvalTool/evaluator").posttool);
 

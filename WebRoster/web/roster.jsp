@@ -49,7 +49,6 @@ th:hover {
                   type: "GET",
                   success: function(data) {
                       roster = data
-                      console.log(data);
                       createTable();
                   }
                 });
@@ -114,33 +113,16 @@ function sortTable(sorttype){
             team += arrow;
             break;
     }
-
-
-    if(order === 1){
-    //beastly bubble sorter
-        for(var i = 0; i < (roster.length - 1); i++){
-
-            for(var j = 0; j < (roster.length - i - 1); j++){
-
+    
+    for(var i = 0; i < (roster.length - 1); i++){
+        for(var j = 0; j < (roster.length - i - 1); j++){
+            if(order === 1) {
                 if(roster[j][element] > roster[j + 1][element]){
-
-                    var temp = roster[j];
-                    roster[j] = roster[j+1];
-                    roster[j+1] = temp;
+                    swap(i, j);
                 }
-            }
-        }
-    }else{
-
-        for(var i = 0; i < (roster.length - 1); i++){
-
-            for(var j = 0; j < (roster.length - i - 1); j++){
-
-                if(roster[j][element] < roster[j + 1][element]){
-
-                    var temp = roster[j];
-                    roster[j] = roster[j+1];
-                    roster[j+1] = temp;
+            } else {
+                if(roster[j][element] < roster[j + 1][element]) {
+                    swap(i, j);
                 }
             }
         }
@@ -151,6 +133,12 @@ function sortTable(sorttype){
         content.removeChild(content.firstChild);
     }
     createTable();
+}
+
+function swap(i, j) {
+    var temp = roster[j];
+    roster[j] = roster[j+1];
+    roster[j+1] = temp;
 }
 
 function createTable(){

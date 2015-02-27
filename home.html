@@ -7,9 +7,8 @@
         Web Applications At PSU Behrend
     </title>
 <script>
-function goHome(){
-  //$("#cframe", window.parent.document). = "/Schedule/home.html";
-  alert("test");
+function goToRoster(){
+  $('#cframe').attr('src', "/WebRoster/roster");
 }
 </script>
 </head>
@@ -23,7 +22,7 @@ function goHome(){
             <li class ="topnavigationbox"><a id="syllabusLink" href="homec.html" target="cframe">Get Syllabus</a></li>
             <li class ="topnavigationbox"><a id="scheduleLink" href="/Schedule/schedule.html" target="cframe">Get Schedule</a></li>
             <li class ="topnavigationbox"><a id="evalToolLink" href="/EvalTool/startpage.html" target="cframe">Evaluation Tool</a></li>
-            <li class ="topnavigationbox"><a id="webServicesLink" href="/WebRoster/" target="cframe">Web Services</a></li>
+            <li class ="topnavigationbox"><a id="webServicesLink" href="/WebRoster/roster.html" target="cframe">Web Services</a></li>
             <li class ="topnavigationbox"><a id="resourcesLink" href="resources.htm">Resources</a></li>
         </ul>
     </div>

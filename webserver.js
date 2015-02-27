@@ -39,7 +39,11 @@ app.get('/NavigationBar/*', function (req, res) {
 app.get('/EvalTool/*', require("./EvalTool/evaluator").gettool);
 app.post('/EvalTool/*', require("./EvalTool/evaluator").posttool);
 
-app.get('/WebRoster/*', function(req, res) {
+app.get('/WebRoster/roster.html', function(req, res) {
+	util.sendFile(root + req.path, req, res);
+});
+
+app.get('/WebRoster/roster', function(req, res) {
 	res.redirect("http://localhost:8080/WebRoster/roster.jsp");
 });
 

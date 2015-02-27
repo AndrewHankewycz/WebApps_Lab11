@@ -48,7 +48,7 @@ th:hover {
                   url: "/WebRoster/roster",
                   type: "GET",
                   success: function(data) {
-                      roster = data
+                      roster = data;
                       createTable();
                   }
                 });
@@ -113,7 +113,7 @@ function sortTable(sorttype){
             team += arrow;
             break;
     }
-    
+
     for(var i = 0; i < (roster.length - 1); i++){
         for(var j = 0; j < (roster.length - i - 1); j++){
             if(order === 1) {

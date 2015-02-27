@@ -28,6 +28,8 @@ public class RosterServlet extends HttpServlet {
                studentJson = new Gson().toJson(getRosterFromFile());
            }
            
+           //response.setHeader(studentJson, studentJson);
+           response.setHeader("Access-Control-Allow-Origin", "*");
            response.setContentType("application/json");    
            PrintWriter out = response.getWriter();  
            out.print(studentJson);

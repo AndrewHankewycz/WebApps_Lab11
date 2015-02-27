@@ -48,7 +48,7 @@ th:hover {
                   url: "/WebRoster/roster",
                   type: "GET",
                   success: function(data) {
-                      roster = data
+                      roster = data;
                       createTable();
                   }
                 });

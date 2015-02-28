@@ -1,2 +1,2 @@
-# WebApps_Lab4
-Web Applications Lab4
+# WebApps_Lab6
+Web Applications Lab6

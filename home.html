@@ -7,8 +7,13 @@
         Web Applications At PSU Behrend
     </title>
 <script>
-function goToRoster(){
-  $('#cframe').attr('src', "/WebRoster/roster");
+function loadRosterJSP(){
+  $('#cframe').attr('src', "/Services/WebRoster/roster");
+}
+
+function loadRosterMVC(){
+  alert("hit that");
+  $('#cframe').attr('src', "/Services/RosterMVC/rosterREST");
 }
 </script>
 </head>
@@ -22,7 +27,7 @@ function goToRoster(){
             <li class ="topnavigationbox"><a id="syllabusLink" href="homec.html" target="cframe">Get Syllabus</a></li>
             <li class ="topnavigationbox"><a id="scheduleLink" href="/Schedule/schedule.html" target="cframe">Get Schedule</a></li>
             <li class ="topnavigationbox"><a id="evalToolLink" href="/EvalTool/startpage.html" target="cframe">Evaluation Tool</a></li>
-            <li class ="topnavigationbox"><a id="webServicesLink" href="/WebRoster/roster.html" target="cframe">Web Services</a></li>
+            <li class ="topnavigationbox"><a id="webServicesLink" href="/Services/roster.html" target="cframe">Web Services</a></li>
             <li class ="topnavigationbox"><a id="resourcesLink" href="resources.htm">Resources</a></li>
         </ul>
     </div>

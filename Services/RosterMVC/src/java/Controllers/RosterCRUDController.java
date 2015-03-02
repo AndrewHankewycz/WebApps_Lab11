@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -46,7 +47,8 @@ public class RosterCRUDController extends HttpServlet {
         String key = request.getParameter("psuid");
 
         fetchStudentsIfEmpty();
-        sendJsonResponse(response, request.getParameterMap().containsKey("psuid") ? students.get(key) : students);
+        sendJsonResponse(response, request.getParameterMap().containsKey("psuid") ? 
+                mapToArray(students.get(key)) : mapToArray(students));
     }
 
     @Override
@@ -88,6 +90,20 @@ public class RosterCRUDController extends HttpServlet {
             }
         }
     }
+    
+    private ArrayList<Student> mapToArray(Map<String, Student> map){
+        ArrayList<Student> studentsArray = new ArrayList();
+        for(Student entry : students.values()) {
+            studentsArray.add(entry);
+        }
+        return studentsArray;
+    }
+    
+    private ArrayList<Student> mapToArray(Student student){
+        ArrayList<Student> list = new ArrayList();
+        list.add(student);
+        return list;
+    }
 
     /**
      * Prints a JSON converted object in the client's response
@@ -98,7 +114,11 @@ public class RosterCRUDController extends HttpServlet {
      */
     private void sendJsonResponse(HttpServletResponse response, Object toJson) throws IOException {
         response.setContentType("application/json");
+//        ArrayList<Student> studentsArray = new ArrayList();
         PrintWriter out = response.getWriter();
+//        for(Student entry : students.values()) {
+//            studentsArray.add(entry);
+//        }
         out.print(new Gson().toJson(toJson));
         out.flush();
     }
@@ -116,7 +136,7 @@ public class RosterCRUDController extends HttpServlet {
     @Override
     public void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
         fetchStudentsIfEmpty();
-
+        
         if (request.getParameterMap().containsKey("psuid")) {
             String key = request.getParameter("psuid");
             students.remove(key);

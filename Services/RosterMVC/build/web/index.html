@@ -5,12 +5,32 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<head>
+    <link href="/ThreeRegion/webhome.css" rel="stylesheet" type="text/css">
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+                $.ajax({
+                  url: "/RosterMVC/rosterREST",
+                  type: "GET",
+                  success: function(data) {
+                      roster = data;
+                      $('#content').html(data);
+                      //createTable();
+                  }
+                });
+            });
+    </script>
+</head>
+
+<body>
+  <fieldset>
+    <legend>Navigation</legend>
+    </br>
+    <button onClick="viewAll()" >View All</button>
+    <button onClick="addStudent()" >Add</button>
+  </fieldset>
+  <div id="content">
+    </div>
+</body>
 </html>

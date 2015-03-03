@@ -72,6 +72,10 @@ public class RosterCRUDController extends HttpServlet {
             //Cannot convert team to integer
             throw new HTTPException(HttpServletResponse.SC_BAD_REQUEST);
         }
+        
+        if(team <= 0){
+            throw new HTTPException(HttpServletResponse.SC_BAD_REQUEST);
+        }
 
         fetchStudentsIfEmpty();
 

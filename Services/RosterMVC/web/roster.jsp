@@ -61,19 +61,27 @@
                     !(lName == null || lName == "") &&
                     !(team == null || team == "")){
                     
-                    $.ajax({
-                        url: "/RosterMVC/rosterREST",
-                        type: "POST",
-                        data: {
-                            psuid: id,
-                            firstname: fName,
-                            lastname: lName,
-                            team: team
-                        },
-                        success: function(data){
-                            getAll();
-                        }
-                    });
+                    var teamExp = new RegExp("[0-9]+");
+                    
+                    // check that the user entered a number for the team, alert otherwise
+                    if(teamExp.test(team)){
+                    
+                        $.ajax({
+                            url: "/RosterMVC/rosterREST",
+                            type: "POST",
+                            data: {
+                                psuid: id,
+                                firstname: fName,
+                                lastname: lName,
+                                team: team
+                            },
+                            success: function(data){
+                                getAll();
+                            }
+                        });
+                    }else{
+                        alert("'Team' must be a number");
+                    }
                 }else{
                     alert("All fields must be complete");
                 }
@@ -85,20 +93,28 @@
                 var params;
                 if(!(id == null || id == "")){
                     params = "?psuid=" + id;
-                }else{
+                    
+                    $.ajax({
+                        url: "/RosterMVC/rosterREST" + params,
+                        type: "DELETE",
+                        success: function(data){
+                            getAll();
+                        }
+                    });
+                }else if(!(team == null || team == "")){
                     params = "?team=" + team;
+                    
+                    $.ajax({
+                        url: "/RosterMVC/rosterREST" + params,
+                        type: "DELETE",
+                        success: function(data){
+                            getAll();
+                        }   
+                    });
+                }else{
+                    alert("One of the fields must be complete");
                 }
                 
-                $.ajax({
-                    url: "/RosterMVC/rosterREST" + params,
-                    type: "DELETE",
-                    success: function(data){
-                        getAll();
-                    },
-                    error: function(){
-                        alert("bad request");
-                    }
-                });
             }
             
             function clearTable(){
@@ -280,14 +296,32 @@
             }
 
             function showDeleteFields(){
-            showFieldsBlock();
-            $('#idGroup').show(100);
-            $('#fNameGroup').hide(100);
-            $('#lNameGroup').hide(100);
-            $('#teamGroup').show(100); 
-            $('#searchButton').hide(100);
-            $('#addButton').hide(100);
-            $('#deleteButton').show(100);
+                showFieldsBlock();
+                
+                // if the user types in the team field, disable input in the id field
+                $('#teamField').keydown(function(){
+                    if($(this).val() != ""){
+                        $('#psuidField').attr('disabled', true);
+                    }else{
+                        $('#psuidField').attr('disabled', false);
+                    }
+                });
+                // if the user types in the id field, disable the team field
+                $('#psuidField').keydown(function(){
+                    if($(this).val() != ""){
+                        $('#teamField').attr('disabled', true);
+                    }else{
+                        $('#teamField').attr('disabled', false);
+                    }
+                });
+                
+                $('#idGroup').show(100);
+                $('#fNameGroup').hide(100);
+                $('#lNameGroup').hide(100);
+                $('#teamGroup').show(100); 
+                $('#searchButton').hide(100);
+                $('#addButton').hide(100);
+                $('#deleteButton').show(100);
         }
         </script>
     </head>

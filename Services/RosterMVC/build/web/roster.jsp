@@ -50,6 +50,33 @@
                 });
             }
             
+            function addTeam(){
+                var team = $('#teamField').val();
+                
+                if(!(team == null || team == "")){
+                    var teamExp = new RegExp("[0-9]+");
+                    
+                    // check that the user entered a number for the team, alert otherwise
+                    if(teamExp.test(team)){
+                        $.ajax({
+                            url: "/RosterMVC/rosterREST",
+                            type: "POST",
+                            data: {
+                                team: team
+                            },
+                            success: function(data){
+                                //getAll();
+                            }
+                        });
+                    }else{
+                        alert("Input must be an integer");
+                    }
+                    
+                }else{
+                    alert("Team field must be complete");
+                }
+            }
+            
             function addStudent(){
                 var id = $('#psuidField').val();
                 var fName = $('#firstnameField').val();
@@ -65,7 +92,6 @@
                     
                     // check that the user entered a number for the team, alert otherwise
                     if(teamExp.test(team)){
-                    
                         $.ajax({
                             url: "/RosterMVC/rosterREST",
                             type: "POST",
@@ -274,14 +300,15 @@
                 $('#formFieldGroup').hide(100);
             }
 
-            function showAddFields(){
+            function showAddStudentFields(){
                 showFieldsBlock();
                 $('#idGroup').show(100);
                 $('#fNameGroup').show(100);
                 $('#lNameGroup').show(100);
                 $('#teamGroup').show(100);
                 $('#searchButton').hide(100);
-                $('#addButton').show(100);
+                $('#addTeamButton').hide(100);
+                $('#addStudentButton').show(100);
                 $('#deleteButton').hide(100);
             }
 
@@ -291,7 +318,20 @@
                 $('#lNameGroup').hide(100);
                 $('#teamGroup').hide(100);
                 $('#searchButton').show(100);
-                $('#addButton').hide(100);
+                $('#addTeamButton').hide(100);
+                $('#addStudentButton').hide(100);
+                $('#deleteButton').hide(100);
+            }
+            
+            function showAddTeamFields(){
+                showFieldsBlock();
+                $('#idGroup').hide(100);
+                $('#fNameGroup').hide(100);
+                $('#lNameGroup').hide(100);
+                $('#teamGroup').show(100);
+                $('#searchButton').hide(100);
+                $('#addTeamButton').show(100);
+                $('#addStudentButton').hide(100);
                 $('#deleteButton').hide(100);
             }
 
@@ -320,7 +360,8 @@
                 $('#lNameGroup').hide(100);
                 $('#teamGroup').show(100); 
                 $('#searchButton').hide(100);
-                $('#addButton').hide(100);
+                $('#addTeamButton').hide(100);
+                $('#addStudentButton').hide(100);
                 $('#deleteButton').show(100);
         }
         </script>
@@ -332,7 +373,8 @@
     </br>
     <button onClick="hideFieldsBlock(), getAll()" >View All</button>
     <button onClick="showSearchFields()" >Search</button>
-    <button onClick="showAddFields()" >Add</button>
+    <button onClick="showAddTeamFields()" >Add Team</button>
+    <button onClick="showAddStudentFields()" >Add</button>
     <button onClick="showDeleteFields()" >Delete</button>
   </fieldset>
     <div style="margin: 10px; display: none" id="formFieldGroup" >
@@ -353,7 +395,8 @@
             <input type="text" id="teamField" />
         </div>
         <input type="submit" value="Search" id="searchButton" onClick="searchById()"/>
-        <input type="submit" value="Add" id="addButton" onClick="addStudent()"/>
+        <input type="submit" value="Add" id="addTeamButton" onClick="addTeam()" />
+        <input type="submit" value="Add" id="addStudentButton" onClick="addStudent()"/>
         <input type="submit" value="Delete" id="deleteButton" onClick="deleteStudent()"/>
     </div>
 <div id="content"></div>

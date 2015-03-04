@@ -20,6 +20,7 @@ import javax.xml.ws.http.HTTPException;
 @WebServlet(name = "RosterCRUDController", urlPatterns = {"/rosterREST"})
 public class RosterCRUDController extends HttpServlet {
 
+    
     /**
      * File path that contains the student roster data
      */
@@ -29,7 +30,8 @@ public class RosterCRUDController extends HttpServlet {
      * lookup times as all student Id's are unique.
      */
     private Map<String, Student> students = new HashMap<>();
-
+    private ArrayList<Integer> teams = new ArrayList<>();
+    
     /**
      * Returns a student JSON string. If no Id is specified as as query string,
      * then it will return all students in the map converted to JSON.
@@ -57,7 +59,9 @@ public class RosterCRUDController extends HttpServlet {
             throws ServletException, IOException {
 
         String[] requestKeys = {"psuid", "firstname", "lastname", "team"};
-        if (!HttpServletRequestUtil.requestContainsKeys(request, requestKeys)) {
+        String teamString = request.getParameter("team");
+        
+        if (!HttpServletRequestUtil.requestContainsKeys(request, requestKeys) && teamString == null){
             throw new HTTPException(HttpServletResponse.SC_BAD_REQUEST);
         }
 
@@ -79,7 +83,14 @@ public class RosterCRUDController extends HttpServlet {
 
         fetchStudentsIfEmpty();
 
-        students.put(psuid, new Student(firstname, lastname, psuid, team));
+        // need to check if the user input just the team or a student
+        if(psuid == null || firstname == null || lastname == null){
+            if(!teams.contains(team)) {
+                    teams.add(team);
+            }
+        }else{
+            students.put(psuid, new Student(firstname, lastname, psuid, team));
+        }
         sendJsonResponse(response);
     }
 
@@ -192,6 +203,10 @@ public class RosterCRUDController extends HttpServlet {
         while ((line = br.readLine()) != null) {
             if (line.equals("")) {
                 count = 0;
+                if(!teams.contains(teamId)) {
+                    teams.add(teamId);
+                }
+                
                 students.put(id, new Student(firstName, lastName, id, teamId));
                 continue;
             }

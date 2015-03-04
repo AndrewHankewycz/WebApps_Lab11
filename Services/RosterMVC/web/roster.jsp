@@ -25,7 +25,7 @@
             });
             
             function searchById(){
-                var id = $('#psuidField').val();
+                var id = $('#psuidField').val().toUpperCase();
                 $.ajax({
                     url: "/RosterMVC/rosterREST",
                     type: "GET",

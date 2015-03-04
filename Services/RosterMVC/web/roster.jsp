@@ -274,23 +274,14 @@
                     document.getElementById("myTable").appendChild(y);
 
                     //access elements in i'th object in array and create a column for each
-                        //append columns to the corresponding i'th row
-                        var z = document.createElement("TD");
-                        z.innerHTML = roster[i].lastname;
-                        document.getElementById("myTr" + i).appendChild(z);
-
-                        z = document.createElement("TD");
-                        z.innerHTML = roster[i].firstname;
-                        document.getElementById("myTr" + i).appendChild(z);
-
-                        z = document.createElement("TD");
-                        z.innerHTML = roster[i].psuid;
-                        document.getElementById("myTr" + i).appendChild(z);
-
-                        z = document.createElement("TD");
-                        z.innerHTML = roster[i].team;
-                        document.getElementById("myTr" + i).appendChild(z);
-
+                    //append columns to the corresponding i'th row
+                    var tableAttributes = ["lastname", "firstname", "psuid", "team"];
+                    
+                    for(var j = 0; j < tableAttributes.length; j++) {
+                        var temp = document.createElement("TD");
+                        temp.innerHTML = roster[i][tableAttributes[j]];
+                        document.getElementById("myTr" + i).appendChild(temp);
+                    }
                 }
             }
 

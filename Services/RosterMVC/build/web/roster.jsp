@@ -265,8 +265,10 @@
                 h.innerHTML = team;
                 document.getElementById("myRH").appendChild(h);
 
-                for(var i = 0; i < roster.length; i++){
-
+                for(var i = 0; i < roster.length; i++) {
+                    if(typeof(roster[i]) === 'undefined' || roster[i] === null)
+                        continue;
+                    
                     var y = document.createElement("TR");
                     y.setAttribute("id", "myTr" + i);
                     document.getElementById("myTable").appendChild(y);

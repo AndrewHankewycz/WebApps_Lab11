@@ -83,7 +83,6 @@ public class RosterCRUDController extends HttpServlet {
 
         fetchStudentsIfEmpty();
 
-        // need to check if the user input just the team or a student
         if(psuid == null || firstname == null || lastname == null){
             if(!teams.contains(team)) {
                     teams.add(team);

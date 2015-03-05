@@ -287,6 +287,12 @@
 
             function showFieldsBlock(){
                 $('#formFieldGroup').show(100);
+                $('#psuidField').val("");
+                $('#firstnameField').val("");
+                $('#lastnameField').val("");
+                $('#teamField').val("");
+                $('#psuidField').attr('disabled', false);
+                $('#teamField').attr('disabled', false);
             }
 
             function hideFieldsBlock(){
@@ -307,6 +313,7 @@
 
             function showSearchFields(){
                 showFieldsBlock();
+                $('#idGroup').show(100);
                 $('#fNameGroup').hide(100);
                 $('#lNameGroup').hide(100);
                 $('#teamGroup').hide(100);

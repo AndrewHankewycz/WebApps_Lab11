@@ -51,6 +51,14 @@ app.get('/Services/RosterMVC', function(req, res) {
 	res.redirect("http://localhost:8080/RosterMVC/roster.jsp");
 });
 
+app.get('/Services/WebRosterJTable', function(req, res) {
+	res.redirect("http://localhost:8080/WebRosterJTable/index.html");
+});
+
+app.get('/Services/RosterRS', function(req, res) {
+	res.redirect("http://localhost:8080/");
+});
+
 app.listen(config.port, function() {
 	console.log('Server running at http://127.0.0.1:' + config.port + '/');
 });

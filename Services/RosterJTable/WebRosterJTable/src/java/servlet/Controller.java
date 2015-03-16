@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.CrudDao;
+import java.util.Enumeration;
 import model.Student;
 
 public class Controller extends HttpServlet {
@@ -61,18 +62,19 @@ public class Controller extends HttpServlet {
                 }
             } else if (action.equals("create") || action.equals("update")) {
                 Student student = new Student();
-                if (request.getParameter("psuId") != null) {
-                    String psuId = request.getParameter("psuId");
+           
+                if (request.getParameter("psuid") != null) {
+                    String psuId = request.getParameter("psuid");
                     student.setPsuid(psuId);
                 }
 
-                if (request.getParameter("firstName") != null) {
-                    String fname = request.getParameter("firstName");
+                if (request.getParameter("firstname") != null) {
+                    String fname = request.getParameter("firstname");
                     student.setFirstname(fname);
                 }
 
-                if (request.getParameter("lastName") != null) {
-                    String lname = request.getParameter("lastName");
+                if (request.getParameter("lastname") != null) {
+                    String lname = request.getParameter("lastname");
                     student.setLastname(lname);
                 }
 
@@ -106,8 +108,8 @@ public class Controller extends HttpServlet {
             } else if (action.equals("delete")) {
                 try {
                     // Delete record
-                    if (request.getParameter("psuId") != null) {
-                        String psuId = request.getParameter("studentId");
+                    if (request.getParameter("psuid") != null) {
+                        String psuId = request.getParameter("psuid");
                         dao.deleteStudent(psuId);
                         String jsonData = "{\"Result\":\"OK\"}";
                         response.getWriter().print(jsonData);

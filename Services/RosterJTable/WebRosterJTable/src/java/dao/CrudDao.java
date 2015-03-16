@@ -23,6 +23,7 @@ public class CrudDao {
     public void addStudent(Student student) {
         String insertQuery = "INSERT INTO STUDENT(PSUID, FIRSTNAME, "
                 + "LASTNAME, TEAM) VALUES (?,?,?,?)";
+   
         try {
             pStmt = dbConnection.prepareStatement(insertQuery);
             pStmt.setString(1, student.getPsuid());

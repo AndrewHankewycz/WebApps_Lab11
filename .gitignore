@@ -30,3 +30,5 @@ node_modules
 /Services/RosterMVC/dist/
 /Services/RosterJTable/WebRosterJTable/nbproject/private/
 /Services/RosterJTable/WebRosterJTable/build/
+/Services/RosterRS/nbproject/private/
+/Services/RosterRS/build/

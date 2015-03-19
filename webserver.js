@@ -51,12 +51,9 @@ app.get('/Services/RosterMVC', function(req, res) {
 	res.redirect("http://localhost:8080/RosterMVC/roster.jsp");
 });
 
-app.get('/Services/WebRosterJTable', function(req, res) {
-	res.redirect("http://localhost:8080/WebRosterJTable/index.html");
-});
-
-app.get('/Services/RosterRS', function(req, res) {
-	res.redirect("http://localhost:8080/");
+app.get('/Services/WebRosterRS', function(req, res) {
+	console.log("got here");
+	res.redirect("http://localhost:8080/RosterRS/roster.jsp");
 });
 
 app.listen(config.port, function() {

@@ -39,6 +39,10 @@ app.get('/NavigationBar/*', function (req, res) {
 app.get('/EvalTool/*', require("./EvalTool/evaluator").gettool);
 app.post('/EvalTool/*', require("./EvalTool/evaluator").posttool);
 
+app.get('/AutoSpeller/*', function (req, res) {
+        util.sendFile(root + req.path, req, res);
+});
+
 app.get('/Services/roster.html', function(req, res) {
 	util.sendFile(root + req.path, req, res);
 });

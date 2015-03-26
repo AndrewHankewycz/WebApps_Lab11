@@ -24,8 +24,9 @@ function sendItemRes(res, type, result) {
 function amazonRequest(req, res) {
 	var isbn = req.body.isbn;
 	var itemId = req.body.itemId;
+	var author = req.body.author;
 
-	if(!isbn && !itemId) {
+	if(!isbn && !itemId && !author) {
 		res.json({ 
 			data: { 
 				error: "Error: Please enter at least one field!" 
@@ -42,6 +43,10 @@ function amazonRequest(req, res) {
 	} else if(itemId) {
 		prodAdv.call("ItemLookup", { ItemId: itemId }, function(err, result) {
 			sendItemRes(res, "item", result);
+		});
+	} else if(author) {
+		prodAdv.call("ItemSearch", { SearchIndex: "Books", Author: author }, function(err, result) {
+			sendItemRes(res, "book", result);
 		});
 	}
 }

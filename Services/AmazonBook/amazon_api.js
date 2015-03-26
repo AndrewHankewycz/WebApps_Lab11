@@ -7,10 +7,10 @@ var ASSOCIATE_TAG = "kalin";
 var root = process.cwd();
 
 function posttool(req, res) {
-	if (req.path==="/AmazonBook/api") {
+	if (req.path==="/Services/AmazonBook/api") {
 		amazonRequest(req, res);
-	} else if (req.path === "/EvalTool/start") {
-		res.sendFile('/AmazonBook/index.html', {root: root });
+	} else {
+		res.sendFile('/Services/AmazonBook/index.html', {root: root });
 	}
 }
 

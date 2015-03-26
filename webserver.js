@@ -43,6 +43,12 @@ app.get('/AutoSpeller/*', function (req, res) {
         util.sendFile(root + req.path, req, res);
 });
 
+app.get('/AmazonBook/*', function (req, res) {
+        util.sendFile(root + req.path, req, res);
+});
+
+app.post('/AmazonBook/*', require("./AmazonBook/amazon_api").posttool);
+
 app.get('/Services/roster.html', function(req, res) {
 	util.sendFile(root + req.path, req, res);
 });

@@ -32,3 +32,10 @@ node_modules
 /Services/RosterJTable/WebRosterJTable/build/
 /Services/RosterRS/nbproject/private/
 /Services/RosterRS/build/
+/Services/RosterRestlet/WebRosterRestlet/RosterRestlet/nbproject/private/
+/Services/RosterRestlet/WebRosterRestlet/nbproject/private/
+/Services/RosterRestlet/WebRosterRestlet/build/
+/Services/RosterRestlet/WebRosterRestlet/dist/
+/Services/RosterRestlet/WebRosterRestlet2/nbproject/private/
+/Services/RosterRestlet/WebRosterRestlet2/dist/
+/Services/RosterRestlet/WebRosterRestlet2/build/

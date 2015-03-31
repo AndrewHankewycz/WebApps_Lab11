@@ -1,0 +1,67 @@
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script type="text/javascript">
+		function displayItem(item) {
+                	var url = item.DetailPageURL;
+                        var itemAttr = item.ItemAttributes;
+
+                        var html = "";
+
+                        for (var key in itemAttr) {
+                                if (itemAttr.hasOwnProperty(key)) {
+                                        html += (key + ": " + itemAttr[key] + "</br>");
+                                }
+                        }
+
+                        html += ("<a target='_blank' href='" + url + "'>URL</a></br></br>");
+
+                        $("#apiResult").append(html);
+		}
+		
+		function displayAllItems(items) {
+			for(var i = 0; i < items.length; i++) {
+				displayItem(items[i]);
+			}
+		}
+
+		$(document).ready(function() {
+			$("#amazonButton").click(function() {
+				var isbn = $("#isbn").val();
+				var itemId = $("#itemid").val();
+				var author = $("#author").val();
+
+				if((!isbn && !itemId && !author) || (isbn && itemId && author)) return;
+
+				$.ajax({
+					method: "POST",
+			        	url: "/Services/AmazonBook/api",
+					data: {
+						isbn: isbn,
+						itemId: itemId,
+						author: author,
+					},
+          				success: function(result) {
+						var type = result.type;
+						var data = result.data;
+						
+						$("#apiResult").empty();
+						displayAllItems(data);
+          				},
+          				error: function() {
+						$("#apiResult").html("Error making request!");
+          				}
+        			});
+			});			
+		});
+	</script>
+</head>
+<body>
+	<h1>Amazon API</h1>
+	Author: <input type="text" id="author" name="author" placeholder="Author"/></br>
+	ISBN: <input type="text" id="isbn" name="isbn" placeholder="ISBN"/></br>
+	Item Id: <input type="text" id="itemid" name="itemid" placeholder="Item Id"/></br></br>
+	<button id="amazonButton" name="amazonButton">Submit</button></br></br>
+	<div id="apiResult"></div>
+</body>
+</html>

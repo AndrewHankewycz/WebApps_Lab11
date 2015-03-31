@@ -69,6 +69,10 @@ app.get('/Services/WebRosterRS', function(req, res) {
 	res.redirect("http://localhost:8080/RosterRS/roster.jsp");
 });
 
+app.get('/Services/WebRosterRestlet', function(req, res) {
+	res.redirect("http://localhost:8282/WebRosterRestlet/roster.jsp");
+});
+
 app.listen(config.port, function() {
 	console.log('Server running at http://127.0.0.1:' + config.port + '/');
 });

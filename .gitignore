@@ -39,3 +39,9 @@ node_modules
 /Services/RosterRestlet/WebRosterRestlet2/nbproject/private/
 /Services/RosterRestlet/WebRosterRestlet2/dist/
 /Services/RosterRestlet/WebRosterRestlet2/build/
+/Services/SOAP/iGrade/nbproject/private/
+/Services/SOAP/iGrade/build/
+/Services/SOAP/iGrade/dist/
+/Services/SOAP/GradeAgent/src/java/iGrade/build/
+/Services/SOAP/GradeAgent/src/java/iGrade/dist/
+/Services/SOAP/GradeAgent/src/java/iGrade/nbproject/private/

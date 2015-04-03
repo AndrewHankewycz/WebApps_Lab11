@@ -13,8 +13,8 @@ import javax.xml.ws.Endpoint;
  */
 public class iGradePublisher {
     public static void main(String[ ] args) {
-        final String url = "http://localhost:8080/GradeAgent";
+        /*final String url = "http://localhost:8080/GradeAgent";
         System.out.println("Publishing iGrade at endpoint " + url);
-        Endpoint.publish(url, new iGrade());
+        Endpoint.publish(url, new iGrade());*/
     }
 }

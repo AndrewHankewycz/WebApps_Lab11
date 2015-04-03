@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="/ThreeRegion/webhome.css" rel="stylesheet" type="text/css">
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+</head>
+
+<script>
+  $(document).ready(function(){
+      $("#sidenavigation", window.parent.document).html('<fieldset>'+
+      '<legend>Navigation</legend>'+
+      '<button id="jspButton" class="sidenavinput" name="jspButton" onClick="loadRosterJSP()" >RosterJSP</button>'+
+      '</br>'+
+      '<button id="mvcButton" class="sidenavinput" name="mvcButton" onClick="loadRosterMVC()" >RosterMVC</button>'+
+      '</br>'+
+      '<button id="jTableButton" class="sidenavinput" name="jTableButton" onClick="loadJTableRoster()" >RosterJTable</button>'+
+      '</br>'+
+      '<button id="jaxRSButton" class="sidenavinput" name="jaxRSButton" onClick="loadJaxRSRoster()" >RosterRS</button>'+
+      '</br>'+
+      '<button id="rosterRestletButton" class="sidenavinput" name="rosterRestletButton" onClick="loadWebRosterRestlet()">Roster Restlet</button>'+
+      '</br>'+
+      '<button id="rosterButton2" class="sidenavinput" name="rosterButton2" >Roster</button>'+
+      '</br>'+
+      '<button id="autoSpellerButton" class="sidenavinput" name="autoSpellerButton" onClick="loadAutoSpeller()" >AutoSpeller</button>'+
+      '</br>'+
+      '<button id="amazonBookButton" class="sidenavinput" name="amazonBookButton" onClick="loadAmazonBook()">AmazonBook</button>'+
+      '</br>'+
+      '<button id="iGradeButton" class="sidenavinput" name="iGradeButton" onClick="loadiGrade()">iGrade</button>'+
+      '</fieldset>');
+  });
+</script>
+<body>
+        <h1 class="heading">Instructions</h1>
+        <p>The goal of the tool is to practice various styles of Web Services</p>
+        <p>We learn to develop RESTful Web Services</p>
+        <p>We also learn to develope SOAP-based Web Services</p>
+        <p>We learn how to achieve service-orieneted architecure in Web Applications</p>
+        <p>click any button in the side region to continue...</p>
+</body>
+</html>

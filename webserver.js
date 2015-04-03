@@ -73,6 +73,10 @@ app.get('/Services/WebRosterRestlet', function(req, res) {
 	res.redirect("http://localhost:8282/WebRosterRestlet/roster.jsp");
 });
 
+app.get('/Services/iGrade', function(req, res) {
+	res.redirect("http://localhost:8080/GradeAgents/index.html");
+});
+
 app.listen(config.port, function() {
 	console.log('Server running at http://127.0.0.1:' + config.port + '/');
 });

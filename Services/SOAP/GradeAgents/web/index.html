@@ -42,7 +42,7 @@
                       $("#gradeConversionResult").html("<b>Conversion: " + response + "</b>");
               },
               error: function(){
-                console.log("error");
+                $("#gradeConversionResult").html("<b>Error: Please choose different types</b>");
                }
              });
            });

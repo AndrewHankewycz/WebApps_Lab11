@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <!-- <page contentType="text/html" pageEncoding="UTF-8"> -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Grade</title>
+        <style type="text/css">
+          button{
+            background-color: lightGray;
+          }
+          fieldset{
+            border-width: 0.3em;
+            width: 18em;
+          }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function() {    
+          $("#submitButton").click(function() {
+            var fromScale = $('#fromScale').val();
+            var toScale = $('#toScale').val();
+            
+            if(fromScale === toScale) {
+                $("#gradeConversionResult").html("<b>Error: Please choose different types</b>");
+                return;
+            }
+            
+            var grade = $('#gradeInput').val();
+
+            $.ajax({
+              url:"/GradeAgents/gradeAgent",
+              type: "POST",
+              data: {
+                 from: fromScale,
+                 to: toScale,
+                 grade: grade
+              },
+              success: function(response){
+                  if(response === "-1")
+                      $("#gradeConversionResult").html("<b>Conversion: Does not exist</b>");
+                  else
+                      $("#gradeConversionResult").html("<b>Conversion: " + response + "</b>");
+              },
+              error: function(){
+                console.log("error");
+               }
+             });
+           });
+        });
+        </script>
+    </head>
+<body>
+    <fieldset id="gradeForm">
+        <legend>Scale Converter</legend>
+        Grade: <input id="gradeInput"></br></br>
+        From:
+        <select id="fromScale">
+            <option value="letter-grade">Letter-Scale</option>
+            <option value="100-scale">100-Scale</option>
+            <option value="7-scale">7-Scale</option>
+        </select></br>
+        To:
+        <select id="toScale">
+            <option value="letter-grade">Letter-Scale</option>
+            <option value="100-scale">100-Scale</option>
+            <option value="7-scale">7-Scale</option>
+        </select></br></br>
+        <button id="submitButton">Submit</button></br></br>
+        <div id="gradeConversionResult"></div>
+    </fieldset>
+</body>
+</html>

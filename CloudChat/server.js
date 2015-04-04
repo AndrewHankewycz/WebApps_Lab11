@@ -1,6 +1,6 @@
 var User = require('./user');
 var config = require('./config');
-var util = require('./util');
+var util = require('../util/util');
 var io = require('socket.io')(config.port);
 
 global.users = [];

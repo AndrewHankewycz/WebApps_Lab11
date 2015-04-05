@@ -32,7 +32,6 @@
       });
 
       $('form').submit(function(){
-        console.log("Session: " + session);
         socket.emit('chat message', {
 	  session: session,
 	  message: $('#messageBox').val()

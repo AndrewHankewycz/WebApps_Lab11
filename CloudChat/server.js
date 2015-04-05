@@ -26,7 +26,8 @@ function getUserBySession(session) {
 }
 
 function addUser(username) {
-	global.users.push(new User(username, generateNewUserId()));
+	var user = new User(username, generateNewUserId());
+	global.users.push(user);
 	return user;
 }
 

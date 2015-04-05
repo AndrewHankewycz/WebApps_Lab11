@@ -77,6 +77,10 @@ app.get('/Services/iGrade', function(req, res) {
 	res.redirect("http://localhost:8080/GradeAgents/index.html");
 });
 
+app.get('/CloudChat/*', function(req, res) {
+	util.sendFile(root + req.path, req, res);
+});
+
 app.listen(config.port, function() {
 	console.log('Server running at http://127.0.0.1:' + config.port + '/');
 });

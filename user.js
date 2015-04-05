@@ -4,4 +4,8 @@ var User = function(id) {
 	this.currentQuestionId = -1;
 };
 
+User.prototype.getId = function() {
+	return this.id;
+};
+
 module.exports = User;

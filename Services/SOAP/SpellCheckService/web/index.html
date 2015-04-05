@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <style type="text/css">
+  </style>
+  <script type="text/javascript">
+    var spellCheck;
+    var currentWrongWord = 0;
+    
+    $(document).ready(function() {
+      $("#checkSpellingButton").click(function() {
+        var report = $("#reportArea").val();
+        $.ajax({
+          method: "POST",
+          url: "/SpellCheckService/SpellCheckServlet",
+          data: {
+            report: report,
+          },
+          success: function(data) {
+            spellCheck = data;
+            
+            var mistakes = data.mistakes;
+            
+            $("#mistakesInput").val(mistakes.length);
+            $("#mistakesArea").val(mistakes.join(", "));
+            $("#wrongWordInput").val(mistakes[0]);
+            $("#suggestionsArea").val(spellCheck.suggestions[0].join(", "));
+            
+            currentWrongWord = 0;
+          },
+          error: function() {
+              // do nothing
+          }
+        });
+      });
+      
+      $("#nextWrongWordButton").click(function() {
+        if(typeof(spellCheck) === "undefined")
+          return;
+      
+        currentWrongWord++;
+
+        if((spellCheck.mistakes.length <= currentWrongWord) || (spellCheck.suggestions.length <= currentWrongWord))
+          return;
+
+        $("#wrongWordInput").val(spellCheck.mistakes[currentWrongWord]);
+        $("#suggestionsArea").val(spellCheck.suggestions[currentWrongWord].join(", "));
+      });
+    });
+  </script>
+</head>
+<body>
+  <b>Compose your technical report here:</b><br><br>
+  <textarea id="reportArea" rows="10" cols="50"></textarea><br><br>
+  <button id="checkSpellingButton">Check Spelling</button><br><br>
+  <b>Number of mistakes: </b>
+  <input id="mistakesInput" readonly=""><br><br>
+  <textarea id="mistakesArea" rows="4" cols="50" readonly=""></textarea><br><br>
+  <button id="nextWrongWordButton">Examine Next Wrong Word</button><br><br>
+  <b>Wrong word:</b>
+  <input id="wrongWordInput" readonly=""><br><br>
+  <b>Suggestions: </b>
+  <textarea id="suggestionsArea" readonly=""></textarea>
+</body>
+</html>

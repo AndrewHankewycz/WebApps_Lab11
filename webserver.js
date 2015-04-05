@@ -77,6 +77,10 @@ app.get('/Services/iGrade', function(req, res) {
 	res.redirect("http://localhost:8080/GradeAgents/index.html");
 });
 
+app.get('/Services/SpellChecker2', function(req, res) {
+	res.redirect("http://localhost:8080/SpellCheckService/index.html");
+});
+
 app.get('/CloudChat/*', function(req, res) {
 	util.sendFile(root + req.path, req, res);
 });

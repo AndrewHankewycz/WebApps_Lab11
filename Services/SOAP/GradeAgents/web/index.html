@@ -15,7 +15,43 @@
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script type="text/javascript">
-        $(document).ready(function() {    
+        var letterScale = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'D', 'F'];
+        var sevenScale = ['7', '6.5', '6', '5.8', '5.5', '5', '4.8', '4.5', '4'];
+        var hundredScale = [];
+        
+        function setScaleOptions(scale) {
+          //Remove all options
+          $('#gradeInput').html('');
+          
+          for(var i = 0; i < scale.length; i++) {
+            $('#gradeInput')
+             .append($("<option></option>")
+             .attr("value", scale[i])
+             .text(scale[i]));
+          }
+        }
+        
+        $(document).ready(function() {
+          setScaleOptions(letterScale);
+          
+          $('#fromScale').on('change', function() {
+            switch(this.value) {
+              case 'letter-grade':
+                setScaleOptions(letterScale);
+                break;
+              case '100-scale':
+                if(hundredScale.length == 0) {
+                  for(var i = 100; i >= 0; i--)
+                    hundredScale.push(i);
+                }
+                setScaleOptions(hundredScale);
+                break;
+              case '7-scale':
+                setScaleOptions(sevenScale);
+                break;
+            }
+          });
+          
           $("#submitButton").click(function() {
             var fromScale = $('#fromScale').val();
             var toScale = $('#toScale').val();
@@ -52,20 +88,20 @@
 <body>
     <fieldset id="gradeForm">
         <legend>Scale Converter</legend>
-        Grade: <input id="gradeInput"></br></br>
+        Grade: <select id="gradeInput"></select><br><br>
         From:
         <select id="fromScale">
             <option value="letter-grade">Letter-Scale</option>
             <option value="100-scale">100-Scale</option>
             <option value="7-scale">7-Scale</option>
-        </select></br>
+        </select><br>
         To:
         <select id="toScale">
             <option value="letter-grade">Letter-Scale</option>
             <option value="100-scale">100-Scale</option>
             <option value="7-scale">7-Scale</option>
-        </select></br></br>
-        <button id="submitButton">Submit</button></br></br>
+        </select><br><br>
+        <button id="submitButton">Submit</button><br><br>
         <div id="gradeConversionResult"></div>
     </fieldset>
 </body>

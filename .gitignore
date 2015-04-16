@@ -47,3 +47,4 @@ node_modules
 /Services/SOAP/GradeAgent/src/java/iGrade/nbproject/private/
 /Services/SOAP/GradeAgents/nbproject/private/
 /Services/SOAP/GradeAgents/build/
+/Services/SOAP/GradeAgents/dist/

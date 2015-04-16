@@ -1,9 +1,12 @@
 package iGrade;
 
+import javax.jws.HandlerChain;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
+import javax.xml.ws.soap.SOAPFaultException;
 
 @WebService
+@HandlerChain(file = "serviceHandler.xml")
 public class iGrade {
     public static final String SEVEN_SCALE = "7-scale";
     public static final String HUNDRED_SCALE = "100-scale";
@@ -62,7 +65,7 @@ public class iGrade {
             }
         }
         
-        return "-1";
+        throw new SOAPFaultException(null);
     }
     
     @WebMethod
@@ -101,7 +104,6 @@ public class iGrade {
                 case "4":   return "F";
             }
         }
-        
-        return "-1";
+        throw new SOAPFaultException(null);
     }
 }

@@ -40,7 +40,10 @@ public class GradeAgents extends HttpServlet {
                 !fromString.equals("") && !toString.equals("") && !gradeString.equals("")){
             try{
                 IGradeService service = new IGradeService();
+                service.setHandlerResolver(new ClientHandlerResolver("curly", "CurlyCurlyCurly"));
                 IGrade port = service.getIGradePort();
+                
+                service.setHandlerResolver(null);
                     
                 if(toString.equals(LETTER_SCALE)){
                     System.out.println("CONV. TO LETTER SCALE");

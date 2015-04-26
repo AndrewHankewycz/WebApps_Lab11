@@ -4,6 +4,7 @@
   "description": "Chat for Web Apps",
   "dependencies": {
     "express": "4.10.2",
-    "socket.io": "1.2.0"
+    "socket.io": "1.2.0",
+    "jdbc": "^0.0.13"
   }
 }

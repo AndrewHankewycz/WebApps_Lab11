@@ -48,3 +48,6 @@ node_modules
 /Services/SOAP/GradeAgents/nbproject/private/
 /Services/SOAP/GradeAgents/build/
 /Services/SOAP/GradeAgents/dist/
+/CloudChat/Services/CloudChatDAO/nbproject/private/
+/CloudChat/Services/CloudChatDAO/build/
+/CloudChat/Services/CloudChatDAO/dist/

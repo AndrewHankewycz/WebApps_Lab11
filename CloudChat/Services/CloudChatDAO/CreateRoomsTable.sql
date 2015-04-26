@@ -1,0 +1,10 @@
+CREATE TABLE "ROOMS"
+
+(
+
+"ID" INT not null primary key
+        GENERATED ALWAYS AS IDENTITY
+        (START WITH 1, INCREMENT BY 1),   
+"TOPIC" VARCHAR(50),     
+"CREATED_TIME" TIME NOT NULL
+);

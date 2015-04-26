@@ -51,3 +51,4 @@ node_modules
 /CloudChat/Services/CloudChatDAO/nbproject/private/
 /CloudChat/Services/CloudChatDAO/build/
 /CloudChat/Services/CloudChatDAO/dist/
+/CloudChat/Services/CloudChatServer/nbproject/private/

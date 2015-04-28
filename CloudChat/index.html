@@ -2,24 +2,56 @@
 <html>
   <head>
     <title>Web Apps Chat</title>
+
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { font: 13px Helvetica, Arial; }
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
-      #messages li { padding: 5px 10px; }
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%;}
+      form input { border: 0; padding: 10px;}
+      form button { color: white; width: 7.78em; background: rgb(27, 52, 58); border: none; padding: 10px; position:fixed; right:3px; bottom:2px;}
+      form button:hover{background: rgb(36, 69, 77)}
+      #input_container{clear:both; height:10%;}
+      #message_container{float:left; width:90%; height:42em; overflow:auto;}
+      #rooms {float:right; width: 10%; border-left-style: solid; border-width: 3px; border-color:black; min-height:40em}
+      #messages {width:100%; margin: 0; padding: 0; table-layout:fixed;}
+      #messages li { padding: 5px; }
       #messages li:nth-child(odd) { background: #eee; }
     </style>
+
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+        $(window).on('resize', function(){
+            $('#messageBox').css( "width",($(window).width() - 113)+'px');
+        });
+        $(document).ready(function(){
+            $('#messageBox').css( "width",($(window).width() - 113) +'px');
+        });
+
+        $(window).on('resize', function(){
+            $('#rooms').css( "height",($(window).height() - 40) +'px');
+        });
+        $(document).ready(function(){
+            $('#rooms').css( "height",($(window).height() - 40) +'px');
+        });
+    </script>
+
   </head>
   <body>
-    <ul id="messages"></ul>
-    <form action="">
-      <input id="messageBox" autocomplete="off" /><button>Send</button>
-    </form>
+    <div>
+      <div id="message_container">
+      <ul id="messages"></ul>
+      </div>
+  	  <div id="rooms">
+  		  <p>sdf</p>
+  	  </div>
+    </div>
+
+    <div id="input_container">
+      <form action="">
+        <input id="messageBox" autocomplete="off" /><button>Send</button>
+      </form>
+    </div>
     <script src="http://localhost:3000/socket.io/socket.io.js"></script>
-    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
       var username;
       var session;

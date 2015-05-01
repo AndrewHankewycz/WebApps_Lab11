@@ -44,6 +44,8 @@ public class CloudChatDAO extends HttpServlet {
             HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
 
+        PrintWriter out = null;
+        
         switch (action) {
             case "register":
                 String username = request.getParameter("username");
@@ -68,13 +70,27 @@ public class CloudChatDAO extends HttpServlet {
                 }
 
                 break;
+            case "login":
+                // returns USER_ID on successful login
+                // -1 on failed login
+                String loginUsername = request.getParameter("username");
+                String loginPassword = request.getParameter("password");
+
+                int userId = -1;
+                userId = dao.loginUser(loginUsername, loginPassword);
+                    
+                out = response.getWriter();  
+                out.print(userId);
+                out.flush();
+              
+                break;
 
             case "message":
                 String msgText = request.getParameter("message");
-                String userId = request.getParameter("userId");
-                String roomId = request.getParameter("roomId");
+                String msgUserId = request.getParameter("userId");
+                String msgRoomId = request.getParameter("roomId");
 
-                String[] keys2 = {msgText, userId, roomId};
+                String[] keys2 = {msgText, msgUserId, msgRoomId};
                 //if (!HttpServletRequestUtil.requestContainsKeys(request, keys2)) {
                 //    System.out.println("Request does not contain all required params.");
                 //    return;
@@ -84,8 +100,8 @@ public class CloudChatDAO extends HttpServlet {
                 int userIdInt = roomIdInt = -1;
 
                 try {
-                    userIdInt = Integer.parseInt(userId);
-                    roomIdInt = Integer.parseInt(roomId);
+                    userIdInt = Integer.parseInt(msgUserId);
+                    roomIdInt = Integer.parseInt(msgRoomId);
                 } catch (NumberFormatException e) {
                     System.out.println("Error parsing userId or roomId in action 'message': " + e);
                     return;
@@ -118,11 +134,11 @@ public class CloudChatDAO extends HttpServlet {
                 response.setContentType("application/json"); 
                 
                 if(searchRoomId != -1){
-                    PrintWriter out = response.getWriter();  
+                    out = response.getWriter();  
                     out.print(searchRoomId);
                     out.flush();
                 }else{
-                    PrintWriter out = response.getWriter();  
+                    out = response.getWriter();  
                     out.print("Room does not exist");
                     out.flush();
                 }
@@ -132,11 +148,11 @@ public class CloudChatDAO extends HttpServlet {
                 Room[] rooms = dao.getAllRooms();
                 
                 if(rooms != null){
-                    PrintWriter out = response.getWriter();  
+                    out = response.getWriter();  
                     out.print(gson.toJson(rooms));
                     out.flush();
                 }else{
-                    PrintWriter out = response.getWriter();  
+                    out = response.getWriter();  
                     out.print("No rooms available");
                     out.flush();
                 }
@@ -152,11 +168,11 @@ public class CloudChatDAO extends HttpServlet {
                 response.setContentType("application/json"); 
                 
                 if(messages != null){
-                    PrintWriter out = response.getWriter();  
+                    out = response.getWriter();  
                     out.print(gson.toJson(messages));
                     out.flush();
                 }else{
-                    PrintWriter out = response.getWriter();  
+                    out = response.getWriter();  
                     out.print("No messages found for topic '" + topic2 + "'");
                     out.flush();
                 }

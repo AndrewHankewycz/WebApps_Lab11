@@ -52,3 +52,13 @@ node_modules
 /CloudChat/Services/CloudChatDAO/build/
 /CloudChat/Services/CloudChatDAO/dist/
 /CloudChat/Services/CloudChatServer/nbproject/private/
+/CloudChat/Services/CloudChatUserManager/nbproject/private/
+/CloudChat/Services/CloudChatUserManager/build/
+/CloudChat/Services/CloudChatUserManager/dist/
+/CloudChat/Services/CloudChatServer/build/
+/CloudChat/Services/CloudChatNavigator/nbproject/private/
+/CloudChat/Services/GradeAgents/build/
+/CloudChat/Services/GradeAgents/dist/
+/CloudChat/Services/GradeAgents/nbproject/private/
+/CloudChat/Services/CloudChatNavigator/build/
+/CloudChat/Services/CloudChatNavigator/dist/

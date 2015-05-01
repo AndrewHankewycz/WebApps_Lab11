@@ -40,7 +40,7 @@ public class AuthHandler implements SOAPHandler<SOAPMessageContext> {
     }
 
     public boolean handleMessage(SOAPMessageContext mCtx) {
-        System.out.println("We are here!");
+        /*System.out.println("We are here!");
         Boolean outbound
                 = (Boolean) mCtx.get(MessageContext.MESSAGE_OUTBOUND_PROPERTY);
         if (!outbound) {
@@ -92,7 +92,7 @@ public class AuthHandler implements SOAPHandler<SOAPMessageContext> {
                 throw new RuntimeException("SOAPException thrown.", e);
             }
 
-        }
+        }*/
         return true; // continue down the handler chain
     }
 

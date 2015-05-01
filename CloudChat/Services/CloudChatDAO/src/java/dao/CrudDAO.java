@@ -17,7 +17,9 @@ import exceptions.UserAlreadyExistsException;
 import java.sql.ResultSet;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.UUID;
 import model.Room;
+import util.Crypto;
 
 /**
  *
@@ -48,6 +50,34 @@ public class CrudDAO {
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
+    }
+    
+    public int loginUser(String username, String password){
+        // on success: returns the USER ID of the username and password submitted
+        // on failure: returns -1
+        int userId = -1;
+        
+        try {
+            String insertSql = "SELECT * FROM USERS WHERE USERNAME = ?";
+            pStmt = dbConnection.prepareStatement(insertSql);
+            pStmt.setString(1, username);
+            
+            ResultSet rset = pStmt.executeQuery();
+            if(rset.next()){
+                String salt = rset.getString(4);
+                String correctPswd = rset.getString(3);
+
+                String saltedPswd = Crypto.sha1(password + salt);
+
+                if(saltedPswd.equals(correctPswd)){
+                    userId = rset.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        
+        return userId;
     }
     
     public void addRoom(Room room) throws RoomAlreadyExistsException{

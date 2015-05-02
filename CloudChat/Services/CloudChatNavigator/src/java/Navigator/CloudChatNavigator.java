@@ -4,8 +4,6 @@ import UserManagerClients.UserManager;
 import UserManagerClients.UserManagerService;
 import com.google.gson.Gson;
 import java.io.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.*;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
@@ -39,18 +37,18 @@ public class CloudChatNavigator extends HttpServlet {
                 out.flush();
                 
                 break;
-            case "logout":
-                String id = request.getParameter("username");
 
-                try{
-                    int userId = Integer.parseInt(id);
-                    port.userLogout(userId);
-
-                }catch(NumberFormatException ex){
-                    Logger.getLogger(CloudChatNavigator.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                break;
             case "register":
+                String registerUsername = request.getParameter("username");
+                String registerPassword = request.getParameter("password");
+
+                // soap service returns JSON formatted data ready to send to the client
+                res = port.registerUser(registerUsername, registerPassword);
+                
+                out = response.getWriter();
+                out.print(res);
+                out.flush();
+                
                 break;
         }
         

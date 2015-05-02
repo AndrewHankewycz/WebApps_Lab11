@@ -16,6 +16,7 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebService;
  
 
@@ -26,36 +27,44 @@ public class UserManager {
     private static final String CC_DAO_URL = "http://localhost:8080/CloudChatDAO/";
     
     @WebMethod
-    public boolean registerUser(String username, String password) {
-        boolean registered = false;
-        String salt = UUID.randomUUID().toString();
-        password = Crypto.sha1(password + salt);
-
+    public String registerUser(@WebParam(name = "username") String username, @WebParam(name = "password") String password) {
+        String res = "";
+        
         try {
             String params = formatParameters(new String[]{"action", "username", "password"}, 
                                              new String[]{"register", username, password});
-            String res = executePost(CC_DAO_URL, params);
-            System.out.println("response was: " + res);
-            registered = true;
+            // make post request to DAO
+            res = executePost(CC_DAO_URL, params);
+            
+            int userId = -1;
+            try{
+                // parse userId response to an integer
+                userId = Integer.parseInt(res);
+            }catch(NumberFormatException ex){
+                System.out.println("something went wrong " + ex);
+                // something must have gone wrong with the lookup
+            }
+            
+            // package userId and username in an object for JSON output
+            res = gson.toJson(new User(userId, username));
+            System.out.println("sending response: " + res);
         } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(UserManager.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex);
         }
         
-        return registered;
+        return res;
     }
     
     @WebMethod
-    public String userLogin(String username, String password) {
+    public String userLogin(@WebParam(name = "username") String username, @WebParam(name = "password") String password) {
         String res = "";
-
-        Logger.getLogger(UserManager.class.getName()).log(Level.INFO, null, "USER LOGIN ENDPOINT");
         
         try {
             String params = formatParameters(new String[]{"action", "username", "password"}, 
                                              new String[]{"login", username, password});
             // make post request to DAO
             res = executePost(CC_DAO_URL, params);
-            
+            System.out.println(res);
             int userId = -1;
             try{
                 // parse userId response to an integer
@@ -69,27 +78,30 @@ public class UserManager {
             res = gson.toJson(new User(userId, username));
             System.out.println("sending response: " + res);
         } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(UserManager.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex);
         }
         
         return res;
     }
     
     @WebMethod
-    public boolean userLogout(int userId) {
-        boolean loggedOut = true;
+    public String userLogout(@WebParam(name = "username") String username, @WebParam(name = "password") String password) {
+        String res = "0";
         
         try {
-            String params = formatParameters(new String[]{"action", "userId"}, 
-                                             new String[]{"logout", Integer.toString(userId)});
-            String res = executePost(CC_DAO_URL, params);
-            System.out.println("response was: " + res);
+            String params = formatParameters(new String[]{"action", "username", "password"}, 
+                                             new String[]{"logout", username, password});
+            // make post request to DAO
+            res = executePost(CC_DAO_URL, params);
+            if(res.equals("1")){
+                res = "1";
+            }
+            System.out.println("logout request was: " + res);
         } catch (UnsupportedEncodingException ex) {
-            loggedOut = false;
-            Logger.getLogger(UserManager.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex);
         }
         
-        return loggedOut;
+        return res;
     }
 
     private static String executePost(String targetURL, String urlParameters) {

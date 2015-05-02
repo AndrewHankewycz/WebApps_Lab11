@@ -26,8 +26,26 @@ public interface UserManager {
 
     /**
      * 
-     * @param arg1
-     * @param arg0
+     * @param password
+     * @param username
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "registerUser", targetNamespace = "http://Controller/", className = "UserManagerClients.RegisterUser")
+    @ResponseWrapper(localName = "registerUserResponse", targetNamespace = "http://Controller/", className = "UserManagerClients.RegisterUserResponse")
+    @Action(input = "http://Controller/UserManager/registerUserRequest", output = "http://Controller/UserManager/registerUserResponse")
+    public String registerUser(
+        @WebParam(name = "username", targetNamespace = "")
+        String username,
+        @WebParam(name = "password", targetNamespace = "")
+        String password);
+
+    /**
+     * 
+     * @param password
+     * @param username
      * @return
      *     returns java.lang.String
      */
@@ -37,42 +55,27 @@ public interface UserManager {
     @ResponseWrapper(localName = "userLoginResponse", targetNamespace = "http://Controller/", className = "UserManagerClients.UserLoginResponse")
     @Action(input = "http://Controller/UserManager/userLoginRequest", output = "http://Controller/UserManager/userLoginResponse")
     public String userLogin(
-        @WebParam(name = "arg0", targetNamespace = "")
-        String arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        String arg1);
+        @WebParam(name = "username", targetNamespace = "")
+        String username,
+        @WebParam(name = "password", targetNamespace = "")
+        String password);
 
     /**
      * 
-     * @param arg1
-     * @param arg0
+     * @param password
+     * @param username
      * @return
-     *     returns boolean
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "registerUser", targetNamespace = "http://Controller/", className = "UserManagerClients.RegisterUser")
-    @ResponseWrapper(localName = "registerUserResponse", targetNamespace = "http://Controller/", className = "UserManagerClients.RegisterUserResponse")
-    @Action(input = "http://Controller/UserManager/registerUserRequest", output = "http://Controller/UserManager/registerUserResponse")
-    public boolean registerUser(
-        @WebParam(name = "arg0", targetNamespace = "")
-        String arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        String arg1);
-
-    /**
-     * 
-     * @param arg0
-     * @return
-     *     returns boolean
+     *     returns java.lang.String
      */
     @WebMethod
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "userLogout", targetNamespace = "http://Controller/", className = "UserManagerClients.UserLogout")
     @ResponseWrapper(localName = "userLogoutResponse", targetNamespace = "http://Controller/", className = "UserManagerClients.UserLogoutResponse")
     @Action(input = "http://Controller/UserManager/userLogoutRequest", output = "http://Controller/UserManager/userLogoutResponse")
-    public boolean userLogout(
-        @WebParam(name = "arg0", targetNamespace = "")
-        int arg0);
+    public String userLogout(
+        @WebParam(name = "username", targetNamespace = "")
+        String username,
+        @WebParam(name = "password", targetNamespace = "")
+        String password);
 
 }

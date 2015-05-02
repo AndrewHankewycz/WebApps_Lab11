@@ -45,30 +45,31 @@ public class CloudChatDAO extends HttpServlet {
         String action = request.getParameter("action");
 
         PrintWriter out = null;
+        if(action == null)
+            return;
         
         switch (action) {
             case "register":
                 String username = request.getParameter("username");
                 String password = request.getParameter("password");
 
-                String[] keys1 = {username, password};
-                //if (!HttpServletRequestUtil.requestContainsKeys(request, keys1)) {
-                //    System.out.println("Request does not contain all required params.");
-                //    return;
-                //}
-
                 String salt = UUID.randomUUID().toString();
                 password = Crypto.sha1(password + salt);
 
                 User user = new User(username, password, salt, new Time(System.currentTimeMillis()));
-
+                int newUserId = -1;
+                
                 try {
-                    dao.addUser(user);
+                    newUserId = dao.addUser(user);
                 } catch (UserAlreadyExistsException ex) {
                     //TODO: Send error that the user already exists
                     Logger.getLogger(CloudChatDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
+                out = response.getWriter();  
+                out.print(newUserId);
+                out.flush();
+                
                 break;
             case "login":
                 // returns USER_ID on successful login
@@ -139,7 +140,7 @@ public class CloudChatDAO extends HttpServlet {
                     out.flush();
                 }else{
                     out = response.getWriter();  
-                    out.print("Room does not exist");
+                    out.print("-1");
                     out.flush();
                 }
                 break;
@@ -153,7 +154,7 @@ public class CloudChatDAO extends HttpServlet {
                     out.flush();
                 }else{
                     out = response.getWriter();  
-                    out.print("No rooms available");
+                    out.print("-1");
                     out.flush();
                 }
                 
@@ -173,9 +174,12 @@ public class CloudChatDAO extends HttpServlet {
                     out.flush();
                 }else{
                     out = response.getWriter();  
-                    out.print("No messages found for topic '" + topic2 + "'");
+                    out.print("-1");
                     out.flush();
                 }
+                break;
+            default:
+                System.out.println("CloudChatDAO cannot process action: " + action);
                 break;
         }
     }

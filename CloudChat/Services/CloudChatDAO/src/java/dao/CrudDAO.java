@@ -17,7 +17,8 @@ import exceptions.UserAlreadyExistsException;
 import java.sql.ResultSet;
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Room;
 import util.Crypto;
 
@@ -34,7 +35,8 @@ public class CrudDAO {
         dbConnection = DBUtility.getConnection();
     }
 
-    public void addUser(User user) throws UserAlreadyExistsException {
+    public int addUser(User user) throws UserAlreadyExistsException {
+        int userId = -1;
         try {
             if (userExists(user)) {
                 throw new UserAlreadyExistsException("User " + user.getUsername() + " already exists");
@@ -47,9 +49,18 @@ public class CrudDAO {
             pStmt.setString(3, user.getSalt());
             pStmt.setTime(4, user.getCreatedTime());
             pStmt.executeUpdate();
+            
+            String lookUpSql = "SELECT * FROM USERS WHERE USERNAME = ?";
+            pStmt = dbConnection.prepareStatement(lookUpSql);
+            pStmt.setString(1, user.getUsername());
+            ResultSet rset = pStmt.executeQuery();
+            if(rset.next()){
+                userId = rset.getInt(1);
+            }
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            Logger.getLogger(CrudDAO.class.getName()).log(Level.SEVERE, null, userId);
         }
+        return userId;
     }
     
     public int loginUser(String username, String password){
@@ -58,8 +69,8 @@ public class CrudDAO {
         int userId = -1;
         
         try {
-            String insertSql = "SELECT * FROM USERS WHERE USERNAME = ?";
-            pStmt = dbConnection.prepareStatement(insertSql);
+            String loginSql = "SELECT * FROM USERS WHERE USERNAME = ?";
+            pStmt = dbConnection.prepareStatement(loginSql);
             pStmt.setString(1, username);
             
             ResultSet rset = pStmt.executeQuery();
@@ -68,9 +79,11 @@ public class CrudDAO {
                 String correctPswd = rset.getString(3);
 
                 String saltedPswd = Crypto.sha1(password + salt);
-
+                
                 if(saltedPswd.equals(correctPswd)){
                     userId = rset.getInt(1);
+                }else{
+                    System.out.println("incorrect password entered");
                 }
             }
         } catch (SQLException e) {

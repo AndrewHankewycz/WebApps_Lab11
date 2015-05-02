@@ -25,18 +25,18 @@ io.on('connection', function(socket){
     request.post(NAVIGATOR_URL, {
         form: {
           action: 'login',
-          username: username,
-          password: password
+          username: data.username,
+          password: data.password
         }
       },
       function (error, response, body) {
           if (!error && response.statusCode == 200 && body != "-1") {
-              var joinedRoom = RoomHelper.addUserToRoom(roomName);
+              var joinedRoom = RoomHelper.addUserToRoom(data.roomName);
               
               if(joinedRoom === -1) {
                 console.log("Could not join room!");
               } else {
-                console.log("User: " + username + " joined " + roomName);
+                console.log("User: " + username + " joined " + data.roomName);
               }
           }
       });

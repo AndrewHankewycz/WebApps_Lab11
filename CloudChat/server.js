@@ -2,12 +2,19 @@ var User = require('./user');
 var config = require('./config');
 var util = require('../util/util');
 var io = require('socket.io')(config.port);
+var xss = require('xss');
+var CommandProcessor = require('./commands/command_processor');
 
 global.users = [];
 
 io.on('connection', function(socket){
   socket.on('chat message', function(data) {
     var username = getUserBySession(data.session).username;
+    var message = xss(data.message);
+    
+    if(CommandProcessor.process(message))
+      return;
+    
     io.emit('chat message', username + ': ' + data.message);
   });
   

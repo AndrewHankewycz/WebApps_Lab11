@@ -1,10 +1,11 @@
+var request = require('request');
 var User = require('./user');
 var config = require('./config');
 var util = require('../util/util');
 var io = require('socket.io')(config.port);
 var xss = require('xss');
 var CommandProcessor = require('./commands/command_processor');
-
+var RoomHelper = require('./util/room_helper.js');
 global.rooms = [];
 global.users = [];
 
@@ -20,8 +21,8 @@ io.on('connection', function(socket){
     //TODO: Send message to room user is in
   });
   
-  socket.on('login', function(username, password, roomName) {
-    request.post(NAVIGATOR_URL, {
+  socket.on('login', function(data) {
+    request.post(config.NAVIGATOR_URL, {
         form: {
           action: 'login',
           username: data.username,

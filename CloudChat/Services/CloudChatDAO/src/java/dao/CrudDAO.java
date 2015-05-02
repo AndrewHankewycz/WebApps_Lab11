@@ -16,6 +16,7 @@ import model.Message;
 import exceptions.UserAlreadyExistsException;
 import java.sql.ResultSet;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,7 +56,7 @@ public class CrudDAO {
             pStmt.setString(1, user.getUsername());
             ResultSet rset = pStmt.executeQuery();
             if(rset.next()){
-                userId = rset.getInt(1);
+                userId = rset.getInt("ID");
             }
         } catch (SQLException e) {
             Logger.getLogger(CrudDAO.class.getName()).log(Level.SEVERE, null, userId);
@@ -81,7 +82,7 @@ public class CrudDAO {
                 String saltedPswd = Crypto.sha1(password + salt);
                 
                 if(saltedPswd.equals(correctPswd)){
-                    userId = rset.getInt(1);
+                    userId = rset.getInt("ID");
                 }else{
                     System.out.println("incorrect password entered");
                 }
@@ -113,7 +114,7 @@ public class CrudDAO {
             ResultSet rset = pStmt.executeQuery();
             
             if(rset.next()){
-                roomId = rset.getInt(1);
+                roomId = rset.getInt("ID");
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -130,7 +131,7 @@ public class CrudDAO {
             pStmt.setString(1, msg.getMessage());
             pStmt.setInt(2, msg.getUserId());
             pStmt.setInt(3, msg.getRoomId());
-            pStmt.setTime(4, msg.getCreatedTime());
+            pStmt.setTimestamp(4, msg.getCreatedTime());
             pStmt.executeUpdate();
             
             sql = "SELECT ID FROM MESSAGES WHERE MESSAGE = ? AND USER_ID = ? AND ROOM_ID = ? AND CREATED_TIME = ?";
@@ -138,11 +139,11 @@ public class CrudDAO {
             pStmt.setString(1, msg.getMessage());
             pStmt.setInt(2, msg.getUserId());
             pStmt.setInt(3, msg.getRoomId());
-            pStmt.setTime(4, msg.getCreatedTime());
+            pStmt.setTimestamp(4, msg.getCreatedTime());
             ResultSet rset = pStmt.executeQuery();
             
             if(rset.next()){
-                messageId = rset.getInt(1);
+                messageId = rset.getInt("ID");
             }else{
                 System.out.println("nothing found");
             }
@@ -257,9 +258,9 @@ public class CrudDAO {
             pStmt = dbConnection.prepareStatement(sql);
             ResultSet rset = pStmt.executeQuery();
             while(rset.next()) {
-                int roomId = rset.getInt(1);
-                String roomTopic = rset.getString(2);
-                Time roomTimestamp = rset.getTime(3);
+                int roomId = rset.getInt("ID");
+                String roomTopic = rset.getString("TOPIC");
+                Time roomTimestamp = rset.getTime("CREATED_TIME");
                 rooms.add(new Room(roomTopic, roomTimestamp, roomId));
             }
         } catch (SQLException e) {
@@ -286,20 +287,18 @@ public class CrudDAO {
         Message[] msgs = null;
         
         String sql = "SELECT * FROM MESSAGES WHERE ROOM_ID = (" +
-                       "SELECT ID FROM ROOMS WHERE TOPIC = ?)";
+                       "SELECT ID FROM ROOMS WHERE TOPIC = ?) ORDER BY CREATED_TIME ASC";
         try {
             pStmt = dbConnection.prepareStatement(sql);
             pStmt.setString(1, topic);
             ResultSet rset = pStmt.executeQuery();
             while(rset.next()) {
                 System.out.println("got some messages");
-                int msgUserId = rset.getInt(2);
-                String msgText = rset.getString(3);
-                //Time msgTimestamp = rset.getTime(4);
-                int msgTimeStamp = rset.getInt(4);
-                int msgRoomId = rset.getInt(5);
-                System.out.println(msgTimeStamp);
-                //messages.add(new Message(msgText, msgUserId, msgRoomId, msgTimestamp));
+                int msgUserId = rset.getInt("USER_ID");
+                String msgText = rset.getString("MESSAGE");
+                int msgRoomId = rset.getInt("ROOM_ID");
+                Timestamp msgTimestamp = rset.getTimestamp("CREATED_TIME");
+                messages.add(new Message(msgText, msgUserId, msgRoomId, msgTimestamp));
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());

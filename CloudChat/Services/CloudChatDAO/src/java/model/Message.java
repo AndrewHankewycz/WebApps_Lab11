@@ -5,7 +5,7 @@
  */
 package model;
 
-import java.sql.Time;
+import java.sql.Timestamp;
 
 /**
  *
@@ -15,9 +15,9 @@ public class Message {
     private String message;
     private int userId;
     private int roomId;
-    private Time createdTime;
+    private Timestamp createdTime;
     
-    public Message(String message, int userId, int roomId, Time createdTime) {
+    public Message(String message, int userId, int roomId, Timestamp createdTime) {
         this.message = message;
         this.userId = userId;
         this.roomId = roomId;
@@ -36,7 +36,7 @@ public class Message {
         return roomId;
     }
 
-    public Time getCreatedTime() {
+    public Timestamp getCreatedTime() {
         return createdTime;
     }
 }

@@ -22,6 +22,7 @@ import model.Message;
 import model.Room;
 import util.Crypto;
 import com.google.gson.Gson;
+import java.sql.Timestamp;
 
 @WebServlet(urlPatterns = {"/"})
 public class CloudChatDAO extends HttpServlet {
@@ -104,7 +105,7 @@ public class CloudChatDAO extends HttpServlet {
                     return;
                 }
 
-                Message message = new Message(msgText, userIdInt, roomIdInt, new Time(System.currentTimeMillis()));
+                Message message = new Message(msgText, userIdInt, roomIdInt, new Timestamp(System.currentTimeMillis()));
 
                 int messageId = dao.addMessage(message);
                 

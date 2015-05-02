@@ -50,6 +50,11 @@ public class CloudChatNavigator extends HttpServlet {
                 out.flush();
                 
                 break;
+            default:
+                out = response.getWriter();
+                out.print("-1");
+                out.flush();
+                break;
         }
         
         //sendJsonResponse(response, res);

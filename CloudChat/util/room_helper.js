@@ -1,4 +1,26 @@
-var self = this;
+var request = require('request'),
+  config = require('../config'),
+  self = this;
+
+exports.insertRoomsFromDB = function() {
+  request.post(config.DAO_URL, {
+      form: {
+        action: 'getRooms'
+      }
+    },
+    function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+          var rooms = JSON.parse(body);
+          for(var i = 0; i < rooms.length; i++) {
+            global.rooms.push({
+              id: rooms[i].id,
+              topic: rooms[i].topic.toLowerCase(),
+              users: []
+            });
+          }
+        }
+    });
+};
 
 /**
  * Adds a user to a specified room and streams
@@ -8,22 +30,23 @@ var self = this;
  */
 exports.addUserToRoom = function(roomId, user) {
   var roomIdAdded = -1;
-  
+
   for(var i = 0; i < global.rooms.length; i++) {
-    if(global.rooms[i].id === roomId) {
+    if(global.rooms[i].topic === roomId) {
+      console.log("Room id valid");
       //Check if user is already in this room.
       for(var j = 0; j < global.rooms[i].users.length; j++) {
           var userInRoom = global.rooms[i].users[j];
           if(userInRoom.getUserId() === user.getUserId())
             return roomIdAdded;
       }
-      
+
       global.rooms[i].users.push(user);
       roomIdAdded = global.rooms[i].id;
       break;
     }
   }
-  
+
   //Inform the users
   if(roomIdAdded != -1) {
     self.streamEventToRoom('join', {
@@ -31,7 +54,7 @@ exports.addUserToRoom = function(roomId, user) {
       username: user.getUsername()
     }, roomId);
   }
-  
+
   return roomIdAdded;
 };
 
@@ -43,7 +66,7 @@ exports.addUserToRoom = function(roomId, user) {
  */
 exports.streamEventToRoom = function(event, data, roomId) {
   for(var i = 0; i < global.rooms.length; i++) {
-    if(global.rooms[i].id === room) {
+    if(global.rooms[i].id === roomId) {
       for(var j = 0; j < global.rooms[i].length; j++) {
         var userInRoom = global.rooms[i].users[j];
         userInRoom.getConnection().emit(event, data);

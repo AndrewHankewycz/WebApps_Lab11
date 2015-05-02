@@ -1,7 +1,6 @@
 var User = function(userId, username, connection) {
   this._userId = userId;
 	this.username = username;
-	//this._session = session;
 	this._connection = connection;
 	this._messages = [];
 };
@@ -24,6 +23,10 @@ User.prototype.getConnection = function() {
 
 User.prototype.getUserId = function() {
   return this._userId;
+};
+
+User.prototype.getUsername = function() {
+  return this._username;
 };
 
 module.exports = User;

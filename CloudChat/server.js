@@ -1,17 +1,23 @@
-var request = require('request');
-var User = require('./user');
-var config = require('./config');
-var util = require('../util/util');
-var io = require('socket.io')(config.port);
-var xss = require('xss');
-var CommandProcessor = require('./commands/command_processor');
-var RoomHelper = require('./util/room_helper.js');
+var request = require('request'),
+  User = require('./user'),
+  config = require('./config'),
+  util = require('../util/util'),
+  io = require('socket.io')(config.port),
+  xss = require('xss'),
+  CommandProcessor = require('./commands/command_processor'),
+  RoomHelper = require('./util/room_helper.js'),
+  UserHelper = require('./util/user_helper.js');
+
 global.rooms = [];
 global.users = [];
 
 RoomHelper.insertRoomsFromDB();
 
-io.on('connection', function(socket){
+io.on('connection', function(socket) {
+  socket.on('disconnect', function () {
+    UserHelper.removeBySocketId(socket.id);
+  });
+  
   socket.on('chat message', function(data) {
     var message = xss(data.message);
 

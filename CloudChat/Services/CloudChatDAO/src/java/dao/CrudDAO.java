@@ -93,7 +93,8 @@ public class CrudDAO {
         return userId;
     }
     
-    public void addRoom(Room room) throws RoomAlreadyExistsException{
+    public int addRoom(Room room) throws RoomAlreadyExistsException{
+        int roomId = -1;
         try {
             if (roomExists(room)) {
                 throw new RoomAlreadyExistsException("Room " + room.getTopic() + " already exists");
@@ -104,12 +105,25 @@ public class CrudDAO {
             pStmt.setString(1, room.getTopic());
             pStmt.setTime(2, room.getCreatedTime());
             pStmt.executeUpdate();
+            
+            sql = "SELECT ID FROM ROOMS WHERE TOPIC = ? AND CREATED_TIME = ?";
+            pStmt = dbConnection.prepareStatement(sql);
+            pStmt.setString(1, room.getTopic());
+            pStmt.setTime(2, room.getCreatedTime());
+            ResultSet rset = pStmt.executeQuery();
+            
+            if(rset.next()){
+                roomId = rset.getInt(1);
+            }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
+        
+        return roomId;
     }
 
-    public void addMessage(Message msg) {
+    public int addMessage(Message msg) {
+        int messageId = -1;
         String sql = "INSERT INTO MESSAGES (MESSAGE, USER_ID, ROOM_ID, CREATED_TIME) VALUES (?,?,?,?)";
         try {
             pStmt = dbConnection.prepareStatement(sql);
@@ -118,6 +132,20 @@ public class CrudDAO {
             pStmt.setInt(3, msg.getRoomId());
             pStmt.setTime(4, msg.getCreatedTime());
             pStmt.executeUpdate();
+            
+            sql = "SELECT ID FROM MESSAGES WHERE MESSAGE = ? AND USER_ID = ? AND ROOM_ID = ? AND CREATED_TIME = ?";
+            pStmt = dbConnection.prepareStatement(sql);
+            pStmt.setString(1, msg.getMessage());
+            pStmt.setInt(2, msg.getUserId());
+            pStmt.setInt(3, msg.getRoomId());
+            pStmt.setTime(4, msg.getCreatedTime());
+            ResultSet rset = pStmt.executeQuery();
+            
+            if(rset.next()){
+                messageId = rset.getInt(1);
+            }else{
+                System.out.println("nothing found");
+            }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         } finally {
@@ -129,6 +157,7 @@ public class CrudDAO {
                 }
             }
         }
+        return messageId;
     }
 
     public boolean userExists(User user) throws SQLException {
@@ -263,12 +292,14 @@ public class CrudDAO {
             pStmt.setString(1, topic);
             ResultSet rset = pStmt.executeQuery();
             while(rset.next()) {
+                System.out.println("got some messages");
                 int msgUserId = rset.getInt(2);
                 String msgText = rset.getString(3);
-                Time msgTimestamp = rset.getTime(4);
+                //Time msgTimestamp = rset.getTime(4);
+                int msgTimeStamp = rset.getInt(4);
                 int msgRoomId = rset.getInt(5);
-                
-                messages.add(new Message(msgText, msgUserId, msgRoomId, msgTimestamp));
+                System.out.println(msgTimeStamp);
+                //messages.add(new Message(msgText, msgUserId, msgRoomId, msgTimestamp));
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());

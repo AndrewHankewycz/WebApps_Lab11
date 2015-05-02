@@ -1,3 +1,5 @@
+package controller;
+
 
 import java.io.IOException;
 
@@ -91,12 +93,6 @@ public class CloudChatDAO extends HttpServlet {
                 String msgUserId = request.getParameter("userId");
                 String msgRoomId = request.getParameter("roomId");
 
-                String[] keys2 = {msgText, msgUserId, msgRoomId};
-                //if (!HttpServletRequestUtil.requestContainsKeys(request, keys2)) {
-                //    System.out.println("Request does not contain all required params.");
-                //    return;
-                //}
-
                 int roomIdInt;
                 int userIdInt = roomIdInt = -1;
 
@@ -110,7 +106,12 @@ public class CloudChatDAO extends HttpServlet {
 
                 Message message = new Message(msgText, userIdInt, roomIdInt, new Time(System.currentTimeMillis()));
 
-                dao.addMessage(message);
+                int messageId = dao.addMessage(message);
+                
+                out = response.getWriter();
+                out.print(messageId);
+                out.flush();
+                
                 break;
                 
             case "createRoom":
@@ -118,12 +119,19 @@ public class CloudChatDAO extends HttpServlet {
                 
                 Room room = new Room(topic, new Time(System.currentTimeMillis()));
                 
+                int newRoomId = -1;
+                
                 try {
-                    dao.addRoom(room);
+                    newRoomId = dao.addRoom(room);
                 } catch (RoomAlreadyExistsException ex) {
                     //TODO: Send error that the user already exists
                     Logger.getLogger(CloudChatDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                
+                out = response.getWriter();
+                out.print(newRoomId);
+                out.flush();
+                
                 break;
                 
             case "searchRoom":
@@ -180,6 +188,9 @@ public class CloudChatDAO extends HttpServlet {
                 break;
             default:
                 System.out.println("CloudChatDAO cannot process action: " + action);
+                out = response.getWriter();  
+                out.print("-1");
+                out.flush();
                 break;
         }
     }

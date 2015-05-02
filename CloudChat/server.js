@@ -12,13 +12,12 @@ global.users = [];
 
 io.on('connection', function(socket){
   socket.on('chat message', function(data) {
-    var username = getUserBySession(data.session).username;
     var message = xss(data.message);
     
     if(CommandProcessor.process(io, socket, message))
       return;
     
-    //io.emit('chat message', username + ': ' + data.message);
+    //TODO: Send message to room user is in
   });
   
   socket.on('login', function(username, password, roomName) {

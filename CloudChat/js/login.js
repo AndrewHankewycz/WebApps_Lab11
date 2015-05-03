@@ -1,5 +1,3 @@
-var username, password, roomId;
-var session;
 var socket = io("http://localhost:3000");
 
 $(document).ready(function() {
@@ -15,7 +13,7 @@ $(document).ready(function() {
         $("#error").show();
         return;
       }
-
+ 
       socket.emit('register', {
         username: username,
         password: password
@@ -43,7 +41,13 @@ $(document).ready(function() {
         roomId: roomId
       },
       function(data) {
-          console.log(data.error);
+          if(data.error !== null) {
+            $("#error").text(data.error);
+            return;
+          }
+          
+          $("#loginContainer").fadeOut();
+          $("#chatContainer").fadeIn();
       });
       
     } else {

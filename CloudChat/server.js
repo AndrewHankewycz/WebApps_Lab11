@@ -50,12 +50,17 @@ io.on('connection', function(socket) {
       if(joinedRoom === -1) {
         console.log("Could not login!");
         cb({
-          error: "Error on login!"
+          error: "Error on login!",
+          user: null
         });
       } else {
         console.log("Logged in!");
         cb({
-          error: null
+          error: null,
+          user: {
+            userId: user.getUserId(),
+            username: username
+          }
         });
       }
       return;
@@ -77,12 +82,17 @@ io.on('connection', function(socket) {
               if(joinedRoom === -1) {
                 console.log("Could not login!");
                 cb({
-                  error: "Error on login!"
+                  error: "Error on login!",
+                  user: null
                 });
               } else {
                 console.log("Logged in!");
                 cb({
-                  error: null
+                  error: null,
+                  user: {
+                    userId: user.getUserId(),
+                    username: username
+                  }
                 });
               }
           }

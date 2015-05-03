@@ -24,19 +24,19 @@
       }
     </style>
     <script>
-        $(window).on('resize', function(){
-            $('#messageBox').css( "width",($(window).width() - 113)+'px');
-        });
-        $(document).ready(function(){
-            $('#messageBox').css( "width",($(window).width() - 113) +'px');
-        });
+      $(window).on('resize', function(){
+          $('#messageBox').css( "width",($(window).width() - 113)+'px');
+      });
+      $(document).ready(function(){
+          $('#messageBox').css( "width",($(window).width() - 113) +'px');
+      });
 
-        $(window).on('resize', function(){
-            $('#rooms').css( "height",($(window).height() - 40) +'px');
-        });
-        $(document).ready(function(){
-            $('#rooms').css( "height",($(window).height() - 40) +'px');
-        });
+      $(window).on('resize', function(){
+          $('#rooms').css( "height",($(window).height() - 40) +'px');
+      });
+      $(document).ready(function(){
+          $('#rooms').css( "height",($(window).height() - 40) +'px');
+      });
     </script>
   </head>
   <body>
@@ -67,7 +67,6 @@
           <input id="messageBox" autocomplete="off" /><button>Send</button>
         </form>
       </div>
-      <script src="http://localhost:3000/socket.io/socket.io.js"></script>
     </div>
   </body>
 </html>

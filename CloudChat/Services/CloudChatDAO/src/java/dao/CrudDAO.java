@@ -95,6 +95,7 @@ public class CrudDAO {
     }
     
     public int addRoom(Room room) throws RoomAlreadyExistsException{
+        ResultSet rset = null;
         int roomId = -1;
         try {
             if (roomExists(room)) {
@@ -111,19 +112,35 @@ public class CrudDAO {
             pStmt = dbConnection.prepareStatement(sql);
             pStmt.setString(1, room.getTopic());
             pStmt.setTime(2, room.getCreatedTime());
-            ResultSet rset = pStmt.executeQuery();
+            rset = pStmt.executeQuery();
             
             if(rset.next()){
                 roomId = rset.getInt("ID");
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
+        } finally {
+            if (pStmt != null) {
+                try {
+                    pStmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (rset != null) {
+                try {
+                    rset.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         
         return roomId;
     }
 
     public int addMessage(Message msg) {
+        ResultSet rset = null;
         int messageId = -1;
         String sql = "INSERT INTO MESSAGES (MESSAGE, USER_ID, ROOM_ID, CREATED_TIME) VALUES (?,?,?,?)";
         try {
@@ -140,7 +157,7 @@ public class CrudDAO {
             pStmt.setInt(2, msg.getUserId());
             pStmt.setInt(3, msg.getRoomId());
             pStmt.setTimestamp(4, msg.getCreatedTime());
-            ResultSet rset = pStmt.executeQuery();
+            rset = pStmt.executeQuery();
             
             if(rset.next()){
                 messageId = rset.getInt("ID");
@@ -157,24 +174,6 @@ public class CrudDAO {
                     e.printStackTrace();
                 }
             }
-        }
-        return messageId;
-    }
-
-    public boolean userExists(User user) throws SQLException {
-        int count = 0;
-        PreparedStatement stmt = null;
-        ResultSet rset = null;
-        try {
-            stmt = dbConnection.prepareStatement(
-                    "SELECT COUNT(ID) FROM USERS WHERE USERNAME=?");
-            stmt.setString(1, user.getUsername());
-            rset = stmt.executeQuery();
-            if (rset.next()) {
-                count = rset.getInt(1);
-            }
-            return count > 0;
-        } finally {
             if (rset != null) {
                 try {
                     rset.close();
@@ -182,9 +181,34 @@ public class CrudDAO {
                     e.printStackTrace();
                 }
             }
-            if (stmt != null) {
+        }
+        return messageId;
+    }
+
+    public boolean userExists(User user) throws SQLException {
+        int count = 0;
+        pStmt = null;
+        ResultSet rset = null;
+        try {
+            pStmt = dbConnection.prepareStatement(
+                    "SELECT COUNT(ID) FROM USERS WHERE USERNAME=?");
+            pStmt.setString(1, user.getUsername());
+            rset = pStmt.executeQuery();
+            if (rset.next()) {
+                count = rset.getInt(1);
+            }
+            return count > 0;
+        } finally {
+            if (pStmt != null) {
                 try {
-                    stmt.close();
+                    pStmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (rset != null) {
+                try {
+                    rset.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -206,16 +230,16 @@ public class CrudDAO {
             }
             return count > 0;
         } finally {
-            if (rset != null) {
+            if (pStmt != null) {
                 try {
-                    rset.close();
+                    pStmt.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
             }
-            if (stmt != null) {
+            if (rset != null) {
                 try {
-                    stmt.close();
+                    rset.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -250,13 +274,14 @@ public class CrudDAO {
     }
     
     public Room[] getAllRooms(){
+        ResultSet rset = null;
         ArrayList<Room> rooms = new ArrayList<>();
         Room[] roomsArray = null;
         
         String sql = "SELECT * FROM ROOMS";
         try {
             pStmt = dbConnection.prepareStatement(sql);
-            ResultSet rset = pStmt.executeQuery();
+            rset = pStmt.executeQuery();
             while(rset.next()) {
                 int roomId = rset.getInt("ID");
                 String roomTopic = rset.getString("TOPIC");
@@ -269,6 +294,13 @@ public class CrudDAO {
             if (pStmt != null) {
                 try {
                     pStmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (rset != null) {
+                try {
+                    rset.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -317,5 +349,58 @@ public class CrudDAO {
             msgs = messages.toArray(msgs);
         }
         return msgs;
+    }
+    
+    public boolean importTable(String tableName, String filePath){
+        boolean success = true;
+        String sqlDelete = "DELETE FROM " + tableName + " WHERE ID = ID";
+        String sqlImport = "CALL SYSCS_UTIL.SYSCS_IMPORT_TABLE(null,'" + tableName + "'," + 
+                "'../glassfish/" + filePath + "',null,null,null,0)";
+
+        System.out.println(sqlImport);
+        try {
+            pStmt = dbConnection.prepareStatement(sqlDelete);
+            pStmt.executeUpdate();
+            
+            pStmt = dbConnection.prepareStatement(sqlImport);
+            int result = pStmt.executeUpdate();
+        } catch (SQLException e) {
+            success = false;
+            System.err.println(e.getMessage());
+        } finally {
+            if (pStmt != null) {
+                try {
+                    pStmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+        return success;
+    }
+    
+    public boolean exportTable(String tableName, String filePath){
+        boolean success = true;
+        String sqlExport = "CALL SYSCS_UTIL.SYSCS_EXPORT_TABLE(null,'" + tableName + 
+                "','../glassfish/" + filePath + "',null,null,null)";
+
+        try {
+            pStmt = dbConnection.prepareStatement(sqlExport);
+            int result = pStmt.executeUpdate();
+        } catch (SQLException e) {
+            success = false;
+            System.err.println(e.getMessage());
+        } finally {
+            if (pStmt != null) {
+                try {
+                    pStmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+        return success;
     }
 }

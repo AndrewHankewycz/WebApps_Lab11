@@ -187,6 +187,18 @@ public class CloudChatDAO extends HttpServlet {
                     out.flush();
                 }
                 break;
+            case "import":
+                boolean importSuccess = dao.importTable("MESSAGES", "messages_backup.del");
+                out = response.getWriter();  
+                out.print(importSuccess);
+                out.flush();
+                break;
+            case "export":
+                boolean exportSuccess = dao.exportTable("MESSAGES", "messages_backup.del");
+                out = response.getWriter();  
+                out.print(exportSuccess);
+                out.flush();
+                break;
             default:
                 System.out.println("CloudChatDAO cannot process action: " + action);
                 out = response.getWriter();  

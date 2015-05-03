@@ -22,3 +22,28 @@ exports.removeBySocketId = function(socketId) {
     }
   }
 };
+
+/**
+ * Removes a user from a specific room by the user's
+ * socket Id
+ */
+exports.leaveRoomBySocketId = function(topic, socketId) {
+  for(var i = 0; i < global.rooms.length; i++) {
+    var room = global.rooms[i];
+    if(room.topic === topic) {
+      for(var j = 0; j < room.users.length; j++) {
+        var user = room.users[j];
+        if(user.getConnection().id === socketId) {
+          //Remove user from this room
+          global.rooms[i].users.splice(j, 1);
+          //Send event to users in this room to remove this user's name
+          RoomHelper.streamEventToRoom('user_disconnected', {
+            userId: user.getUserId()
+          }, room.id);
+          return;
+        }
+      }
+    }
+  }
+};
+

@@ -19,6 +19,9 @@ io.on('connection', function(socket) {
   });
   
   socket.on('chat message', function(data) {
+    if(data === null)
+      return;
+
     var message = xss(data.message);
 
     if(CommandProcessor.process(io, socket, message))
@@ -26,8 +29,16 @@ io.on('connection', function(socket) {
 
     //TODO: Send message to room user is in
   });
+  
+  socket.on('edit', function(data) {
+    if(data === null)
+      return;
+  });
 
   socket.on('login', function(data) {
+    if(data === null)
+      return;
+
     var username = data.username;
 
     request.post(config.NAVIGATOR_URL, {

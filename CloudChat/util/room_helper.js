@@ -12,11 +12,7 @@ exports.insertRoomsFromDB = function() {
         if (!error && response.statusCode == 200) {
           var rooms = JSON.parse(body);
           for(var i = 0; i < rooms.length; i++) {
-            global.rooms.push({
-              id: rooms[i].id,
-              topic: rooms[i].topic.toLowerCase(),
-              users: []
-            });
+            self.createRoom(rooms[i].id, rooms[i].topic.toLowerCase());
           }
         }
     });
@@ -33,7 +29,6 @@ exports.addUserToRoom = function(roomId, user) {
 
   for(var i = 0; i < global.rooms.length; i++) {
     if(global.rooms[i].topic === roomId) {
-      console.log("Room id valid");
       //Check if user is already in this room.
       for(var j = 0; j < global.rooms[i].users.length; j++) {
           var userInRoom = global.rooms[i].users[j];
@@ -73,4 +68,15 @@ exports.streamEventToRoom = function(event, data, roomId) {
       }
     }
   }
+};
+
+/**
+ * Creates a room with an empty list of users
+ */
+exports.createRoom = function(roomId, topic) {
+  global.rooms.push({
+    id: roomId,
+    topic: topic,
+    users: []
+  });
 };

@@ -1,4 +1,4 @@
-var socket = io("http://localhost:3000");
+var socket = io("http://bunnyrunajo.me:3000");
 
 $(document).ready(function() {
   $("#registerButton").click(function() {

@@ -10,6 +10,7 @@ var request = require('request'),
 
 global.rooms = [];
 global.users = [];
+global.usersOnline = 0;
 
 RoomHelper.insertRoomsFromDB();
 
@@ -42,25 +43,21 @@ io.on('connection', function(socket) {
     var username = data.username;
     
     if(config.DEBUG) {
-      //TODO: Create a method to increment total users online for unique debugging user Ids.
       //TODO: Reuse the code below
-      var user = new User(1, username, socket);
-      var joinedRoom = RoomHelper.addUserToRoom(data.roomId.toLowerCase(), user);
+      var user = new User(++global.usersOnline, username, socket);
+      var roomData = RoomHelper.addUserToRoom(data.roomId.toLowerCase(), user);
 
-      if(joinedRoom === -1) {
+      if(roomData === null) {
         console.log("Could not login!");
         cb({
           error: "Error on login!",
-          user: null
+          room: null
         });
       } else {
         console.log("Logged in!");
         cb({
           error: null,
-          user: {
-            userId: user.getUserId(),
-            username: username
-          }
+          room: roomData
         });
       }
       return;
@@ -77,22 +74,19 @@ io.on('connection', function(socket) {
           if (!error && response.statusCode == 200 && body != "-1") {
               var userResp = JSON.parse(body);
               var user = new User(userResp.id, username, socket);
-              var joinedRoom = RoomHelper.addUserToRoom(data.roomId.toLowerCase(), user);
+              var roomData = RoomHelper.addUserToRoom(data.roomId.toLowerCase(), user);
 
-              if(joinedRoom === -1) {
+              if(roomData === null) {
                 console.log("Could not login!");
                 cb({
                   error: "Error on login!",
-                  user: null
+                  room: null
                 });
               } else {
                 console.log("Logged in!");
                 cb({
                   error: null,
-                  user: {
-                    userId: user.getUserId(),
-                    username: username
-                  }
+                  room: roomData
                 });
               }
           }

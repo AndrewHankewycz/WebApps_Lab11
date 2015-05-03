@@ -1,6 +1,6 @@
 var User = function(userId, username, connection) {
   this._userId = userId;
-	this.username = username;
+	this._username = username;
 	this._connection = connection;
 	this._messages = [];
 };

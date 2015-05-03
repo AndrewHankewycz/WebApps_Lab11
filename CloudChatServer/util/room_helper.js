@@ -1,5 +1,6 @@
 var request = require('request'),
   config = require('../config'),
+  User = require('../user'),
   self = this;
 
 exports.insertRoomsFromDB = function() {
@@ -31,32 +32,52 @@ exports.insertRoomsFromDB = function() {
  * @param user User object to add to the room
  */
 exports.addUserToRoom = function(roomId, user) {
-  var roomIdAdded = -1;
-
+  var roomData = null;
+  
   for(var i = 0; i < global.rooms.length; i++) {
     if(global.rooms[i].topic === roomId) {
+      //Stores non-sensitive user data
+      var usersInRoom = [];
+      
       //Check if user is already in this room.
       for(var j = 0; j < global.rooms[i].users.length; j++) {
           var userInRoom = global.rooms[i].users[j];
-          if(userInRoom.getUserId() === user.getUserId())
-            return roomIdAdded;
+          usersInRoom.push(new User(
+            userInRoom.getUserId(),
+            userInRoom.getUsername(),
+            null
+          ));
+          if(userInRoom.getUserId() === user.getUserId()) {
+            console.log("User already in room");
+            return null;
+          }
       }
 
       global.rooms[i].users.push(user);
-      roomIdAdded = global.rooms[i].id;
+      
+      usersInRoom.push(new User(
+        user.getUserId(),
+        user.getUsername(),
+        null
+      ));
+      
+      roomData = {
+        id: global.rooms[i].id,
+        users: usersInRoom
+      };
       break;
     }
   }
 
   //Inform the users
-  if(roomIdAdded != -1) {
+  if(roomData !== null) {
     self.streamEventToRoom('join', {
       userId: user.getUserId(),
       username: user.getUsername()
     }, roomId);
   }
 
-  return roomIdAdded;
+  return roomData;
 };
 
 /**

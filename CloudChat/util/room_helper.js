@@ -3,6 +3,12 @@ var request = require('request'),
   self = this;
 
 exports.insertRoomsFromDB = function() {
+  if(config.DEBUG) {
+    self.createRoom(1, 'pokemon');
+    self.createRoom(2, 'dragons');
+    return;
+  }
+  
   request.post(config.DAO_URL, {
       form: {
         action: 'getRooms'

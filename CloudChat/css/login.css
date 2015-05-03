@@ -1,0 +1,16 @@
+#loginContainer {
+  width: 300px;
+  padding: 25px;
+  border: 2px solid grey;
+  margin: 25px;
+
+  border: -webkit-linear-gradient(square, red , blue); /* For Safari 5.1 to 6.0 */
+  border: -o-linear-gradient(square, red, blue); /* For Opera 11.1 to 12.0 */
+  border: -moz-linear-gradient(square, red, blue); /* For Firefox 3.6 to 15 */
+  border: linear-gradient(square, red , blue); /* Standard syntax */
+}
+
+.error {
+  display: none;
+  color: red;
+}

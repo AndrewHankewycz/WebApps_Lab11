@@ -2,7 +2,10 @@
 <html>
   <head>
     <title>Web Apps Chat</title>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/login.css">
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { font: 13px Helvetica, Arial; }
@@ -16,9 +19,10 @@
       #messages {width:100%; margin: 0; padding: 0; table-layout:fixed;}
       #messages li { padding: 5px; }
       #messages li:nth-child(odd) { background: #eee; }
+      #chatContainer {
+        display: none;
+      }
     </style>
-
-    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
         $(window).on('resize', function(){
             $('#messageBox').css( "width",($(window).width() - 113)+'px');
@@ -33,56 +37,37 @@
         $(document).ready(function(){
             $('#rooms').css( "height",($(window).height() - 40) +'px');
         });
-
-        
     </script>
-
   </head>
   <body>
-    <div>
-      <div id="message_container">
-      <ul id="messages"></ul>
-      </div>
-  	  <div id="rooms">
-  		  <p>sdf</p>
-  	  </div>
-    </div>
-
-    <div id="input_container">
-      <form action="">
-        <input id="messageBox" autocomplete="off" /><button>Send</button>
-      </form>
-    </div>
     <script src="http://localhost:3000/socket.io/socket.io.js"></script>
-    <script>
-      var username;
-      var session;
-      var socket = io("http://localhost:3000");
-
-      $(document).ready(function() {
-        while(typeof(username) === 'undefined' || username === "")
-	        username = prompt("Please enter a username", "");
-        socket.emit('login', username);
-      });
-
-      $('form').submit(function(){
-          socket.emit('chat message', {
-  	         session: session,
-  	          message: $('#messageBox').val()
-          });
-
-	        $('#messageBox').val('');
-          return false;
-      });
-
-      socket.on('chat message', function(msg){
-          $('#messages').append($('<li>').text(msg));
-          $("#message_container").scrollTop($("#message_container")[0].scrollHeight);
-      });
-
-      socket.on('login', function(sess) {
-          session = sess;
-      });
-    </script>
+    <script src="js/login.js"></script>
+    <div id="loginContainer">
+      <div id="login">
+        <p id="formTitle">User Login</p>
+        <p id="error" class="error">Please fill in all fields.</p>
+        <input type="text" class="form-control" id="usernameInput" placeholder="Username"><br>
+        <input type="password" class="form-control" id="passwordInput" placeholder="Password"><br>
+        <input type="text" class="form-control" id="roomInput" placeholder="Room"><br>
+        <button id="loginButton" type="button" class="btn btn-primary btn-sm">Login</button>
+        <button id="registerButton" type="button" class="btn btn-default btn-sm">Register</button>
+      </div>
+    </div>
+    <div id="chatContainer">
+      <div>
+        <div id="message_container">
+        <ul id="messages"></ul>
+        </div>
+    	  <div id="rooms">
+    		  <p>sdf</p>
+    	  </div>
+      </div>
+      <div id="input_container">
+        <form action="">
+          <input id="messageBox" autocomplete="off" /><button>Send</button>
+        </form>
+      </div>
+      <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    </div>
   </body>
 </html>

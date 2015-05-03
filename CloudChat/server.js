@@ -35,11 +35,31 @@ io.on('connection', function(socket) {
       return;
   });
 
-  socket.on('login', function(data) {
+  socket.on('login', function(data, cb) {
     if(data === null)
       return;
 
     var username = data.username;
+    
+    if(config.DEBUG) {
+      //TODO: Create a method to increment total users online for unique debugging user Ids.
+      //TODO: Reuse the code below
+      var user = new User(1, username, socket);
+      var joinedRoom = RoomHelper.addUserToRoom(data.roomId.toLowerCase(), user);
+
+      if(joinedRoom === -1) {
+        console.log("Could not login!");
+        cb({
+          error: "Error on login!"
+        });
+      } else {
+        console.log("Logged in!");
+        cb({
+          error: null
+        });
+      }
+      return;
+    }
 
     request.post(config.NAVIGATOR_URL, {
         form: {
@@ -55,9 +75,15 @@ io.on('connection', function(socket) {
               var joinedRoom = RoomHelper.addUserToRoom(data.roomId.toLowerCase(), user);
 
               if(joinedRoom === -1) {
-                //TODO: Return a failed to login response
+                console.log("Could not login!");
+                cb({
+                  error: "Error on login!"
+                });
               } else {
-                //TODO: Send success response to user
+                console.log("Logged in!");
+                cb({
+                  error: null
+                });
               }
           }
       });

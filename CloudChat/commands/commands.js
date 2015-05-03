@@ -57,5 +57,13 @@ module.exports = {
    */
   'leave' : function(io, socket, args) {
     UserHelper.leaveRoomBySocketId(args, socket.id);
+  },
+  /**
+   * Command for 'logging out' the user. Removes the user from all
+   * rooms that they're in, and notifies every user in each of those
+   * rooms
+   */
+  'exit' : function(io, socket, args) {
+    UserHelper.removeBySocketId(socket.id);
   }
 };

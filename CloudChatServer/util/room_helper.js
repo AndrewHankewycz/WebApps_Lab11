@@ -28,14 +28,14 @@ exports.insertRoomsFromDB = function() {
 /**
  * Adds a user to a specified room and streams
  * user join event if the room and user pass checks
- * @param roomId Integer representing the room to add the user to
+ * @param roomTopic Room name to add the user to
  * @param user User object to add to the room
  */
-exports.addUserToRoom = function(roomId, user) {
+exports.addUserToRoom = function(roomTopic, user) {
   var roomData = null;
   
   for(var i = 0; i < global.rooms.length; i++) {
-    if(global.rooms[i].topic === roomId) {
+    if(global.rooms[i].topic === roomTopic) {
       //Stores non-sensitive user data
       var usersInRoom = [];
       
@@ -47,7 +47,6 @@ exports.addUserToRoom = function(roomId, user) {
             username: userInRoom.getUsername()
           });
           if(userInRoom.getUserId() === user.getUserId()) {
-            console.log("User already in room");
             return null;
           }
       }
@@ -72,7 +71,7 @@ exports.addUserToRoom = function(roomId, user) {
     self.streamEventToRoom('join', {
       userId: user.getUserId(),
       username: user.getUsername()
-    }, roomId);
+    }, roomData.id);
   }
 
   return roomData;
@@ -86,11 +85,13 @@ exports.addUserToRoom = function(roomId, user) {
  */
 exports.streamEventToRoom = function(event, data, roomId) {
   for(var i = 0; i < global.rooms.length; i++) {
+    console.log(global.rooms[i].id + " " + roomId);
     if(global.rooms[i].id === roomId) {
-      for(var j = 0; j < global.rooms[i].length; j++) {
+      for(var j = 0; j < global.rooms[i].users.length; j++) {
         var userInRoom = global.rooms[i].users[j];
         userInRoom.getConnection().emit(event, data);
       }
+      return;
     }
   }
 };

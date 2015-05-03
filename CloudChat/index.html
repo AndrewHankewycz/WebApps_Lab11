@@ -5,9 +5,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/chat.css">
     <script>
+      var socket = io("http://localhost:3000");
+      
       $(window).on('resize', function(){
         $('#messageBox').css( "width",($(window).width() - 113)+'px');
       });
@@ -21,11 +24,16 @@
       $(document).ready(function(){
         $('#rooms').css( "height",($(window).height() - 40) +'px');
       });
+      
+      socket.on('join', function(data) {
+        alert("User joined your room!");
+        var username = data.username;
+        $("#users").append("<p>" + username + "</p>");
+      });
     </script>
+    <script src="js/login.js"></script>
   </head>
   <body>
-    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
-    <script src="js/login.js"></script>
     <div id="loginContainer">
       <div id="login">
         <p id="formTitle">User Login</p>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <!-- <page contentType="text/html" pageEncoding="UTF-8"> -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Grade</title>
+        <style type="text/css">
+          button{
+            background-color: lightGray;
+          }
+          fieldset{
+            border-width: 0.3em;
+            width: 18em;
+          }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script type="text/javascript">
+        var letterScale = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'D', 'F'];
+        var sevenScale = ['7', '6.5', '6', '5.8', '5.5', '5', '4.8', '4.5', '4'];
+        var hundredScale = [];
+        
+        function setScaleOptions(scale) {
+          //Remove all options
+          $('#gradeInput').html('');
+          
+          for(var i = 0; i < scale.length; i++) {
+            $('#gradeInput')
+             .append($("<option></option>")
+             .attr("value", scale[i])
+             .text(scale[i]));
+          }
+        }
+        
+        $(document).ready(function() {
+          setScaleOptions(letterScale);
+          
+          $('#fromScale').on('change', function() {
+            switch(this.value) {
+              case 'letter-grade':
+                setScaleOptions(letterScale);
+                break;
+              case '100-scale':
+                if(hundredScale.length == 0) {
+                  for(var i = 100; i >= 0; i--)
+                    hundredScale.push(i);
+                }
+                setScaleOptions(hundredScale);
+                break;
+              case '7-scale':
+                setScaleOptions(sevenScale);
+                break;
+            }
+          });
+          
+          $("#submitButton").click(function() {
+            var fromScale = $('#fromScale').val();
+            var toScale = $('#toScale').val();
+            
+            if(fromScale === toScale) {
+                $("#gradeConversionResult").html("<b>Error: Please choose different types</b>");
+                return;
+            }
+            
+            var grade = $('#gradeInput').val();
+
+            $.ajax({
+              url:"/GradeAgents/gradeAgent",
+              type: "POST",
+              data: {
+                 from: fromScale,
+                 to: toScale,
+                 grade: grade
+              },
+              success: function(response){
+                  if(response === "-1")
+                      $("#gradeConversionResult").html("<b>Conversion: Does not exist</b>");
+                  else
+                      $("#gradeConversionResult").html("<b>Conversion: " + response + "</b>");
+              },
+              error: function(){
+                $("#gradeConversionResult").html("<b>Error: Please choose different types</b>");
+               }
+             });
+           });
+        });
+        </script>
+    </head>
+<body>
+    <fieldset id="gradeForm">
+        <legend>Scale Converter</legend>
+        Grade: <select id="gradeInput"></select><br><br>
+        From:
+        <select id="fromScale">
+            <option value="letter-grade">Letter-Scale</option>
+            <option value="100-scale">100-Scale</option>
+            <option value="7-scale">7-Scale</option>
+        </select><br>
+        To:
+        <select id="toScale">
+            <option value="letter-grade">Letter-Scale</option>
+            <option value="100-scale">100-Scale</option>
+            <option value="7-scale">7-Scale</option>
+        </select><br><br>
+        <button id="submitButton">Submit</button><br><br>
+        <div id="gradeConversionResult"></div>
+    </fieldset>
+</body>
+</html>

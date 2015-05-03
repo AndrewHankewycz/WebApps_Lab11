@@ -42,11 +42,10 @@ exports.addUserToRoom = function(roomId, user) {
       //Check if user is already in this room.
       for(var j = 0; j < global.rooms[i].users.length; j++) {
           var userInRoom = global.rooms[i].users[j];
-          usersInRoom.push(new User(
-            userInRoom.getUserId(),
-            userInRoom.getUsername(),
-            null
-          ));
+          usersInRoom.push({
+            userId: userInRoom.getUserId(),
+            username: userInRoom.getUsername()
+          });
           if(userInRoom.getUserId() === user.getUserId()) {
             console.log("User already in room");
             return null;
@@ -55,11 +54,10 @@ exports.addUserToRoom = function(roomId, user) {
 
       global.rooms[i].users.push(user);
       
-      usersInRoom.push(new User(
-        user.getUserId(),
-        user.getUsername(),
-        null
-      ));
+      usersInRoom.push({
+        userId: user.getUserId(),
+        username: user.getUsername()
+      });
       
       roomData = {
         id: global.rooms[i].id,

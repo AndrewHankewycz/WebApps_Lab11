@@ -1,4 +1,4 @@
-var socket = io("http://bunnyrunajo.me:3000");
+var socket = io("http://localhost:3000");
 
 $(document).ready(function() {
   $("#registerButton").click(function() {
@@ -44,6 +44,15 @@ $(document).ready(function() {
           if(data.error !== null) {
             $("#error").text(data.error);
             return;
+          }
+          
+          var room = data.room;
+          if(!room)
+            return;
+          
+          for(var i = 0; i < room.users.length; i++) {
+            var username = room.users[i].username;
+            $("#users").append("<p>" + username + "</p>");
           }
           
           $("#loginContainer").fadeOut();

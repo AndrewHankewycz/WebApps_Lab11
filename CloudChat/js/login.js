@@ -53,6 +53,8 @@ $(document).ready(function() {
             $("#users").append("<p>" + username + "</p>");
           }
 
+          roomIdViewing = room.id;
+          room.messages = [];
           rooms.push(room);
 
           $("#loginContainer").fadeOut();

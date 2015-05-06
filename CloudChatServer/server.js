@@ -19,7 +19,7 @@ io.on('connection', function(socket) {
     UserHelper.removeBySocketId(socket.id);
   });
 
-  socket.on('chat message', function(data) {
+  socket.on('message', function(data) {
     if(data === null)
       return;
 
@@ -28,7 +28,14 @@ io.on('connection', function(socket) {
     if(CommandProcessor.process(io, socket, message))
       return;
 
-    //TODO: Send message to room user is in
+    var user = UserHelper.getUserFromRoom(socket.id);
+
+    RoomHelper.streamEventToRoom('message', {
+      roomId: data.roomId,
+      userId: user.getUserId(),
+      username: user.getUsername(),
+      message: message
+    }, data.roomId);
   });
 
   socket.on('edit', function(data) {

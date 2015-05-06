@@ -69,6 +69,7 @@ exports.addUserToRoom = function(roomTopic, user) {
   //Inform the users
   if(roomData !== null) {
     self.streamEventToRoom('join', {
+      roomId: roomData.id,
       userId: user.getUserId(),
       username: user.getUsername()
     }, roomData.id);

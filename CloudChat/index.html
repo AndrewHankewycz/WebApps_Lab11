@@ -11,6 +11,10 @@
     <script>
       var socket = io("http://localhost:3000");
 
+      /**
+      * The room Id of the room that the user is currently viewing
+      */
+      var roomIdViewing = -1;
       var rooms = [];
 
       /*rooms = [
@@ -33,13 +37,53 @@
       });
       $(document).ready(function(){
         $('#rooms').css( "height",($(window).height() - 40) +'px');
+
+        $("#submitMessageButton").click(function() {
+          socket.emit('message', {
+            message: $("#messageBox").val(),
+            roomId: roomIdViewing
+          });
+        });
+      });
+
+
+      socket.on('message', function(data) {
+        if(data.roomId === roomIdViewing) {
+          $("#messages").append("<li>" + data.username + ": " + data.message + "</li>");
+        }
+
+        //Keep track of the messages the user should see
+        //regardless of whether they're currently viewing
+        //the room that this message is being sent to. That
+        //way when they switch to this room, they will immediately
+        //be shown these messages without having to poll the server
+        for(var i = 0; i < rooms.length; i++) {
+          if(rooms[i].id === data.roomId) {
+            rooms[i].messages.push({
+              userId: data.userId,
+              username: data.username,
+              message: data.message
+            });
+          }
+        }
       });
 
       socket.on('join', function(data) {
-        alert("User joined your room!");
-        var username = data.username;
-        $("#users").append("<p>" + username + "</p>");
+        for(var i = 0; i < rooms.length; i++) {
+          if(rooms[i].id === data.roomId) {
+            var username = data.username;
+
+            rooms[i].users.push({
+              userId: data.userId,
+              username: username
+            });
+
+            $("#users").append("<p>" + username + "</p>");
+            break;
+          }
+        }
       });
+
     </script>
     <script src="js/login.js"></script>
   </head>
@@ -64,9 +108,9 @@
     	  </div>
       </div>
       <div id="input_container">
-        <form action="">
-          <input id="messageBox" autocomplete="off" /><button>Send</button>
-        </form>
+        <div id="messageContainer">
+          <input id="messageBox" autocomplete="off" /><button id="submitMessageButton">Send</button>
+        </div>
       </div>
     </div>
   </body>

@@ -1,5 +1,18 @@
 var RoomHelper = require('./room_helper');
 
+exports.getUserFromRoom = function(socketId) {
+  for(var i = 0; i < global.rooms.length; i++) {
+    for(var j = 0; j < global.rooms[i].users.length; j++) {
+      var room = global.rooms[i];
+      var user = room.users[j];
+
+      if(user.getConnection().id === socketId) {
+        return user;
+      }
+    }
+  }
+};
+
 /**
  * Removes a user with a specific socket id from
  * all rooms that they were a part of
@@ -10,7 +23,7 @@ exports.removeBySocketId = function(socketId) {
     for(var j = 0; j < global.rooms[i].users.length; j++) {
       var room = global.rooms[i];
       var user = room.users[j];
-      
+
       if(user.getConnection().id === socketId) {
         //Remove user from this room
         global.rooms[i].users.splice(j, 1);
@@ -46,4 +59,3 @@ exports.leaveRoomBySocketId = function(topic, socketId) {
     }
   }
 };
-

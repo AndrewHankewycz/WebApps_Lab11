@@ -8,7 +8,7 @@ body {
     font: 13px Helvetica, Arial;
 }
 
-form {
+#messageContainer {
     background: #000;
     padding: 3px;
     position: fixed;
@@ -16,12 +16,12 @@ form {
     width: 100%;
 }
 
-form input {
+#messageContainer input {
     border: 0;
     padding: 10px;
 }
 
-form button {
+#messageContainer button {
     color: white;
     width: 7.78em;
     background: rgb(27, 52, 58);
@@ -32,7 +32,7 @@ form button {
     bottom: 2px;
 }
 
-form button:hover {
+#messageContainer button:hover {
     background: rgb(36, 69, 77)
 }
 

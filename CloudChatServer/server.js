@@ -30,12 +30,30 @@ io.on('connection', function(socket) {
 
     var user = UserHelper.getUserFromRoom(socket.id);
 
-    RoomHelper.streamEventToRoom('message', {
-      roomId: data.roomId,
-      userId: user.getUserId(),
-      username: user.getUsername(),
-      message: message
-    }, data.roomId);
+    request.post(config.DAO_URL, {
+        form: {
+          action: 'message',
+          message: message,
+          userId: user.getUserId(),
+          roomId: data.roomId
+        }
+      },
+      function (error, response, body) {
+          if (!error && response.statusCode == 200 && body != "-1") {
+            var messageId = parseInt(body);
+
+            if(messageId === -1)
+              return;
+
+            RoomHelper.streamEventToRoom('message', {
+              messageId: messageId,
+              roomId: data.roomId,
+              userId: user.getUserId(),
+              username: user.getUsername(),
+              message: message
+            }, data.roomId);
+          }
+        });
   });
 
   socket.on('edit', function(data) {

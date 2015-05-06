@@ -11,7 +11,7 @@ var commands = {
 
         for(var j = 0; j < rooms[i].messages.length; j++) {
           var message = rooms[i].messages[j];
-          $("#messages").append("<li>" + message.username + ": " + message.message + "</li>");
+          $("#messages").append("<li messageid='" + message.id+ "'>" + message.username + ": " + message.message + "</li>");
         }
         //We don't need to make a request to the server if this room is cached on the client
         return true;
@@ -19,7 +19,7 @@ var commands = {
     }
     return false;
   }
-};
+}
 
 function commandProcessor(message) {
   if(message[0] !== '/')
@@ -33,7 +33,7 @@ function commandProcessor(message) {
 
   var remainingMsg = message.substr(message.indexOf(' ') + 1, message.length - 1);
   return exeCmd(remainingMsg);
-};
+}
 
 function setChatUsers(room) {
   for(var i = 0; i < room.users.length; i++) {
@@ -50,7 +50,6 @@ function sendMessage() {
 
   var commandHandledOnClient = commandProcessor(message);
 
-
   if(!commandHandledOnClient) {
     socket.emit('message', {
       message: $("#messageBox").val(),
@@ -63,7 +62,7 @@ function sendMessage() {
 
 socket.on('message', function(data) {
   if(data.roomId === roomIdViewing) {
-    $("#messages").append("<li>" + data.username + ": " + data.message + "</li>");
+    $("#messages").append("<li messageid='" + data.messageId + "'>" + data.username + ": " + data.message + "</li>");
   }
 
   //Keep track of the messages the user should see
@@ -74,6 +73,7 @@ socket.on('message', function(data) {
   for(var i = 0; i < rooms.length; i++) {
     if(rooms[i].id === data.roomId) {
       rooms[i].messages.push({
+        id: data.messageId,
         userId: data.userId,
         username: data.username,
         message: data.message

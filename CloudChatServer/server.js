@@ -82,7 +82,7 @@ io.on('connection', function(socket) {
                 return;
               }
 
-              var user = new User(userResp.id, username, socket);
+              var user = new User(userResp.userId, username, socket);
               var roomData = RoomHelper.addUserToRoom(data.roomId.toLowerCase(), user);
 
               if(roomData === null) {

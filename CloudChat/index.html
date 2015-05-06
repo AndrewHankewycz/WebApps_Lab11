@@ -8,7 +8,6 @@
     <script src="http://localhost:3000/socket.io/socket.io.js"></script>
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/chat.css">
-    <script src="js/chat.js"></script>
     <script>
       var socket = io("http://localhost:3000");
 
@@ -51,52 +50,8 @@
           sendMessage();
         });
       });
-
-      socket.on('message', function(data) {
-        if(data.roomId === roomIdViewing) {
-          $("#messages").append("<li>" + data.username + ": " + data.message + "</li>");
-        }
-
-        //Keep track of the messages the user should see
-        //regardless of whether they're currently viewing
-        //the room that this message is being sent to. That
-        //way when they switch to this room, they will immediately
-        //be shown these messages without having to poll the server
-        for(var i = 0; i < rooms.length; i++) {
-          if(rooms[i].id === data.roomId) {
-            rooms[i].messages.push({
-              userId: data.userId,
-              username: data.username,
-              message: data.message
-            });
-          }
-        }
-      });
-
-      socket.on('join', function(data) {
-        for(var i = 0; i < rooms.length; i++) {
-          if(rooms[i].id === data.roomId) {
-            var username = data.username;
-
-            rooms[i].users.push({
-              userId: data.userId,
-              username: username
-            });
-
-            $("#users").append("<p>" + username + "</p>");
-            break;
-          }
-        }
-      });
-
-      socket.on('me_joined', function(data) {
-        roomIdViewing = data.roomId;
-        $("#messages").html("");
-        $("#users").html("");
-        setChatUsers(data.roomData);
-      });
-
     </script>
+    <script src="js/chat.js"></script>
     <script src="js/login.js"></script>
   </head>
   <body>

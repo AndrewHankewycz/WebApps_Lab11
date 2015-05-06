@@ -60,6 +60,7 @@ exports.addUserToRoom = function(roomTopic, user) {
 
       roomData = {
         id: global.rooms[i].id,
+        topic: global.rooms[i].topic,
         users: usersInRoom
       };
       break;
@@ -100,6 +101,13 @@ exports.streamEventToRoom = function(event, data, roomId) {
  * Creates a room with an empty list of users
  */
 exports.createRoom = function(roomId, topic) {
+  for(var i = 0; i < global.rooms.length; i++) {
+    if(global.rooms[i].id === roomId || global.rooms[i].topic === topic) {
+      console.log("A room with this Id or topic already exists!");
+      return;
+    }
+  }
+
   global.rooms.push({
     id: roomId,
     topic: topic,

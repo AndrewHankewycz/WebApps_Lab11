@@ -52,7 +52,14 @@ module.exports = {
           if (!error && response.statusCode == 200 && body != "-1") {
             var roomId = parseInt(body);
             RoomHelper.createRoom(roomId, topic);
-            RoomHelper.addUserToRoom(roomId);
+            var roomData = RoomHelper.addUserToRoom(roomId);
+
+            if(roomData === null)
+              return;
+
+            socket.emit('me_joined', {
+              roomData: roomData
+            });
           }
       });
   },

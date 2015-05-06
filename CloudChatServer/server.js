@@ -105,8 +105,6 @@ io.on('connection', function(socket) {
                   room: roomData
                 });
               }
-          }else{
-            console.log("no response");
           }
       });
   });

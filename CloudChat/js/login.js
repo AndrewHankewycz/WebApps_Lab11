@@ -48,10 +48,7 @@ $(document).ready(function() {
           if(!room)
             return;
 
-          for(var i = 0; i < room.users.length; i++) {
-            var username = room.users[i].username;
-            $("#users").append("<p>" + username + "</p>");
-          }
+          setChatUsers(room);
 
           roomIdViewing = room.id;
           room.messages = [];

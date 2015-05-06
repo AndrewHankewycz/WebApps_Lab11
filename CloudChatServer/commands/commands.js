@@ -21,7 +21,15 @@ module.exports = {
       },
       function (error, response, body) {
           if (!error && response.statusCode == 200 && body != "-1") {
-              RoomHelper.addUserToRoom(parseInt(body));
+            var user = UserHelper.getUserFromRoom(socket.id);
+            var roomData = RoomHelper.addUserToRoom(args, user);
+
+            if(roomData === null)
+              return;
+
+            socket.emit('me_joined', {
+              roomData: roomData
+            });
           }
       });
   },
@@ -33,7 +41,7 @@ module.exports = {
    */
   'create' : function(io, socket, args) {
     var topic = args.toLowerCase();
-    
+
     request.post(config.DAO_URL, {
         form: {
           action: 'createRoom',

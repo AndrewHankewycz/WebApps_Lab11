@@ -10,7 +10,17 @@
     <link rel="stylesheet" href="css/chat.css">
     <script>
       var socket = io("http://localhost:3000");
-      
+
+      var rooms = [];
+
+      /*rooms = [
+        {
+          id: 5,
+          name: "pokemon",
+          users: []
+        }
+      ];*/
+
       $(window).on('resize', function(){
         $('#messageBox').css( "width",($(window).width() - 113)+'px');
       });
@@ -24,7 +34,7 @@
       $(document).ready(function(){
         $('#rooms').css( "height",($(window).height() - 40) +'px');
       });
-      
+
       socket.on('join', function(data) {
         alert("User joined your room!");
         var username = data.username;
@@ -38,9 +48,9 @@
       <div id="login">
         <p id="formTitle">User Login</p>
         <p id="error" class="error">Please fill in all fields.</p>
-        <input type="text" class="form-control" id="usernameInput" placeholder="Username"><br>
-        <input type="password" class="form-control" id="passwordInput" placeholder="Password"><br>
-        <input type="text" class="form-control" id="roomInput" placeholder="Room"><br>
+        <input type="text" class="form-control" id="usernameInput" placeholder="Username" value="andrew"><br>
+        <input type="password" class="form-control" id="passwordInput" placeholder="Password" value="password"><br>
+        <input type="text" class="form-control" id="roomInput" placeholder="Room" value="dragons"><br>
         <button id="loginButton" type="button" class="btn btn-primary btn-sm">Login</button>
         <button id="registerButton" type="button" class="btn btn-default btn-sm">Register</button>
       </div>

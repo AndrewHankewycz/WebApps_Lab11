@@ -3,5 +3,5 @@ module.exports = {
 	sessionIdSize: 20,
 	NAVIGATOR_URL: 'http://localhost:8080/CloudChatNavigator',
 	DAO_URL: 'http://localhost:8080/CloudChatDAO',
-	DEBUG: true
+	DEBUG: false
 };

@@ -9,7 +9,7 @@ exports.insertRoomsFromDB = function() {
     self.createRoom(2, 'dragons');
     return;
   }
-  
+
   request.post(config.DAO_URL, {
       form: {
         action: 'getRooms'
@@ -33,12 +33,12 @@ exports.insertRoomsFromDB = function() {
  */
 exports.addUserToRoom = function(roomTopic, user) {
   var roomData = null;
-  
+
   for(var i = 0; i < global.rooms.length; i++) {
     if(global.rooms[i].topic === roomTopic) {
       //Stores non-sensitive user data
       var usersInRoom = [];
-      
+
       //Check if user is already in this room.
       for(var j = 0; j < global.rooms[i].users.length; j++) {
           var userInRoom = global.rooms[i].users[j];
@@ -52,12 +52,12 @@ exports.addUserToRoom = function(roomTopic, user) {
       }
 
       global.rooms[i].users.push(user);
-      
+
       usersInRoom.push({
         userId: user.getUserId(),
         username: user.getUsername()
       });
-      
+
       roomData = {
         id: global.rooms[i].id,
         users: usersInRoom
@@ -85,7 +85,6 @@ exports.addUserToRoom = function(roomTopic, user) {
  */
 exports.streamEventToRoom = function(event, data, roomId) {
   for(var i = 0; i < global.rooms.length; i++) {
-    console.log(global.rooms[i].id + " " + roomId);
     if(global.rooms[i].id === roomId) {
       for(var j = 0; j < global.rooms[i].users.length; j++) {
         var userInRoom = global.rooms[i].users[j];

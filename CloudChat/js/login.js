@@ -11,12 +11,12 @@ $(document).ready(function() {
         $("#error").show();
         return;
       }
- 
+
       socket.emit('register', {
         username: username,
         password: password
       });
-      
+
       $("#loginContainer").fadeOut();
       $("#chatContainer").fadeIn();
     }
@@ -43,20 +43,22 @@ $(document).ready(function() {
             $("#error").text(data.error);
             return;
           }
-          
+
           var room = data.room;
           if(!room)
             return;
-          
+
           for(var i = 0; i < room.users.length; i++) {
             var username = room.users[i].username;
             $("#users").append("<p>" + username + "</p>");
           }
-          
+
+          rooms.push(room);
+
           $("#loginContainer").fadeOut();
           $("#chatContainer").fadeIn();
       });
-      
+
     } else {
       $("#formTitle").text('User Login');
       $("#roomInput").show();

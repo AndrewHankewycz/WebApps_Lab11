@@ -18,7 +18,7 @@ io.on('connection', function(socket) {
   socket.on('disconnect', function () {
     UserHelper.removeBySocketId(socket.id);
   });
-  
+
   socket.on('chat message', function(data) {
     if(data === null)
       return;
@@ -30,7 +30,7 @@ io.on('connection', function(socket) {
 
     //TODO: Send message to room user is in
   });
-  
+
   socket.on('edit', function(data) {
     if(data === null)
       return;
@@ -41,7 +41,7 @@ io.on('connection', function(socket) {
       return;
 
     var username = data.username;
-    
+
     if(config.DEBUG) {
       //TODO: Reuse the code below
       var user = new User(++global.usersOnline, username, socket);
@@ -73,6 +73,15 @@ io.on('connection', function(socket) {
       function (error, response, body) {
           if (!error && response.statusCode == 200 && body != "-1") {
               var userResp = JSON.parse(body);
+
+              if(userResp.userId === -1) {
+                cb({
+                  error: "Incorrect username/password",
+                  room: null
+                });
+                return;
+              }
+
               var user = new User(userResp.id, username, socket);
               var roomData = RoomHelper.addUserToRoom(data.roomId.toLowerCase(), user);
 
@@ -89,6 +98,8 @@ io.on('connection', function(socket) {
                   room: roomData
                 });
               }
+          }else{
+            console.log("no response");
           }
       });
   });

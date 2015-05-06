@@ -36,16 +36,19 @@
       $(window).on('resize', function(){
         $('#rooms').css( "height",($(window).height() - 40) +'px');
       });
+
+      $(document).keypress(function(e) {
+        //Enter key pressed
+        if(e.which == 13) {
+          sendMessage();
+        }
+      });
+
       $(document).ready(function(){
         $('#rooms').css( "height",($(window).height() - 40) +'px');
 
         $("#submitMessageButton").click(function() {
-          socket.emit('message', {
-            message: $("#messageBox").val(),
-            roomId: roomIdViewing
-          });
-
-          $("#messageBox").val("");
+          sendMessage();
         });
       });
 

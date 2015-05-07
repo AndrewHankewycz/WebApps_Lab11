@@ -10,7 +10,14 @@ function selectRoom(topic) {
 
       for(var j = 0; j < rooms[i].messages.length; j++) {
         var message = rooms[i].messages[j];
-        $("#messages").append("<li messageid='" + message.id+ "'>" + message.username + ": " + message.message + "</li>");
+        //$("#messages").append("<li messageid='" + message.id+ "'>" + message.username + ": " + message.message + "</li>");
+
+        if(message.userId === userId) {
+          $("#messages").append('<li messageid="' + message.id + '"><b>' + message.username + '</b>: ' + message.message + '<span class="btn btn-default message_button glyphicon glyphicon-remove" onclick="deleteMsg(\'' + message.id + '\',\'' + message.message + '\')"></span><span class="btn btn-default message_button glyphicon glyphicon-edit" onclick="editMsg(\'' + message.id + '\',\'' + message.message + '\')"></span></li>');
+        } else {
+          $("#messages").append("<li messageid='" + message.id+ "'>" + message.username + ": " + message.message + "</li>");
+        }
+
       }
       //We don't need to make a request to the server if this room is cached on the client
       return true;

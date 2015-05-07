@@ -36,10 +36,36 @@ function commandProcessor(message) {
 }
 
 function setChatUsers(room) {
+  $("#users").append("<p style'text-align:center'>Users:</p>");
+
   for(var i = 0; i < room.users.length; i++) {
+    var userId = room.users[i].userId;
     var username = room.users[i].username;
-    $("#users").append("<p>" + username + "</p>");
+    $("#users").append("<p class='username' userid='" + userId + "'>" + username + "</p>");
   }
+}
+
+function deleteMsg(messageId, message) {
+  //Delete that message!
+  messageIdEditing = -1;
+}
+
+function sendEditMessage() {
+  var message = $("#messageBox").val();
+
+  if(message === '') {
+    deleteMsg();
+    return;
+  }
+
+  socket.emit('edit_message', {
+    messageId: messageIdEditing,
+    message: message,
+    roomId: roomIdViewing
+  });
+
+  messageIdEditing = -1;
+  $("#messageBox").val("");
 }
 
 function sendMessage() {
@@ -60,9 +86,61 @@ function sendMessage() {
   $("#messageBox").val("");
 }
 
+function editMsg(messageId, message) {
+  $("#messageBox").val(message);
+  messageIdEditing = messageId;
+}
+
+socket.on('message_deleted', function(data) {
+  if(data.roomId === roomIdViewing) {
+    //find the correct li and remove it from the HTML!
+  }
+
+  for(var i = 0; i < rooms.length; i++) {
+    if(rooms[i].id === data.roomId) {
+      for(var j = 0; j < rooms[i].messages.length; j++) {
+        var message = rooms[i].messages[j];
+
+        //If this is message is found, remove the old one
+        if(message.id === data.messageId) {
+          rooms[i].messages.splice(j, 1);
+          return;
+        }
+      }
+    }
+  }
+});
+
+socket.on('message_edited', function(data) {
+  if(data.roomId === roomIdViewing) {
+    //Update the visible li for this message Id with the new message
+    $("ul").find("[messageid='" + data.messageId + "']").html(
+      '<li messageid="' + data.messageId + '">' + data.username + ': ' + data.message + '<span class="btn btn-default message_button glyphicon glyphicon-remove" onclick="deleteMsg(\'' + data.messageId + '\',\'' + data.message + '\')"></span><span class="btn btn-default message_button glyphicon glyphicon-edit" onclick="editMsg(\'' + data.messageId + '\',\'' + data.message + '\')"></span></li>'
+    );
+  }
+
+  for(var i = 0; i < rooms.length; i++) {
+    if(rooms[i].id === data.roomId) {
+      for(var j = 0; j < rooms[i].messages.length; j++) {
+        var message = rooms[i].messages[j];
+
+        //If this is message is found, update the old one
+        if(message.id === data.messageId) {
+          rooms[i].messages[j].message = data.message;
+          return;
+        }
+      }
+    }
+  }
+});
+
 socket.on('message', function(data) {
   if(data.roomId === roomIdViewing) {
-    $("#messages").append("<li messageid='" + data.messageId + "'>" + data.username + ": " + data.message + "</li>");
+    if(data.userId === userId) {
+      $("#messages").append('<li messageid="' + data.messageId + '">' + data.username + ': ' + data.message + '<span class="btn btn-default message_button glyphicon glyphicon-remove" onclick="deleteMsg(\'' + data.messageId + '\',\'' + data.message + '\')"></span><span class="btn btn-default message_button glyphicon glyphicon-edit" onclick="editMsg(\'' + data.messageId + '\',\'' + data.message + '\')"></span></li>');
+    } else {
+      $("#messages").append("<li messageid='" + data.messageId + "'>" + data.username + ": " + data.message + "</li>");
+    }
   }
 
   //Keep track of the messages the user should see

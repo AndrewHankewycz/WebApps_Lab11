@@ -56,9 +56,22 @@ io.on('connection', function(socket) {
         });
   });
 
-  socket.on('edit', function(data) {
+  socket.on('edit_message', function(data) {
     if(data === null)
       return;
+
+    var messageId = parseInt(data.messageId);
+    var message = xss(data.message);
+
+    var user = UserHelper.getUserFromRoom(socket.id);
+
+    //TODO: Log to database
+    RoomHelper.streamEventToRoom('message_edited', {
+      messageId: messageId,
+      username: user.getUsername(),
+      roomId: data.roomId,
+      message: message
+    }, data.roomId);
   });
 
   socket.on('login', function(data, cb) {
@@ -102,7 +115,8 @@ io.on('connection', function(socket) {
               if(userResp.userId === -1) {
                 cb({
                   error: "Incorrect username/password",
-                  room: null
+                  room: null,
+                  userId: user.getUserId()
                 });
                 return;
               }
@@ -120,7 +134,8 @@ io.on('connection', function(socket) {
                 console.log("Logged in!");
                 cb({
                   error: null,
-                  room: roomData
+                  room: roomData,
+                  userId: user.getUserId()
                 });
               }
           }

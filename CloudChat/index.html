@@ -5,6 +5,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="http://localhost:3000/socket.io/socket.io.js"></script>
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/chat.css">
@@ -15,31 +16,34 @@
       * The room Id of the room that the user is currently viewing
       */
       var roomIdViewing = -1;
+      //The logged in user's Id.
+      var userId;
       var rooms = [];
-
-      /*rooms = [
-        {
-          id: 5,
-          name: "pokemon",
-          users: []
-        }
-      ];*/
+      //Id of the message being edited
+      var messageIdEditing = -1;
 
       $(window).on('resize', function(){
-        $('#messageBox').css( "width",($(window).width() - 113)+'px');
+          $('#messageBox').css( "width",($(window).width() - 245)+'px');
+          $('messageContainer').css( "width",($(window).width() - 239)+'px');
+          $('#message_container').css( "width",($(window).width() - 145)+'px');
+          $('#rooms').css( "height",($(window).height() - 40) +'px');
       });
+
       $(document).ready(function(){
-        $('#messageBox').css( "width",($(window).width() - 113) +'px');
-      });
-
-      $(window).on('resize', function(){
-        $('#rooms').css( "height",($(window).height() - 40) +'px');
+          $('#messageBox').css( "width",($(window).width() - 245) +'px');
+          $('messageContainer').css( "width",($(window).width() - 239)+'px');
+          $('#message_container').css( "width",($(window).width() - 145)+'px');
+          $('#rooms').css( "height",($(window).height() - 40) +'px');
       });
 
       $(document).keypress(function(e) {
         //Enter key pressed
         if(e.which == 13) {
-          sendMessage();
+          if(messageIdEditing != -1) {
+            sendEditMessage();
+          } else {
+            sendMessage();
+          }
         }
       });
 
@@ -47,7 +51,11 @@
         $('#rooms').css( "height",($(window).height() - 40) +'px');
 
         $("#submitMessageButton").click(function() {
-          sendMessage();
+          if(messageIdEditing != -1) {
+            sendEditMessage();
+          } else {
+            sendMessage();
+          }
         });
       });
     </script>
@@ -69,14 +77,28 @@
     <div id="chatContainer">
       <div>
         <div id="message_container">
-        <ul id="messages"></ul>
+          <ul id="messages"></ul>
         </div>
-    	  <div id="users">
-    	  </div>
+
+        <div id="rooms">
+          <div class="dropdown" style="text-align:center; position: relative;">
+            <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">ROOMS
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Pokemon</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JavaScript</a></li>
+            </ul>
+          </div>
+          <div id="users">
+          </div>
+          <div id="logout">
+          </div>
+        </div>
       </div>
       <div id="input_container">
         <div id="messageContainer">
-          <input id="messageBox" autocomplete="off" /><button id="submitMessageButton">Send</button>
+          <input name="messageBox" id="messageBox" autocomplete="off" /><button id="submitMessageButton">Send</button>
         </div>
       </div>
     </div>

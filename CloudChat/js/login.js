@@ -48,6 +48,8 @@ $(document).ready(function() {
           if(!room)
             return;
 
+          userId = data.userId;
+
           setChatUsers(room);
 
           roomIdViewing = room.id;

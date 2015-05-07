@@ -138,6 +138,30 @@ public class CloudChatDAO extends HttpServlet {
                 out.flush();
                 
                 break;
+            
+            case "deleteMessage":
+                String deleteMsgIdString = request.getParameter("messageId");
+                String deleteUserIdString = request.getParameter("userId");
+
+                int deleteMsgIdInt = -1;
+                int deleteUserIdInt = -1;
+
+                try {
+                    deleteMsgIdInt = Integer.parseInt(deleteMsgIdString);
+                    deleteUserIdInt = Integer.parseInt(deleteUserIdString);
+                } catch (NumberFormatException e) {
+                    System.out.println("Error parsing userId in action 'editMessage': " + e);
+                    return;
+                }
+
+
+                boolean successDelete = dao.deleteMessage(deleteUserIdInt, deleteMsgIdInt);
+                
+                out = response.getWriter();
+                out.print(successDelete);
+                out.flush();
+                
+                break;
                 
             case "createRoom":
                 String topic = request.getParameter("topic");                

@@ -185,6 +185,47 @@ public class CrudDAO {
         return messageId;
     }
     
+    public boolean deleteMessage(int userId, int msgId) {
+        ResultSet rset = null;
+        boolean success = false;
+        String sql = "SELECT USER_ID FROM MESSAGES WHERE ID = ?";
+        try {
+            pStmt = dbConnection.prepareStatement(sql);
+            pStmt.setInt(1, msgId);
+            rset = pStmt.executeQuery();
+            
+            
+            if(rset.next()){
+                int correctUserId = rset.getInt("USER_ID");
+                
+                if(correctUserId == userId){
+                    sql = "DELETE FROM MESSAGES WHERE ID = ?";
+                    pStmt = dbConnection.prepareStatement(sql);
+                    pStmt.setInt(1, msgId);
+                    success = true;
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        } finally {
+            if (pStmt != null) {
+                try {
+                    pStmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (rset != null) {
+                try {
+                    rset.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return success;
+    }
+    
     public boolean editMessage(int userId, int msgId, String newMessage) {
         ResultSet rset = null;
         boolean success = false;

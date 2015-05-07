@@ -73,11 +73,21 @@ io.on('connection', function(socket) {
       return;
     }
 
-    //TODO: Delete from database
-    RoomHelper.streamEventToRoom('message_deleted', {
-      messageId: messageId,
-      roomId: data.roomId
-    }, data.roomId);
+    request.post(config.DAO_URL, {
+        form: {
+          action: 'deleteMessage',
+          messageId: messageId,
+          userId: user.getUserId()
+        }
+      },
+      function (error, response, body) {
+          if (!error && response.statusCode == 200 && body != "-1") {
+            RoomHelper.streamEventToRoom('message_deleted', {
+              messageId: messageId,
+              roomId: data.roomId
+            }, data.roomId);
+          }
+        });
   });
 
   socket.on('export_messages', function() {

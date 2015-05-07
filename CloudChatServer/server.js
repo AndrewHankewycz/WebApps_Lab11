@@ -181,6 +181,7 @@ io.on('connection', function(socket) {
       //TODO: Reuse the code below
       var user = new User(++global.usersOnline, username, socket);
       var roomData = RoomHelper.addUserToRoom(data.roomId.toLowerCase(), user);
+      var allRoomTopics = RoomHelper.getRoomTopics();
 
       if(roomData === null) {
         console.log("Could not login!");
@@ -213,34 +214,50 @@ io.on('connection', function(socket) {
 
               if(userResp.userId === -1) {
                 cb({
-                  error: "Incorrect username/password",
-                  room: null,
-                  userId: user.getUserId(),
-                  rooms: []
+                  error: "Incorrect username/password"
                 });
                 return;
               }
 
-              var user = new User(userResp.userId, username, socket);
-              var roomData = RoomHelper.addUserToRoom(data.roomId.toLowerCase(), user);
-              var allRoomTopics = RoomHelper.getRoomTopics();
+              var roomTopic = data.roomId.toLowerCase();
 
-              if(roomData === null) {
-                console.log("Could not login!");
-                cb({
-                  error: "Error on login!",
-                  room: null,
-                  rooms: []
-                });
-              } else {
-                console.log("Logged in!");
-                cb({
-                  error: null,
-                  room: roomData,
-                  userId: user.getUserId(),
-                  rooms: allRoomTopics
-                });
-              }
+              request.post(config.DAO_URL, {
+                  form: {
+                    action: 'createRoom',
+                    topic: roomTopic
+                  }
+                },
+                function (error, response, body) {
+                    if (!error && response.statusCode == 200 && body != "-1") {
+                      var roomDbId = parseInt(body);
+
+                      if(roomDbId === -1)
+                        return;
+
+                      RoomHelper.createRoom(roomDbId, roomTopic);
+                    }
+
+                    var user = new User(userResp.userId, username, socket);
+                    var roomData = RoomHelper.addUserToRoom(roomTopic, user);
+                    var allRoomTopics = RoomHelper.getRoomTopics();
+
+                    if(roomData === null) {
+                      console.log("Could not login!");
+                      cb({
+                        error: "Error on login!",
+                        room: null,
+                        rooms: []
+                      });
+                    } else {
+                      console.log("Logged in!");
+                      cb({
+                        error: null,
+                        room: roomData,
+                        userId: user.getUserId(),
+                        rooms: allRoomTopics
+                      });
+                    }
+                  });
           }
       });
   });

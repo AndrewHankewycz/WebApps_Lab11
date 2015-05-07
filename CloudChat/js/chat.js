@@ -147,25 +147,44 @@ socket.on('user_disconnected', function(data) {
   //then remove them from the room, attempt to join
   //another room if they're leaving the room they're looking at,
   //and if they're a part of none, log them out.
-  if(userIdDisconnect === userId && roomId === roomIdViewing) {
-    for(var i = 0; i < rooms.length; i++) {
-        if(rooms[i].id != roomId) {
-          roomIdViewing = rooms[i].id;
-          selectRoom(rooms[i].topic);
-          break;
-        }
+  if(userIdDisconnect === userId) {
+    var roomIndex = -1;
+
+    if(roomId === roomIdViewing) {
+      for(var i = 0; i < rooms.length; i++) {
+          if(rooms[i].id != roomId) {
+            roomIdViewing = rooms[i].id;
+            selectRoom(rooms[i].topic);
+            break;
+          } else {
+            roomIndex = i;
+          }
+      }
+
+      //If the current room of the user never changed, then we
+      //know they were only a part of one room and cannot switch.
+      //We just log them out
+      if(roomId === roomIdViewing) {
+        socket.emit('message', {
+          message: '/logout',
+          roomId: roomIdViewing
+        });
+        return;
+      }
     }
 
-    //If the current room of the user never changed, then we
-    //know they were only a part of one room and cannot switch.
-    //We just log them out
-    if(roomId === roomIdViewing) {
-      socket.emit('message', {
-        message: '/logout',
-        roomId: roomIdViewing
-      });
-      return;
+    if(roomIndex === -1) {
+      for(var i = 0; i < rooms.length; i++) {
+        if(rooms[i].id === roomId) {
+          roomIndex = i;
+          break;
+        }
+      }
     }
+
+    //Remove the room from the array if the current
+    //user decided to leave the room
+    rooms.splice(roomIndex, 1);
   }
 
   if(roomId === roomIdViewing) {

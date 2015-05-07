@@ -7,6 +7,7 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script src="js/upload.js"></script>
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/chat.css">
     <script>
@@ -79,7 +80,6 @@
         <div id="message_container">
           <ul id="messages"></ul>
         </div>
-
         <div id="rooms">
           <div class="dropdown" style="text-align:center; position: relative;">
             <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">ROOMS
@@ -89,6 +89,18 @@
           <div id="users">
           </div>
           <div id="logout">
+            <form
+                id="uploadForm"
+                enctype="multipart/form-data"
+                action="http://127.0.0.1:8888/upload"
+                method="POST"
+                class="navbar-form"
+                role="search"
+                style="width:100px;">
+                <div class="form-group">
+                  <input type="file" id="userUpload" name="userUpload" class='form-control'/><br>
+                </div>
+            </form>
           </div>
         </div>
       </div>

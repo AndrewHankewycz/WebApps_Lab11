@@ -212,8 +212,11 @@ public class CloudChatDAO extends HttpServlet {
                 }
                 break;
             case "import":
-                boolean importSuccess = dao.importTable("MESSAGES", "messages_backup.del");
-                out = response.getWriter();  
+                System.out.println("Importing file.");
+                String filePath = request.getParameter("path");
+                //boolean importSuccess = dao.importTable("MESSAGES", "messages_backup.del");
+                boolean importSuccess = dao.importTable("MESSAGES", filePath);
+                out = response.getWriter();
                 out.print(importSuccess);
                 out.flush();
                 break;

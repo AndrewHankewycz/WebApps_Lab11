@@ -3,12 +3,18 @@ var express = require('express');
 var bodyParser  = require('body-parser');
 var util = require('./util/util');
 var config = require('./config').config;
+var multer = require('multer');
+var request = require('request');
 var root = __dirname;
 
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended: true
+}));
+
+app.use(multer({
+    dest: "./uploads/"
 }));
 
 app.set("jsonp callback", true);
@@ -83,6 +89,42 @@ app.get('/Services/SpellChecker2', function(req, res) {
 
 app.get('/CloudChat/*', function(req, res) {
 	util.sendFile(root + req.path, req, res);
+});
+
+app.post('/upload', function(req, res) {
+    var serverPath = req.files.userUpload.name;
+		console.log(serverPath);
+
+		var fullPath = config.GLASS_FISH_DIR + serverPath;
+
+		var serverPath = req.files.userUpload.name;
+		console.log(serverPath);
+
+    require('fs').rename(
+			req.files.userUpload.path,
+			fullPath,
+			function(error) {
+				if(error) {
+					res.json({
+						error: 'Something went wrong!'
+					});
+					return;
+				}
+
+				console.log("Attempting to import");
+
+				request.post("http://127.0.0.1:8080/CloudChatDAO", {
+						form: {
+							action: 'import',
+							path: serverPath
+						}
+					},
+					function (error, response, body) {
+							if (!error && response.statusCode == 200 && body != "-1") {
+								console.log("Successfully imported!");
+							}
+					});
+			});
 });
 
 app.listen(config.port, function() {

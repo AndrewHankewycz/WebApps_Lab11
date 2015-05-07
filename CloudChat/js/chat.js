@@ -141,9 +141,9 @@ socket.on('message_edited', function(data) {
 socket.on('message', function(data) {
   if(data.roomId === roomIdViewing) {
     if(data.userId === userId) {
-      $("#messages").append('<li messageid="' + data.messageId + '">' + data.username + ': ' + data.message + '<span class="btn btn-default message_button glyphicon glyphicon-remove" onclick="deleteMsg(\'' + data.messageId + '\',\'' + data.message + '\')"></span><span class="btn btn-default message_button glyphicon glyphicon-edit" onclick="editMsg(\'' + data.messageId + '\',\'' + data.message + '\')"></span></li>');
+      $("#messages").append('<li messageid="' + data.messageId + '"><b>' + data.username + '</b>: ' + data.message + '<span class="btn btn-default message_button glyphicon glyphicon-remove" onclick="deleteMsg(\'' + data.messageId + '\',\'' + data.message + '\')"></span><span class="btn btn-default message_button glyphicon glyphicon-edit" onclick="editMsg(\'' + data.messageId + '\',\'' + data.message + '\')"></span></li>');
     } else {
-      $("#messages").append("<li messageid='" + data.messageId + "'>" + data.username + ": " + data.message + "</li>");
+      $("#messages").append("<li messageid='" + data.messageId + "'><b>" + data.username + "</b>: " + data.message + "</li>");
     }
   }
 

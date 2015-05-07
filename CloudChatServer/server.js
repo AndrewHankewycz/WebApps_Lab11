@@ -136,6 +136,41 @@ io.on('connection', function(socket) {
       });
   });
 
+  socket.on('register', function(data, cb) {
+    if(data === null)
+      return;
+
+    var username = data.username;
+    var password = data.password;
+
+    request.post(config.NAVIGATOR_URL, {
+        form: {
+          action: 'register',
+          username: username,
+          password: password
+        }
+      },
+      function (error, response, body) {
+          if (!error && response.statusCode == 200 && body != "-1") {
+              var userResp = JSON.parse(body);
+
+              if(userResp.userId === -1) {
+                var errorText = "Username already exists!";
+                console.log(errorText);
+                cb({
+                  error: errorText
+                });
+                return;
+              }
+
+              console.log("Successfully registered!");
+              cb({
+                error: null
+              });
+          }
+      });
+  });
+
   socket.on('login', function(data, cb) {
     if(data === null)
       return;

@@ -1,5 +1,7 @@
 $(document).ready(function() {
   $("#registerButton").click(function() {
+    $("#error").hide();
+
     if($("#roomInput").is(":visible")) {
       $("#formTitle").text('User Register');
       $("#roomInput").hide();
@@ -15,14 +17,22 @@ $(document).ready(function() {
       socket.emit('register', {
         username: username,
         password: password
-      });
+      },
+      function(data) {
+          if(data.error !== null) {
+            $("#error").text(data.error);
+          } else {
+            $("#error").text("Successfully registered!");
+          }
 
-      $("#loginContainer").fadeOut();
-      $("#chatContainer").fadeIn();
+          $("#error").show();
+      });
     }
   });
 
   $("#loginButton").click(function() {
+    $("#error").hide();
+
     if($("#roomInput").is(":visible")) {
       var username = $("#usernameInput").val();
       var password = $("#passwordInput").val();

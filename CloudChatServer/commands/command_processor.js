@@ -18,8 +18,7 @@ exports.process = function(io, socket, message) {
     command = message.substr(1, message.indexOf(' ') - 1);
   }
 
-  console.log("Command: " + command);
-  var exeCmd = commands[command];
+  var exeCmd = commands[command].command;
 
   if(typeof(exeCmd) !== 'function')
     return false;

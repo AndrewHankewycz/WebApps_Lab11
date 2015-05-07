@@ -139,6 +139,14 @@ function removeRoomUsernameByUserId(userIdRemove) {
   });
 }
 
+socket.on('help', function(docs) {
+  var message = "";
+  for(var i = 0; i < docs.length; i++) {
+    message += ("Command: " + docs[i].command + "\n" + "Doc: " + docs[i].doc + "\n\n");
+  }
+  alert(message);
+});
+
 socket.on('user_disconnected', function(data) {
   var roomId = data.roomId;
   var userIdDisconnect = data.userId;

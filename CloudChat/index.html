@@ -99,30 +99,30 @@
             <span class="caret"></span></button>
             <ul id="roomsMenu" class="dropdown-menu" role="menu" aria-labelledby="menu1"></ul>
           </div>
-          <div id="users">
+          <div id="users" style="text-align:center;">
           </div>
-          <div id="logout">
+          <div id="logout" style="text-align:center; margin-top:320%;">
             <form
                 id="uploadForm"
                 enctype="multipart/form-data"
                 action="http://127.0.0.1:8888/upload"
                 method="POST"
                 class="navbar-form"
-                role="search"
-                style="width:100px;">
+                role="search">
                 <div class="form-group">
-                  <input type="file" id="userUpload" name="userUpload" class='form-control'/><br>
+                  <input type="file" id="userUpload" name="userUpload" class='form-control' style="width:100px;"/><br>
                 </div>
             </form>
-            <button id="exportButton">Export</button>
+            <button id="exportButton" type="button" class="btn btn-default" style="width:100px;">Export</button>
           </div>
         </div>
       </div>
       <div id="input_container">
         <div id="messageContainer">
-          <p><img src="atd-jquery/images/atdbuttontr.gif"><a href="javascript:check()" id="checkLink">Check Spelling</a></p>
+          <p>
+            <img src="atd-jquery/images/atdbuttontr.gif"><a href="javascript:check()" id="checkLink">Check Spelling</a>
+          </p>
           <input name="messageBox" id="messageBox" autocomplete="off" />
-
           <button id="submitMessageButton">Send</button>
         </div>
       </div>

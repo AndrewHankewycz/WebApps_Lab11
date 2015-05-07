@@ -114,6 +114,43 @@ function editMsg(messageId, message) {
   messageIdEditing = messageId;
 }
 
+socket.on('logout', function() {
+  roomIdViewing = -1;
+  userId = -1;
+  rooms = [];
+  messageIdEditing = -1;
+
+  $("#chatContainer").fadeOut();
+  $("#loginContainer").fadeIn();
+});
+
+socket.on('user_disconnected', function(data) {
+  var roomId = data.roomId;
+  var userId = data.userId;
+
+  if(roomId === roomIdViewing) {
+    $('p').each(function() {
+      var $this = $(this);
+      var id = $this.attr('userid');
+
+      if(id == userId) {
+        $(this).remove();
+      }
+    });
+  }
+
+  for(var i = 0; i < rooms.length; i++) {
+    for(var j = 0; j < rooms[i].users.length; j++) {
+      var user = rooms[i].users[j];
+
+      if(user.userId === userId) {
+        rooms[i].users.splice(j, 1);
+        return;
+      }
+    }
+  }
+});
+
 socket.on('message_deleted', function(data) {
   if(data.roomId === roomIdViewing) {
     $("ul").find("[messageid='" + data.messageId + "']").html("<i>Message deleted</i>");

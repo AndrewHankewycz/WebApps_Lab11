@@ -79,6 +79,8 @@ module.exports = {
    * rooms
    */
   'logout' : function(io, socket, args) {
+    console.log("User logging out");
     UserHelper.removeBySocketId(socket.id);
+    socket.emit('logout');
   }
 };

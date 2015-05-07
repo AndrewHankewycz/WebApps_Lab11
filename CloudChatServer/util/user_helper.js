@@ -25,12 +25,14 @@ exports.removeBySocketId = function(socketId) {
       var user = room.users[j];
 
       if(user.getConnection().id === socketId) {
-        //Remove user from this room
-        global.rooms[i].users.splice(j, 1);
         //Send event to users in this room to remove this user's name
+        console.log(room.id);
         RoomHelper.streamEventToRoom('user_disconnected', {
-          userId: user.getUserId()
+          userId: user.getUserId(),
+          roomId: room.id
         }, room.id);
+
+        global.rooms[i].users.splice(j, 1);
       }
     }
   }

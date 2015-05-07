@@ -8,15 +8,24 @@ var commands = require('./commands');
 exports.process = function(io, socket, message) {
   if(message[0] !== '/')
     return false;
-    
-  var command = message.substr(1, message.indexOf(' ') - 1);
+
+  var argsBeginning = message.indexOf(' ');
+  var command;
+
+  if(argsBeginning === -1) {
+    command = message.substr(1, message.length - 1);
+  } else {
+    command = message.substr(1, message.indexOf(' ') - 1);
+  }
+
+  console.log("Command: " + command);
   var exeCmd = commands[command];
-  
+
   if(typeof(exeCmd) !== 'function')
     return false;
-    
+
   var remainingMsg = message.substr(message.indexOf(' ') + 1, message.length - 1);
   exeCmd(io, socket, remainingMsg);
-  
+
   return true;
 };

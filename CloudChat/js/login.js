@@ -23,6 +23,8 @@ $(document).ready(function() {
             $("#error").text(data.error);
           } else {
             $("#error").text("Successfully registered!");
+            $("#formTitle").text('User Login');
+            $("#roomInput").show();
           }
 
           $("#error").show();

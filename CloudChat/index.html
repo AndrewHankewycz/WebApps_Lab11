@@ -58,6 +58,10 @@
             sendMessage();
           }
         });
+
+        $("#exportButton").click(function() {
+          socket.emit('export_messages');
+        });
       });
     </script>
     <script src="js/chat.js"></script>
@@ -101,6 +105,7 @@
                   <input type="file" id="userUpload" name="userUpload" class='form-control'/><br>
                 </div>
             </form>
+            <button id="exportButton">Export</button>
           </div>
         </div>
       </div>

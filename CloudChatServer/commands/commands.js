@@ -78,7 +78,7 @@ module.exports = {
    * rooms that they're in, and notifies every user in each of those
    * rooms
    */
-  'exit' : function(io, socket, args) {
+  'logout' : function(io, socket, args) {
     UserHelper.removeBySocketId(socket.id);
   }
 };

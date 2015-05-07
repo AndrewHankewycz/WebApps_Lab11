@@ -72,6 +72,19 @@ io.on('connection', function(socket) {
     }, data.roomId);
   });
 
+  socket.on('export_messages', function() {
+    request.post(config.DAO_URL, {
+        form: {
+          action: 'export'
+        }
+      },
+      function (error, response, body) {
+          if (!error && response.statusCode == 200 && body != "-1") {
+            console.log("Successfully exported!");
+          }
+      });
+  });
+
   socket.on('edit_message', function(data) {
     if(data === null)
       return;

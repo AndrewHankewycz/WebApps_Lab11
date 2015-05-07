@@ -30,6 +30,10 @@ io.on('connection', function(socket) {
 
     var user = UserHelper.getUserFromRoom(socket.id);
 
+    if(user === null) {
+      return;
+    }
+
     request.post(config.DAO_URL, {
         form: {
           action: 'message',
@@ -65,6 +69,10 @@ io.on('connection', function(socket) {
 
     var user = UserHelper.getUserFromRoom(socket.id);
 
+    if(user === null) {
+      return;
+    }
+
     //TODO: Delete from database
     RoomHelper.streamEventToRoom('message_deleted', {
       messageId: messageId,
@@ -93,6 +101,10 @@ io.on('connection', function(socket) {
     var message = xss(data.message);
 
     var user = UserHelper.getUserFromRoom(socket.id);
+
+    if(user === null) {
+      return;
+    }
 
     //TODO: Log to database
     RoomHelper.streamEventToRoom('message_edited', {

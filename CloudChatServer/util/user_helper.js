@@ -11,6 +11,7 @@ exports.getUserFromRoom = function(socketId) {
       }
     }
   }
+  return null;
 };
 
 /**

@@ -238,10 +238,17 @@ socket.on('join', function(data) {
 
 socket.on('me_joined', function(data) {
   roomIdViewing = data.roomData.id;
+  var topic = data.roomData.topic;
 
   $("#messages").html("");
   $("#users").html("");
   setChatUsers(data.roomData);
+
+  var roomTopicExists = $("ul").find("[roomid='" + roomIdViewing + "']").html();
+
+  if(typeof(roomTopicExists) === 'undefined') {
+    $("#roomsMenu").append('<li roomid="' + roomIdViewing + '" role="presentation"><a role="menuitem" tabindex="-1" onclick="selectRoomOrJoin(\'' + topic + '\')">'+topic+'</a></li>');
+  }
 
   //Check if the room already exists in
   //the local cache before adding it

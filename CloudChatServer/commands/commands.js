@@ -22,6 +22,11 @@ module.exports = {
       function (error, response, body) {
           if (!error && response.statusCode == 200 && body != "-1") {
             var user = UserHelper.getUserFromRoom(socket.id);
+
+            if(user === null) {
+              return;
+            }
+
             var roomData = RoomHelper.addUserToRoom(args, user);
 
             if(roomData === null)
@@ -52,7 +57,13 @@ module.exports = {
           if (!error && response.statusCode == 200 && body != "-1") {
             var roomId = parseInt(body);
             RoomHelper.createRoom(roomId, topic);
-            var roomData = RoomHelper.addUserToRoom(roomId);
+            var user = UserHelper.getUserFromRoom(socket.id);
+
+            if(user === null) {
+              return;
+            }
+
+            var roomData = RoomHelper.addUserToRoom(topic, user);
 
             if(roomData === null)
               return;

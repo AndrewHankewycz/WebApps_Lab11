@@ -56,6 +56,22 @@ io.on('connection', function(socket) {
         });
   });
 
+  socket.on('delete_message', function(data) {
+    if(data === null)
+      return;
+
+    var messageId = parseInt(data.messageId);
+    var message = xss(data.message);
+
+    var user = UserHelper.getUserFromRoom(socket.id);
+
+    //TODO: Delete from database
+    RoomHelper.streamEventToRoom('message_deleted', {
+      messageId: messageId,
+      roomId: data.roomId
+    }, data.roomId);
+  });
+
   socket.on('edit_message', function(data) {
     if(data === null)
       return;

@@ -46,7 +46,11 @@ function setChatUsers(room) {
 }
 
 function deleteMsg(messageId, message) {
-  //Delete that message!
+  socket.emit('delete_message', {
+    messageId: messageId,
+    roomId: roomIdViewing
+  });
+
   messageIdEditing = -1;
 }
 
@@ -93,7 +97,7 @@ function editMsg(messageId, message) {
 
 socket.on('message_deleted', function(data) {
   if(data.roomId === roomIdViewing) {
-    //find the correct li and remove it from the HTML!
+    $("ul").find("[messageid='" + data.messageId + "']").html("<i>Message deleted</i>");
   }
 
   for(var i = 0; i < rooms.length; i++) {

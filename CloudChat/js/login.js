@@ -56,6 +56,13 @@ $(document).ready(function() {
           room.messages = [];
           rooms.push(room);
 
+          for(var i = 0; i < data.rooms.length; i++) {
+            var roomId = data.rooms[i].id;
+            var topic = data.rooms[i].topic;
+
+            $("#roomsMenu").append('<li roomid="' + roomId + '" role="presentation"><a role="menuitem" tabindex="-1" onclick="selectRoomOrJoin(\'' + topic + '\')">'+topic+'</a></li>');
+          }
+
           $("#loginContainer").fadeOut();
           $("#chatContainer").fadeIn();
       });

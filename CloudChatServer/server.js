@@ -105,13 +105,15 @@ io.on('connection', function(socket) {
         console.log("Could not login!");
         cb({
           error: "Error on login!",
-          room: null
+          room: null,
+          rooms: []
         });
       } else {
         console.log("Logged in!");
         cb({
           error: null,
-          room: roomData
+          room: roomData,
+          rooms: allRoomTopics
         });
       }
       return;
@@ -132,26 +134,30 @@ io.on('connection', function(socket) {
                 cb({
                   error: "Incorrect username/password",
                   room: null,
-                  userId: user.getUserId()
+                  userId: user.getUserId(),
+                  rooms: []
                 });
                 return;
               }
 
               var user = new User(userResp.userId, username, socket);
               var roomData = RoomHelper.addUserToRoom(data.roomId.toLowerCase(), user);
+              var allRoomTopics = RoomHelper.getRoomTopics();
 
               if(roomData === null) {
                 console.log("Could not login!");
                 cb({
                   error: "Error on login!",
-                  room: null
+                  room: null,
+                  rooms: []
                 });
               } else {
                 console.log("Logged in!");
                 cb({
                   error: null,
                   room: roomData,
-                  userId: user.getUserId()
+                  userId: user.getUserId(),
+                  rooms: allRoomTopics
                 });
               }
           }

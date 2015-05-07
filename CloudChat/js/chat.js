@@ -1,23 +1,38 @@
+function selectRoom(topic) {
+  for(var i = 0; i < rooms.length; i++) {
+    if(rooms[i].topic === topic) {
+      roomIdViewing = rooms[i].id;
+
+      $("#messages").html("");
+      $("#users").html("");
+
+      setChatUsers(rooms[i]);
+
+      for(var j = 0; j < rooms[i].messages.length; j++) {
+        var message = rooms[i].messages[j];
+        $("#messages").append("<li messageid='" + message.id+ "'>" + message.username + ": " + message.message + "</li>");
+      }
+      //We don't need to make a request to the server if this room is cached on the client
+      return true;
+    }
+  }
+  return false;
+}
+
+function selectRoomOrJoin(topic) {
+  if(selectRoom(topic)) {
+    return;
+  }
+
+  socket.emit('message', {
+    message: '/join ' + topic,
+    roomId: roomIdViewing
+  });
+}
+
 var commands = {
   'join': function(args) {
-    for(var i = 0; i < rooms.length; i++) {
-      if(rooms[i].topic === args) {
-        roomIdViewing = rooms[i].id;
-
-        $("#messages").html("");
-        $("#users").html("");
-
-        setChatUsers(rooms[i]);
-
-        for(var j = 0; j < rooms[i].messages.length; j++) {
-          var message = rooms[i].messages[j];
-          $("#messages").append("<li messageid='" + message.id+ "'>" + message.username + ": " + message.message + "</li>");
-        }
-        //We don't need to make a request to the server if this room is cached on the client
-        return true;
-      }
-    }
-    return false;
+    return selectRoom(args);
   }
 }
 

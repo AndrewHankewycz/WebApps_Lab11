@@ -3,6 +3,18 @@ var request = require('request'),
   User = require('../user'),
   self = this;
 
+exports.getRoomTopics = function() {
+  var temp = [];
+  for(var i = 0; i < global.rooms.length; i++) {
+    var room = global.rooms[i];
+    temp.push({
+      id: room.id,
+      topic: room.topic
+    })
+  }
+  return temp;
+}
+
 exports.insertRoomsFromDB = function() {
   if(config.DEBUG) {
     self.createRoom(1, 'pokemon');

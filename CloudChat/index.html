@@ -7,11 +7,20 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+
+    <script src="atd-jquery/scripts/jquery.atd.textarea.js"></script>
+    <script src="atd-jquery/scripts/csshttprequest.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="atd-jquery/css/atd.css" />
+
     <script src="js/upload.js"></script>
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/chat.css">
     <script>
       var socket = io("http://localhost:3000");
+
+      function check() {
+         AtD.checkTextAreaCrossAJAX('messageBox', 'checkLink', 'Edit Text');
+      }
 
       /**
       * The room Id of the room that the user is currently viewing
@@ -111,7 +120,10 @@
       </div>
       <div id="input_container">
         <div id="messageContainer">
-          <input name="messageBox" id="messageBox" autocomplete="off" /><button id="submitMessageButton">Send</button>
+          <p><img src="atd-jquery/images/atdbuttontr.gif"><a href="javascript:check()" id="checkLink">Check Spelling</a></p>
+          <input name="messageBox" id="messageBox" autocomplete="off" />
+
+          <button id="submitMessageButton">Send</button>
         </div>
       </div>
     </div>

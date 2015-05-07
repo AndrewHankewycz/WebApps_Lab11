@@ -106,13 +106,24 @@ io.on('connection', function(socket) {
       return;
     }
 
-    //TODO: Log to database
-    RoomHelper.streamEventToRoom('message_edited', {
-      messageId: messageId,
-      username: user.getUsername(),
-      roomId: data.roomId,
-      message: message
-    }, data.roomId);
+    request.post(config.DAO_URL, {
+        form: {
+          action: 'editMessage',
+          messageId: messageId,
+          userId: user.getUserId(),
+          message: message
+        }
+      },
+      function (error, response, body) {
+          if (!error && response.statusCode == 200 && body != "-1") {
+            RoomHelper.streamEventToRoom('message_edited', {
+              messageId: messageId,
+              username: user.getUsername(),
+              roomId: data.roomId,
+              message: message
+            }, data.roomId);
+          }
+      });
   });
 
   socket.on('login', function(data, cb) {

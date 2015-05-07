@@ -82,6 +82,7 @@ module.exports = {
    * ex: /leave pokemon
    */
   'leave' : function(io, socket, args) {
+    console.log("Leaving room");
     UserHelper.leaveRoomBySocketId(args, socket.id);
   },
   /**

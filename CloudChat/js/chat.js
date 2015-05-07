@@ -91,8 +91,8 @@ function sendEditMessage() {
   $("#messageBox").val("");
 }
 
-function sendMessage() {
-  var message = $("#messageBox").val();
+function sendMessage(messageSend) {
+  var message = messageSend || $("#messageBox").val();
 
   if(message === '')
     return;
@@ -114,7 +114,7 @@ function editMsg(messageId, message) {
   messageIdEditing = messageId;
 }
 
-socket.on('logout', function() {
+function logout() {
   roomIdViewing = -1;
   userId = -1;
   rooms = [];
@@ -122,28 +122,61 @@ socket.on('logout', function() {
 
   $("#chatContainer").fadeOut();
   $("#loginContainer").fadeIn();
+}
+
+socket.on('logout', function() {
+  logout();
 });
+
+function removeRoomUsernameByUserId(userIdRemove) {
+  $('p').each(function() {
+    var $this = $(this);
+    var id = $this.attr('userid');
+
+    if(id == userIdRemove) {
+      $(this).remove();
+    }
+  });
+}
 
 socket.on('user_disconnected', function(data) {
   var roomId = data.roomId;
-  var userId = data.userId;
+  var userIdDisconnect = data.userId;
+
+  //If the user disconnected is this user logged in
+  //then remove them from the room, attempt to join
+  //another room if they're leaving the room they're looking at,
+  //and if they're a part of none, log them out.
+  if(userIdDisconnect === userId && roomId === roomIdViewing) {
+    for(var i = 0; i < rooms.length; i++) {
+        if(rooms[i].id != roomId) {
+          roomIdViewing = rooms[i].id;
+          selectRoom(rooms[i].topic);
+          break;
+        }
+    }
+
+    //If the current room of the user never changed, then we
+    //know they were only a part of one room and cannot switch.
+    //We just log them out
+    if(roomId === roomIdViewing) {
+      socket.emit('message', {
+        message: '/logout',
+        roomId: roomIdViewing
+      });
+      return;
+    }
+  }
 
   if(roomId === roomIdViewing) {
-    $('p').each(function() {
-      var $this = $(this);
-      var id = $this.attr('userid');
-
-      if(id == userId) {
-        $(this).remove();
-      }
-    });
+    removeRoomUsernameByUserId(userIdDisconnect);
   }
 
   for(var i = 0; i < rooms.length; i++) {
     for(var j = 0; j < rooms[i].users.length; j++) {
       var user = rooms[i].users[j];
 
-      if(user.userId === userId) {
+      if(user.userId === userIdDisconnect) {
         rooms[i].users.splice(j, 1);
         return;
       }
@@ -230,7 +263,7 @@ socket.on('join', function(data) {
         username: username
       });
 
-      $("#users").append("<p>" + username + "</p>");
+      $("#users").append("<p userid='" + data.userId + "'>" + username + "</p>");
       break;
     }
   }

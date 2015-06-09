@@ -1,2 +1,2 @@
-# WebApps_Lab11
-Web Applications Lab 11
+# WebApps_Project
+Web Applications Project
